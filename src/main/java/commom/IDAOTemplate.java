@@ -10,7 +10,7 @@ public interface IDAOTemplate<E> {
 	
 	public void attachDirty(E instance) ;
 	
-	public E findById(java.io.Serializable id) ;
+	public <T> E findById(java.io.Serializable id,Class<T> className) ;
 	
 	public E merge(E detachedInstance) ;
 

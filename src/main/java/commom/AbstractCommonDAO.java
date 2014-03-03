@@ -13,6 +13,7 @@ public abstract class AbstractCommonDAO<E> extends HibernateDaoSupport implement
 		IDAOTemplate<E> {
 	private static final Logger log = Logger.getLogger("AbstractCommonDAO<E>");
 	
+	
 	@Override
 	public List<?> findByProperties(String[] names, Object[] objects,Class<?> classType) {
 		Session session = getHibernateTemplate().getSessionFactory().openSession() ;

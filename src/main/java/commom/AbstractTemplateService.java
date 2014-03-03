@@ -23,18 +23,18 @@ public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E> {
 		dao.save(e) ;
 	}
 	
-	public void delete(java.io.Serializable id) {
-		dao.delete(get(id)) ;
+	public <T> void delete(java.io.Serializable id,Class<T> className) {
+		dao.delete(get(id,className)) ;
 	}
 	
 	
-	public void delete(E e){
+	public <T> void delete(E e){
 		dao.delete(e) ;
 	}
 	
-	public E get(Serializable id) {
+	public <T> E get(Serializable id,Class<T> className) {
 		// TODO Auto-generated method stub
-		return dao.findById(id) ;
+		return dao.findById(id,className) ;
 	}
 	
 	public void update(E e) {

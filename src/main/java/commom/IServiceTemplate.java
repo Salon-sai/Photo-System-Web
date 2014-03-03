@@ -15,7 +15,7 @@ public interface IServiceTemplate<D extends IDAOTemplate<E>,E>{
 	
 	public void delete(E e);
 	
-	public E get(Serializable id) ;
+	public <T> E get(Serializable id,Class<T> className) ;
 	
 	public void update(E e) ;
 	

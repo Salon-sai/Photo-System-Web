@@ -10,17 +10,13 @@ public interface IDAOTemplate<E> {
 	
 	public void attachDirty(E instance) ;
 	
-	public <T> E findById(java.io.Serializable id,Class<T> className) ;
+	public E findById(java.io.Serializable id,Class<?> classType) ;
 	
 	public E merge(E detachedInstance) ;
 
 	public void attachClean(E instance) ;
 	
-	public List<?> findByExample(E instance) ;
-	
-	public List<?> findByProperty(String propertyName, Object value) ;
-	
-	public List<?> findAll() ;
+	public List<?> findByProperty(String propertyName, Object value,Class<?> classType) ;
 	
 	public List<?> findByProperties(String[] names, Object[] objects,Class<?> ClassType) ;
 	

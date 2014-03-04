@@ -7,32 +7,28 @@ import java.util.List;
  * @author sai
  *
  */
-public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E> {
+public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E> implements IServiceTemplate<IDAOTemplate<E>, E> {
 	
 	protected D dao = null ;
 
 	public D getDao() {
 		return dao;
 	}
-
-	public void setDao(D dao) {
-		this.dao = dao;
-	}
 	
 	public void save(E e) {
 		dao.save(e) ;
 	}
 	
-	public <T> void delete(java.io.Serializable id,Class<T> className) {
+	public void delete(java.io.Serializable id,Class<?> className) {
 		dao.delete(get(id,className)) ;
 	}
 	
 	
-	public <T> void delete(E e){
+	public void delete(E e){
 		dao.delete(e) ;
 	}
 	
-	public <T> E get(Serializable id,Class<T> className) {
+	public E get(Serializable id,Class<?> className) {
 		// TODO Auto-generated method stub
 		return dao.findById(id,className) ;
 	}
@@ -42,22 +38,17 @@ public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E> {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<E> findAll() {
-		// TODO Auto-generated method stub
-		return (List<E>) dao.findAll() ;
-	}
-	
-	@SuppressWarnings("unchecked")
-	public E findByName(String name){
-		List<?> list = dao.findByProperty("name", name);
+	public E findByName(String name,Class<?> classType){
+		List<?> list = dao.findByProperty("name", name,classType);
 		if(list.isEmpty()){
 			return null ;
 		}
 		return (E) list.get(0) ;
 	}
 	
-	public List<?> findByProperty(String propertyName,Object value){
-		return dao.findByProperty(propertyName, value) ;
+	@Override
+	public List<?> findByProperty(String propertyName,Object value,Class<?> classType){
+		return dao.findByProperty(propertyName, value,classType) ;
 	}
 	
 	public List<?> findByProperties(String[] names,Object[] values,String Entity){

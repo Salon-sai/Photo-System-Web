@@ -8,8 +8,10 @@ import java.util.List;
 
 import javax.persistence.MappedSuperclass;
 
-import org.apache.log4j.Logger;
+import org.hibernate.Criteria;
+import org.hibernate.LockMode;
 import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -19,7 +21,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @MappedSuperclass
 public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 
-	private static final Logger logger = Logger.getLogger(BaseDAO.class);
+//	private static final Logger logger = Logger.getLogger(BaseDAO.class);
 	
 	@Autowired
 	private SessionFactory sessionFactory;
@@ -44,11 +46,15 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#attachDirty(java.lang.Object)
+	 *  
+	 * 将传入的对象持久化并保存。 
+	 * 如果对象未保存（Transient状态），调用save方法保存。如果对象已保存
+	 * （Detached状态），调用update方法将对象与Session重新关联。 
 	 */
 	@Override
 	public void attachDirty(E instance) {
 		// TODO Auto-generated method stub
-		
+		sessionFactory.getCurrentSession().saveOrUpdate(instance);
 	}
 
 	/* (non-Javadoc)
@@ -56,9 +62,9 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 	 */
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T> E findById(java.io.Serializable id,Class<T> className) {
+	public E findById(java.io.Serializable id,Class<?> classType) {
 		// TODO Auto-generated method stub
-		return (E) sessionFactory.getCurrentSession().get(className, id);
+		return (E) sessionFactory.getCurrentSession().get(classType, id);
 	}
 
 	/* (non-Javadoc)
@@ -73,39 +79,25 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#attachClean(java.lang.Object)
+	 * 将传入的对象状态设置为Transient状态 
 	 */
+	@SuppressWarnings("deprecation")
 	@Override
 	public void attachClean(E instance) {
 		// TODO Auto-generated method stub
-		
-	}
-
-	/* (non-Javadoc)
-	 * @see commom.IDAOTemplate#findByExample(java.lang.Object)
-	 */
-	@Override
-	public List<?> findByExample(E instance) {
-		// TODO Auto-generated method stub
-		return null;
+		sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 	}
 
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#findByProperty(java.lang.String, java.lang.Object)
 	 */
 	@Override
-	public List<?> findByProperty(String propertyName, Object value) {
+	public List<?> findByProperty(String propertyName, Object value,Class<?> classType) {
 		// TODO Auto-generated method stub
-		return null;
+		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(classType);
+		return criteria.add(Restrictions.eq(propertyName, value)).list();
 	}
 
-	/* (non-Javadoc)
-	 * @see commom.IDAOTemplate#findAll()
-	 */
-	@Override
-	public List<?> findAll() {
-		// TODO Auto-generated method stub
-		return null;
-	}
 
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#findByProperties(java.lang.String[], java.lang.Object[], java.lang.Class)

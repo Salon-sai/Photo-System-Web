@@ -15,15 +15,13 @@ public interface IServiceTemplate<D extends IDAOTemplate<E>,E>{
 	
 	public void delete(E e);
 	
-	public <T> E get(Serializable id,Class<T> className) ;
+	public E get(Serializable id,Class<?> className) ;
 	
 	public void update(E e) ;
 	
-	public List<E> findAll() ;
-	
 	public E findByName(String name) ;
 	
-	public List<?> findByProperty(String propertyName,Object value);
+	public List<?> findByProperty(String propertyName,Object value,Class<?> classType);
 	
 	public List<?> findByProperties(String[] names,Object[] values,String Entity) ;
 }

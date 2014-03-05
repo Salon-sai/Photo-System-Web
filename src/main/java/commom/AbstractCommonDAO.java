@@ -11,8 +11,8 @@ import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 public abstract class AbstractCommonDAO<E> extends HibernateDaoSupport implements
 		IDAOTemplate<E> {
-	private static final Logger log = Logger.getLogger("AbstractCommonDAO<E>");
 	
+	private static final Logger log = Logger.getLogger("AbstractCommonDAO<E>");
 	
 	@Override
 	public List<?> findByProperties(String[] names, Object[] objects,Class<?> classType) {

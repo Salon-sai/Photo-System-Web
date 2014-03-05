@@ -7,7 +7,7 @@ import java.util.List;
  * @author sai
  *
  */
-public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E> implements IServiceTemplate<IDAOTemplate<E>, E> {
+public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E>{
 	
 	protected D dao = null ;
 
@@ -46,7 +46,6 @@ public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E> imple
 		return (E) list.get(0) ;
 	}
 	
-	@Override
 	public List<?> findByProperty(String propertyName,Object value,Class<?> classType){
 		return dao.findByProperty(propertyName, value,classType) ;
 	}
@@ -54,4 +53,5 @@ public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E> imple
 	public List<?> findByProperties(String[] names,Object[] values,String Entity){
 		return dao.findBySqlProperties(names, Entity, values) ;
 	}
+
 }

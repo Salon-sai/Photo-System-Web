@@ -11,7 +11,7 @@ public interface IServiceTemplate<D extends IDAOTemplate<E>,E>{
 	
 	public void save(E e) ;
 	
-	public void delete(java.io.Serializable id) ;
+	public void delete(java.io.Serializable id,Class<?> className) ;
 	
 	public void delete(E e);
 	

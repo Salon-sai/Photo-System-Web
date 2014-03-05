@@ -10,8 +10,10 @@ public class TestHibernate {
 	public void connection(){
 		ApplicationContext context = new 
 				ClassPathXmlApplicationContext(new String[]{"classpath:spring.xml","classpath:spring-hibernate.xml"});
+		context.getBean("");
 	}
 	
+	@Test
 	public void createUser(){
 		
 	}

@@ -85,9 +85,10 @@
 			<tx:method name="*" propagation="SUPPORTS"/>
 		</tx:attributes>
 	</tx:advice>
+	
 	<aop:config>
-		<aop:pointcut expression="execution(* service..*Impl.*(..))" id="transactionPointcut"/>
-		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionPointcut"/>
+		<aop:pointcut expression="execution(* saiwei.service..*Impl.*(..))" id="transactionPointcut"/>
+		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
 	</aop:config>
 	
 	

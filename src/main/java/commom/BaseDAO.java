@@ -23,7 +23,6 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 
 //	private static final Logger logger = Logger.getLogger(BaseDAO.class);
 	
-	@Autowired
 	private SessionFactory sessionFactory;
 
 	/* (non-Javadoc)
@@ -183,7 +182,8 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 	public SessionFactory getSessionFactory() {
 		return sessionFactory;
 	}
-
+	
+	@Autowired
 	public void setSessionFactory(SessionFactory sessionFactory) {
 		this.sessionFactory = sessionFactory;
 	}

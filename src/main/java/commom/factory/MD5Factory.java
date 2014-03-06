@@ -1,4 +1,4 @@
-package common.factory;
+package commom.factory;
 
 public class MD5Factory {
 	

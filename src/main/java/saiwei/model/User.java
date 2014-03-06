@@ -13,7 +13,7 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import common.factory.MD5Factory;
+import commom.factory.MD5Factory;
 
 /**
  * @author sai

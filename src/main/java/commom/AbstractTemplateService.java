@@ -1,7 +1,9 @@
 package commom;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author sai
@@ -23,7 +25,6 @@ public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E>{
 		dao.delete(get(id,className)) ;
 	}
 	
-	
 	public void delete(E e){
 		dao.delete(e) ;
 	}
@@ -39,19 +40,22 @@ public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E>{
 	
 	@SuppressWarnings("unchecked")
 	public E findByName(String name,Class<?> classType){
-		List<?> list = dao.findByProperty("name", name,classType);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("name", name);
+		List<?> list = dao.findByPropertiesInCriteria(params ,classType);
 		if(list.isEmpty()){
 			return null ;
 		}
 		return (E) list.get(0) ;
 	}
 	
-	public List<?> findByProperty(String propertyName,Object value,Class<?> classType){
-		return dao.findByProperty(propertyName, value,classType) ;
-	}
-	
 	public List<?> findByProperties(String[] names,Object[] values,String Entity){
 		return dao.findBySqlProperties(names, Entity, values) ;
+	}
+	
+	public List<?> findByProperties(Map<String, Object> params,
+			Class<?> classType){
+		return dao.findByPropertiesInCriteria(params, classType);
 	}
 
 }

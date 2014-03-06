@@ -5,11 +5,14 @@ package commom;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 import javax.persistence.MappedSuperclass;
 
+import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +24,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 @MappedSuperclass
 public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 
-//	private static final Logger logger = Logger.getLogger(BaseDAO.class);
+	private static final Logger logger = Logger.getLogger(BaseDAO.class);
 	
 	private SessionFactory sessionFactory;
 
@@ -88,33 +91,48 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 	}
 
 	/* (non-Javadoc)
-	 * @see commom.IDAOTemplate#findByProperty(java.lang.String, java.lang.Object)
-	 */
-	@Override
-	public List<?> findByProperty(String propertyName, Object value,Class<?> classType) {
-		// TODO Auto-generated method stub
-		Criteria criteria = sessionFactory.getCurrentSession().createCriteria(classType);
-		return criteria.add(Restrictions.eq(propertyName, value)).list();
-	}
-
-
-	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#findByProperties(java.lang.String[], java.lang.Object[], java.lang.Class)
 	 */
 	@Override
 	public List<?> findByProperties(String[] names, Object[] objects,
 			Class<?> ClassType) {
 		// TODO Auto-generated method stub
+		
 		return null;
+	}
+	
+	public List<?> findByPropertiesInHql(Map<String,Object> map,Class<?> classType){
+		
+		return null;
+	}
+	
+	public List<?> findByPropertiesInCriteria(Map<String,Object> params,Class<?> classType){
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(classType);
+		List<?> list = null;
+		try{
+			if(params != null && !params.isEmpty()){
+				for(String key : params.keySet()){
+					criteria.add(Restrictions.eq(key, params.get(key)));
+				}
+				list = criteria.list();
+			}
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+			e.printStackTrace();
+		}
+		return list;
 	}
 
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#load(java.lang.Class, java.io.Serializable)
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public E load(Class<?> entityClass, Serializable id) {
 		// TODO Auto-generated method stub
-		return null;
+		return (E)sessionFactory.getCurrentSession().load(entityClass, id);
 	}
 
 	/* (non-Javadoc)

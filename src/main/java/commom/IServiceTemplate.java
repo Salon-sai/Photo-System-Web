@@ -19,9 +19,7 @@ public interface IServiceTemplate<D extends IDAOTemplate<E>,E>{
 	
 	public void update(E e) ;
 	
-	public E findByName(String name) ;
-	
-	public List<?> findByProperty(String propertyName,Object value,Class<?> classType);
-	
+	public E findByName(String name,Class<?> classType) ;
+
 	public List<?> findByProperties(String[] names,Object[] values,String Entity) ;
 }

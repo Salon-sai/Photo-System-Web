@@ -1,6 +1,7 @@
 package commom;
 
 import java.util.List;
+import java.util.Map;
 
 public interface IDAOTemplate<E> {
 	
@@ -15,8 +16,6 @@ public interface IDAOTemplate<E> {
 	public E merge(E detachedInstance) ;
 
 	public void attachClean(E instance) ;
-	
-	public List<?> findByProperty(String propertyName, Object value,Class<?> classType) ;
 	
 	public List<?> findByProperties(String[] names, Object[] objects,Class<?> ClassType) ;
 	
@@ -34,4 +33,5 @@ public interface IDAOTemplate<E> {
 	
 	public List<?> findExcludeProperties(String[] propertyNames,Object[][] values,Class<?> classType) ;
 
+	public List<?> findByPropertiesInCriteria(Map<String,Object> params,Class<?> classType);
 }

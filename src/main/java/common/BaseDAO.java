@@ -1,7 +1,7 @@
 /**
  * 
  */
-package commom;
+package common;
 
 import java.io.Serializable;
 import java.util.List;
@@ -12,6 +12,7 @@ import javax.persistence.MappedSuperclass;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
@@ -102,9 +103,20 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 		return list;
 	}
 	
-	public List<?> findByPropertiesInHql(Map<String,Object> map,Class<?> classType){
-		
-		return null;
+	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType){
+		List<?> list = null;
+		String queryString = "from " + classType + " as model where ";
+		try{
+			for(String key : params.keySet()){
+				queryString += "model." + key + "=:" + key + " and ";
+			}
+			queryString = queryString.substring(0, queryString.lastIndexOf("and "));
+			Query query = sessionFactory.getCurrentSession().createQuery(queryString);
+			list = query.setProperties(params).list();
+		}catch(Exception e){
+			logger.error(e);
+		}
+		return list;
 	}
 	
 	public List<?> findByPropertiesInCriteria(Map<String,Object> params,Class<?> classType){

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import saiwei.dao.IUserDAO;
 import saiwei.model.User;
 
-import commom.BaseDAO;
+import common.BaseDAO;
 
 /**
  * @author sai

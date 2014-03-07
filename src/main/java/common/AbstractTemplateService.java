@@ -1,4 +1,4 @@
-package commom;
+package common;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -60,4 +60,8 @@ public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E>{
 		return dao.findByPropertiesInCriteria(params, classType);
 	}
 
+	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType){
+		return dao.findByPropertiesInHql(params, classType);
+	}
+	
 }

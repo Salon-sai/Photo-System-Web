@@ -11,7 +11,7 @@ import saiwei.dao.IUserDAO;
 import saiwei.model.User;
 import saiwei.service.IUserService;
 
-import commom.AbstractTemplateService;
+import common.AbstractTemplateService;
 
 /**
  * @author sai

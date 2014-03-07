@@ -1,7 +1,8 @@
-package commom;
+package common;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public interface IServiceTemplate<D extends IDAOTemplate<E>,E>{
 	
@@ -22,4 +23,6 @@ public interface IServiceTemplate<D extends IDAOTemplate<E>,E>{
 	public E findByName(String name,Class<?> classType) ;
 
 	public List<?> findByProperties(String[] names,Object[] values,String Entity) ;
+	
+	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType);
 }

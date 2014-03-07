@@ -89,7 +89,7 @@
 	
  	<aop:config>
 		<aop:pointcut expression="execution(* saiwei.service..*Impl.*(..))" id="transactionPointcut"/>
-		<aop:pointcut expression="execution(* commom.*Service.*(..))" id="transationPointcutCommon"/>
+		<aop:pointcut expression="execution(* common.*Service.*(..))" id="transationPointcutCommon"/>
 		<aop:advisor pointcut-ref="transactionPointcut" advice-ref="transactionAdvice"/>
 		<aop:advisor pointcut-ref="transationPointcutCommon" advice-ref="transactionAdvice"/>
 	</aop:config>

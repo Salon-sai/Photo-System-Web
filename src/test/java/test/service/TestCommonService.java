@@ -14,7 +14,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import commom.factory.MD5Factory;
+import common.factory.MD5Factory;
 
 
 import saiwei.model.User;
@@ -24,11 +24,11 @@ import saiwei.service.IUserService;
  * @author sai
  *
  */
-public class TestUserService {
+public class TestCommonService {
 
 	private ApplicationContext context;
 	private IUserService userservice;
-	private static final Logger logger = Logger.getLogger(TestUserService.class);
+	private static final Logger logger = Logger.getLogger(TestCommonService.class);
 	
 	@Before
 	public void init(){
@@ -39,6 +39,7 @@ public class TestUserService {
 	
 	@Test
 	public void testSave(){
+		logger.info("test save begin");
 		User user = new User();
 		user.setName("a");
 		user.setPassword("111111");
@@ -48,10 +49,24 @@ public class TestUserService {
 	@SuppressWarnings("unchecked")
 	@Test
 	public void testFind(){
+		logger.info("test find begin");
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("name", "a");
 		params.put("password", MD5Factory.getMD5("111111".getBytes()));
 		List<User> users = (List<User>)userservice.findByProperties(params, User.class);
+		for(User user : users){
+			logger.info(user.getId());
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Test
+	public void testFindByHql(){
+		logger.info("test find hql begin");
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("name", "a");
+		params.put("password", MD5Factory.getMD5("111111".getBytes()));
+		List<User> users = (List<User>)userservice.findByPropertiesInHql(params, "User");
 		for(User user : users){
 			logger.info(user.getId());
 		}
@@ -72,6 +87,7 @@ public class TestUserService {
 	@After
 	public void after(){
 		logger.info("after testing");
+		logger.info("----------------------------------");
 	}
 	
 	

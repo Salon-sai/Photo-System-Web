@@ -8,7 +8,7 @@ import java.util.Map;
 
 import saiwei.dao.IUserDAO;
 import saiwei.model.User;
-import commom.IServiceTemplate;
+import common.IServiceTemplate;
 
 /**
  * @author sai

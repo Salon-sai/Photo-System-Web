@@ -4,7 +4,7 @@
 package saiwei.dao;
 
 import saiwei.model.User;
-import commom.IDAOTemplate;
+import common.IDAOTemplate;
 
 /**
  * @author sai

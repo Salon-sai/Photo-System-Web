@@ -1,4 +1,4 @@
-package commom;
+package common;
 
 import java.util.List;
 import java.util.Map;
@@ -34,4 +34,6 @@ public interface IDAOTemplate<E> {
 	public List<?> findExcludeProperties(String[] propertyNames,Object[][] values,Class<?> classType) ;
 
 	public List<?> findByPropertiesInCriteria(Map<String,Object> params,Class<?> classType);
+	
+	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType);
 }

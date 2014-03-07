@@ -90,15 +90,16 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 		sessionFactory.getCurrentSession().lock(instance, LockMode.NONE);
 	}
 
-	/* (non-Javadoc)
-	 * @see commom.IDAOTemplate#findByProperties(java.lang.String[], java.lang.Object[], java.lang.Class)
-	 */
-	@Override
-	public List<?> findByProperties(String[] names, Object[] objects,
-			Class<?> ClassType) {
-		// TODO Auto-generated method stub
-		
-		return null;
+	public List<?> findAll(Class<?> classType){
+		List<?> list = null;
+		try{
+			list = (List<?>) sessionFactory.getCurrentSession().createQuery("from "+classType.toString());
+			logger.info("find all " + classType);
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error(e);
+		}
+		return list;
 	}
 	
 	public List<?> findByPropertiesInHql(Map<String,Object> map,Class<?> classType){

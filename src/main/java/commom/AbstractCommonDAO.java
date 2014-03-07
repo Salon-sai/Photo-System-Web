@@ -7,25 +7,12 @@ import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Restrictions;
-import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
+import org.springframework.orm.hibernate4.support.HibernateDaoSupport;
 
 public abstract class AbstractCommonDAO<E> extends HibernateDaoSupport implements
 		IDAOTemplate<E> {
 	
 	private static final Logger log = Logger.getLogger("AbstractCommonDAO<E>");
-	
-	@Override
-	public List<?> findByProperties(String[] names, Object[] objects,Class<?> classType) {
-		Session session = getHibernateTemplate().getSessionFactory().openSession() ;
-		Criteria criteria = session.createCriteria(classType) ;
-		
-		for(int i = 0; i < names.length ; i++){
-			criteria.add(Restrictions.in(names[i], (Object[]) objects[i])) ;
-		}
-		List<?> list = criteria.list() ;
-		session.close() ;
-		return list;
-	}
 	
 	@SuppressWarnings("unchecked")
 	@Override

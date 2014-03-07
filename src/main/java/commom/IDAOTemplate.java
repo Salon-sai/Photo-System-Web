@@ -17,7 +17,7 @@ public interface IDAOTemplate<E> {
 
 	public void attachClean(E instance) ;
 	
-	public List<?> findByProperties(String[] names, Object[] objects,Class<?> ClassType) ;
+//	public List<?> findAll(Class<?> classType);
 	
 	public E load(Class<?> entityClass, java.io.Serializable id) ;
 	

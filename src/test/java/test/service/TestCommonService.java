@@ -85,7 +85,7 @@ public class TestCommonService {
 	
 	
 	@After
-	public void after(){
+	public void destory(){
 		logger.info("after testing");
 		logger.info("----------------------------------");
 	}

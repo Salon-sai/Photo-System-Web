@@ -4,6 +4,8 @@
 package saiwei.model;
 
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
 import common.BaseModelHasName;
 
@@ -11,6 +13,8 @@ import common.BaseModelHasName;
  * @author sai
  *
  */
+@Entity
+@Table(name="manager",catalog="photosystem")
 public class Manager extends BaseModelHasName {
 
 	/**

@@ -3,7 +3,12 @@
  */
 package saiwei.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 import common.BaseModel;
 
@@ -11,12 +16,18 @@ import common.BaseModel;
  * @author sai
  *
  */
+@Entity
+@Table(name="profile",catalog="photosystem")
 public class Profile extends BaseModel {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@PrimaryKeyJoinColumn
+	private Photo head_photo;
 	
 	@Column(name="e_mail")
 	private String e_mail;
@@ -49,5 +60,13 @@ public class Profile extends BaseModel {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public Photo getHead_photo() {
+		return head_photo;
+	}
+
+	public void setHead_photo(Photo head_photo) {
+		this.head_photo = head_photo;
 	}
 }

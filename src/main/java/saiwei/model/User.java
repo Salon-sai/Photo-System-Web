@@ -5,8 +5,16 @@ package saiwei.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import common.BaseModelHasName;
@@ -28,18 +36,57 @@ public class User extends BaseModelHasName {
 	@Column(name="password")
 	private String password;
 	
+	@OneToOne
+	@PrimaryKeyJoinColumn
 	private Profile profile;
 	
-	private RelationShip relationship_net;
+	@OneToMany
+	private Set<RelationShip> relationship_links;
 	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinTable(
+			name="tag_user",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="tag")
+	)
 	private Set<Tag> tags;
 	
-	private Set<Post> like_posts;
+	@ManyToMany(
+			targetEntity=saiwei.model.Post.class,
+			cascade={CascadeType.PERSIST,CascadeType.MERGE}
+	)
+	@JoinTable(
+			name="users_favoritePosts",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="post_id")
+	)
+	private Set<Post> favorite_posts;
 	
+	@ManyToMany(
+			targetEntity=saiwei.model.Post.class,
+			cascade={CascadeType.PERSIST,CascadeType.MERGE}
+	)
+	@JoinTable(
+			name="users_collectPosts",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="post_id")
+	)
 	private Set<Post> collect_posts;
 	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinTable(
+			name="own_posts",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="post_id")
+	)
 	private Set<Post> own_posts;
 	
+	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinTable(
+			name="user_comments",
+			joinColumns=@JoinColumn(name="user_id"),
+			inverseJoinColumns=@JoinColumn(name="comment_id")
+	)
 	private Set<Comment> comments;
 	
 	/**
@@ -55,12 +102,12 @@ public class User extends BaseModelHasName {
 		this.password = MD5Factory.getMD5(password.getBytes());
 	}
 
-	public RelationShip getRelationship_net() {
-		return relationship_net;
+	public Set<RelationShip> getRelationship_links() {
+		return relationship_links;
 	}
 
-	public void setRelationship_net(RelationShip relationship_net) {
-		this.relationship_net = relationship_net;
+	public void setRelationship_links(Set<RelationShip> relationship_links) {
+		this.relationship_links = relationship_links;
 	}
 
 	public Profile getProfile() {
@@ -79,12 +126,12 @@ public class User extends BaseModelHasName {
 		this.tags = tags;
 	}
 
-	public Set<Post> getLike_posts() {
-		return like_posts;
+	public Set<Post> getFavorite_posts() {
+		return favorite_posts;
 	}
 
-	public void setLike_posts(Set<Post> like_posts) {
-		this.like_posts = like_posts;
+	public void setFavorite_posts(Set<Post> favorite_posts) {
+		this.favorite_posts = favorite_posts;
 	}
 
 	public Set<Post> getCollect_posts() {

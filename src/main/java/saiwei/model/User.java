@@ -40,14 +40,20 @@ public class User extends BaseModelHasName {
 	@PrimaryKeyJoinColumn
 	private Profile profile;
 	
-	@OneToMany
-	private Set<RelationShip> relationship_links;
+	@OneToMany(mappedBy="founder")
+	private Set<RelationShip> found_relationship;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@OneToMany(mappedBy="linked_person")
+	private Set<RelationShip> linked_relationship;
+	
+	@ManyToMany(
+			targetEntity=saiwei.model.Tag.class,
+			cascade={CascadeType.PERSIST,CascadeType.MERGE}
+	)
 	@JoinTable(
-			name="tag_user",
+			name="tags_users",
 			joinColumns=@JoinColumn(name="user_id"),
-			inverseJoinColumns=@JoinColumn(name="tag")
+			inverseJoinColumns=@JoinColumn(name="tag_id")
 	)
 	private Set<Tag> tags;
 	
@@ -81,13 +87,11 @@ public class User extends BaseModelHasName {
 	)
 	private Set<Post> own_posts;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinTable(
-			name="user_comments",
-			joinColumns=@JoinColumn(name="user_id"),
-			inverseJoinColumns=@JoinColumn(name="comment_id")
-	)
-	private Set<Comment> comments;
+	@OneToMany(mappedBy="poster")
+	private Set<Comment> send_comments;
+	
+	@OneToMany(mappedBy="recipients")
+	private Set<Comment> receive_comments;
 	
 	/**
 	 * getter and setter
@@ -102,12 +106,20 @@ public class User extends BaseModelHasName {
 		this.password = MD5Factory.getMD5(password.getBytes());
 	}
 
-	public Set<RelationShip> getRelationship_links() {
-		return relationship_links;
+	public Set<RelationShip> getFound_relationship() {
+		return found_relationship;
 	}
 
-	public void setRelationship_links(Set<RelationShip> relationship_links) {
-		this.relationship_links = relationship_links;
+	public void setFound_relationship(Set<RelationShip> found_relationship) {
+		this.found_relationship = found_relationship;
+	}
+
+	public Set<RelationShip> getLinked_relationship() {
+		return linked_relationship;
+	}
+
+	public void setLinked_relationship(Set<RelationShip> linked_relationship) {
+		this.linked_relationship = linked_relationship;
 	}
 
 	public Profile getProfile() {
@@ -150,11 +162,19 @@ public class User extends BaseModelHasName {
 		this.own_posts = own_posts;
 	}
 
-	public Set<Comment> getComments() {
-		return comments;
+	public Set<Comment> getSend_comments() {
+		return send_comments;
 	}
 
-	public void setComments(Set<Comment> comments) {
-		this.comments = comments;
+	public void setSend_comments(Set<Comment> send_comments) {
+		this.send_comments = send_comments;
+	}
+
+	public Set<Comment> getReceive_comments() {
+		return receive_comments;
+	}
+
+	public void setReceive_comments(Set<Comment> receive_comments) {
+		this.receive_comments = receive_comments;
 	}
 }

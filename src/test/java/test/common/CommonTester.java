@@ -12,7 +12,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class CommonTester {
 	
 	protected ApplicationContext context;
-	private static final Logger logger = Logger.getLogger(CommonTester.class);
+	protected static final Logger logger = Logger.getLogger(CommonTester.class);
 	
 	@Before
 	public void init(){

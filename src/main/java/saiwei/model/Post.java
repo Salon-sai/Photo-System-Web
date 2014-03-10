@@ -55,6 +55,13 @@ public class Post extends BaseModel {
 	)
 	private Set<User> favorite;
 	
+	@ManyToMany(
+			cascade={CascadeType.PERSIST,CascadeType.MERGE},
+			mappedBy="collect_posts",
+			targetEntity=saiwei.model.User.class
+	)
+	private Set<User> collecters;
+	
 	/**
 	 * getter and setter
 	 */
@@ -96,5 +103,13 @@ public class Post extends BaseModel {
 
 	public void setPhotos(Set<Photo> photos) {
 		this.photos = photos;
+	}
+
+	public Set<User> getCollecters() {
+		return collecters;
+	}
+
+	public void setCollecters(Set<User> collecters) {
+		this.collecters = collecters;
 	}
 }

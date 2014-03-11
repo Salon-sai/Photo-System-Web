@@ -13,7 +13,7 @@ import common.BaseModelHasName;
  *
  */
 @Entity
-@Table(name="user-type",catalog="photosystem")
+@Table(name="user_type",catalog="photosystem")
 public class UserType extends BaseModelHasName {
 
 	/**

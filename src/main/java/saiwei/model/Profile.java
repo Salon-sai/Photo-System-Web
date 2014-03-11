@@ -6,8 +6,9 @@ package saiwei.model;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import common.BaseModel;
@@ -26,8 +27,11 @@ public class Profile extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	
 	@OneToOne(cascade=CascadeType.ALL)
-	@PrimaryKeyJoinColumn
+	@JoinColumn(name="photo_id")
 	private Photo head_photo;
+	
+	@OneToOne(mappedBy="profile",fetch=FetchType.LAZY)
+	private User user;
 	
 	@Column(name="e_mail")
 	private String e_mail;
@@ -68,5 +72,13 @@ public class Profile extends BaseModel {
 
 	public void setHead_photo(Photo head_photo) {
 		this.head_photo = head_photo;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 }

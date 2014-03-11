@@ -12,9 +12,9 @@ import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
 import common.BaseModelHasName;
@@ -36,8 +36,8 @@ public class User extends BaseModelHasName {
 	@Column(name="password")
 	private String password;
 	
-	@OneToOne
-	@PrimaryKeyJoinColumn
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="profile_pk")
 	private Profile profile;
 	
 	@OneToMany(mappedBy="founder")
@@ -92,6 +92,10 @@ public class User extends BaseModelHasName {
 	
 	@OneToMany(mappedBy="recipients")
 	private Set<Comment> receive_comments;
+	
+	@ManyToOne
+	@JoinColumn(name="type_id")
+	private UserType userType;
 	
 	/**
 	 * getter and setter
@@ -176,5 +180,13 @@ public class User extends BaseModelHasName {
 
 	public void setReceive_comments(Set<Comment> receive_comments) {
 		this.receive_comments = receive_comments;
+	}
+
+	public UserType getUserType() {
+		return userType;
+	}
+
+	public void setUserType(UserType userType) {
+		this.userType = userType;
 	}
 }

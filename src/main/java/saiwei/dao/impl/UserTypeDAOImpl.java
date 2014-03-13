@@ -3,6 +3,8 @@
  */
 package saiwei.dao.impl;
 
+import org.springframework.stereotype.Repository;
+
 import saiwei.dao.IUserTypeDAO;
 import saiwei.model.UserType;
 
@@ -12,6 +14,7 @@ import common.BaseDAO;
  * @author sai
  *
  */
-public class UserDAOTypeImpl extends BaseDAO<UserType> implements IUserTypeDAO {
+@Repository("userTypeDAO")
+public class UserTypeDAOImpl extends BaseDAO<UserType> implements IUserTypeDAO {
 
 }

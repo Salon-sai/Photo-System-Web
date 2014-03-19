@@ -17,7 +17,7 @@ import common.AbstractTemplateService;
  * @author sai
  *
  */
-@Service("managerDAO")
+@Service("managerService")
 public class ManagerServiceImpl extends
 		AbstractTemplateService<IManagerDAO, Manager> implements IManagerService {
 

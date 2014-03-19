@@ -26,6 +26,9 @@ public class Profile extends BaseModel {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name="name")
+	private String name;
+	
 	@OneToOne(cascade=CascadeType.ALL)
 	@JoinColumn(name="photo_id")
 	private Photo head_photo;
@@ -80,5 +83,13 @@ public class Profile extends BaseModel {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }

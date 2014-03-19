@@ -33,6 +33,9 @@ public class User extends BaseModelHasName {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	@Column(name="IdNumber")
+	private String IdNumber;
+	
 	@Column(name="password")
 	private String password;
 	
@@ -188,5 +191,13 @@ public class User extends BaseModelHasName {
 
 	public void setUserType(UserType userType) {
 		this.userType = userType;
+	}
+
+	public String getIdNumber() {
+		return IdNumber;
+	}
+
+	public void setIdNumber(String idNumber) {
+		IdNumber = idNumber;
 	}
 }

@@ -18,4 +18,6 @@ public interface IUserService extends IServiceTemplate<IUserDAO,User> {
 	
 	public List<?> findByProperties(Map<String,Object> params,Class<?> classType);
 	
+	public User login(String idNum, String password);
+	
 }

@@ -33,10 +33,10 @@ public class User extends BaseModelHasName {
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	@Column(name="IdNumber")
+	@Column(name="IdNumber",nullable=false,unique=true)
 	private String IdNumber;
 	
-	@Column(name="password")
+	@Column(name="password",nullable=false)
 	private String password;
 	
 	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)

@@ -28,4 +28,5 @@ public class RelationShipTypeServiceImpl extends
 		// TODO Auto-generated method stub
 		this.dao = dao;
 	}
+	
 }

@@ -14,5 +14,5 @@ import common.IServiceTemplate;
  */
 public interface IUserTypeService extends
 		IServiceTemplate<IUserTypeDAO, UserType> {
-
+	
 }

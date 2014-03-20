@@ -45,6 +45,4 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		else
 			return list.get(0);
 	}
-	
-	
 }

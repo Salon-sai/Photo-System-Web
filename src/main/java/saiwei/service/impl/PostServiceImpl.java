@@ -28,4 +28,9 @@ public class PostServiceImpl extends
 		this.dao = dao;
 	}
 	
+	@Override
+	public void save(Post post) {
+		// TODO Auto-generated method stub
+		super.save(post);
+	}
 }

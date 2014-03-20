@@ -27,4 +27,8 @@ public class PhotoServiceImpl extends
 		// TODO Auto-generated method stub
 		this.dao = dao;
 	}
+	
+	public void saveToDisk(){
+		
+	}
 }

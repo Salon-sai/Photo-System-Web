@@ -24,5 +24,7 @@ public interface IServiceTemplate<D extends IDAOTemplate<E>,E>{
 
 	public List<?> findByProperties(String[] names,Object[] values,String Entity) ;
 	
+	public List<?> findByProperties(Map<String,Object> params,Class<?> classType);
+	
 	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType);
 }

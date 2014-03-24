@@ -3,12 +3,16 @@
  */
 package saiwei.service.impl;
 
+import java.util.Set;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import saiwei.dao.IPostDAO;
+import saiwei.model.Photo;
 import saiwei.model.Post;
+import saiwei.model.User;
 import saiwei.service.IPostService;
 
 import common.AbstractTemplateService;
@@ -28,9 +32,17 @@ public class PostServiceImpl extends
 		this.dao = dao;
 	}
 	
-	@Override
-	public void save(Post post) {
+	/**
+	 * user save the post with photos
+	 * 
+	 * @param post
+	 * @param poster
+	 * @param photos
+	 */
+	public void save(Post post,User poster,Set<Photo> photos) {
 		// TODO Auto-generated method stub
+		post.setPoster(poster);
+		post.setPhotos(photos);
 		super.save(post);
 	}
 }

@@ -2,14 +2,16 @@ package test.service;
 
 import org.junit.Test;
 
+import saiwei.model.Post;
 import saiwei.model.Profile;
 import saiwei.model.User;
+import saiwei.service.IPostService;
 import saiwei.service.IUserService;
 import test.common.CommonTester;
 
 public class TestUserService extends CommonTester {
 	
-	@Test
+//	@Test
 	public void testsave(){
 		User user = new User();
 		user.setName("a");
@@ -23,11 +25,36 @@ public class TestUserService extends CommonTester {
 		userservice.save(user);
 	}
 	
-//	@Test
+	@Test
 	public void testlogin(){
 		IUserService userservice = (IUserService)context.getBean("userService");
 		User user = userservice.login("a", "a");
 		logger.info("user name : " +user.getName());
 	}
+	
+//	@Test
+	public void deleteuser(){
+		IUserService userservice = (IUserService)context.getBean("userService");
+		User user = userservice.login("a", "a");
+		userservice.delete(user);
+	}
+	
+//	@Test
+	public void userpostPost(){
+		IUserService userservice = (IUserService)context.getBean("userService");
+		User user = userservice.login("a", "a");
+		
+		Post post = new Post();
+		post.setContent("bbb");
+		
+		IPostService postservice = (IPostService)context.getBean("postService");
+		postservice.save(post,user,null);
+	}
+	
+	public void likethispost(){
+		
+	}
+	
+	
 
 }

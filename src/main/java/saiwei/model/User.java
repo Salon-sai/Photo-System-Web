@@ -82,12 +82,7 @@ public class User extends BaseModelHasName {
 	)
 	private Set<Post> collect_posts;
 	
-	@OneToMany(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinTable(
-			name="own_posts",
-			joinColumns=@JoinColumn(name="user_id"),
-			inverseJoinColumns=@JoinColumn(name="post_id")
-	)
+	@OneToMany(mappedBy="poster")
 	private Set<Post> own_posts;
 	
 	@OneToMany(mappedBy="poster")

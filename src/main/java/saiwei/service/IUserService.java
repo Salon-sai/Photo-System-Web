@@ -16,4 +16,6 @@ public interface IUserService extends IServiceTemplate<IUserDAO,User> {
 	
 	public User login(String idNum, String password);
 	
+	public boolean saveOrupdateProfile(String email,String name,String location,String company,String IdNumber);
+	
 }

@@ -45,4 +45,16 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		else
 			return list.get(0);
 	}
+	
+	
+	public boolean saveOrupdateProfile(String email,String name,String location,String company,String IdNumber){
+		boolean flag = false ;
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("e_mail", email);
+		params.put("name", name);
+		params.put("location", location);
+		params.put("company", company);
+		dao.updateProfileByUser(params, IdNumber);
+		return flag;
+	}
 }

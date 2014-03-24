@@ -11,7 +11,7 @@ public class TestImageFactory {
 	
 	@Test
 	public void getinfobyImage(){
-//		logger.info(ImageFactory.getImageInfo("C:/Users/sai/Desktop/20120604789.jpg"));
+		logger.info(ImageFactory.getImageInfo("C:/Users/sai/Desktop/20120604789.jpg"));
 		ImageFactory.zoomImage("C:/Users/sai/Desktop/20120604789.jpg", "C:/Users/sai/Desktop/20120604789a.jpg", 70, 70);
 	}
 	

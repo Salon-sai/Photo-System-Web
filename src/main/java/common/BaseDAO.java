@@ -27,7 +27,7 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 
 	private static final Logger logger = Logger.getLogger(BaseDAO.class);
 	
-	private SessionFactory sessionFactory;
+	protected SessionFactory sessionFactory;
 
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#save(java.lang.Object)

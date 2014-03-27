@@ -12,6 +12,7 @@ import javax.persistence.MappedSuperclass;
 import org.apache.log4j.Logger;
 import org.hibernate.Criteria;
 import org.hibernate.LockMode;
+import org.hibernate.NonUniqueResultException;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -104,6 +105,17 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 	}
 	
 	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType){
+		return findByPropertiesInHql(sessionFactory.getCurrentSession(), params, classType);
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param params
+	 * @param classType
+	 * @return
+	 */
+	public List<?> findByPropertiesInHql(Session session,Map<String,Object> params,String classType){
 		List<?> list = null;
 		String queryString = "from " + classType + " as model where ";
 		try{
@@ -111,7 +123,7 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 				queryString += "model." + key + "=:" + key + " and ";
 			}
 			queryString = queryString.substring(0, queryString.lastIndexOf("and "));
-			Query query = sessionFactory.getCurrentSession().createQuery(queryString);
+			Query query = session.createQuery(queryString);
 			list = query.setProperties(params).list();
 		}catch(Exception e){
 			logger.error(e);
@@ -120,7 +132,17 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 	}
 	
 	public List<?> findByPropertiesInCriteria(Map<String,Object> params,Class<?> classType){
-		Session session = sessionFactory.getCurrentSession();
+		return findByPropertiesInCriteria(sessionFactory.getCurrentSession(),params,classType);
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param params
+	 * @param classType
+	 * @return
+	 */
+	public List<?> findByPropertiesInCriteria(Session session,Map<String,Object> params,Class<?> classType){
 		Criteria criteria = session.createCriteria(classType);
 		List<?> list = null;
 		try{
@@ -138,6 +160,19 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 		return list;
 	}
 
+	public Object uniqueElement(Map<String,Object> params,String classType){
+		List<?> list  = this.findByPropertiesInHql(sessionFactory.getCurrentSession(), params, classType);
+		int size = list.size();
+		if(size == 0) return null;
+		Object first = list.get(0);
+		for(int i = 1;i < size; i++){
+			if(list.get(i) != first){
+				throw new NonUniqueResultException(size);
+			}
+		}
+		return first;
+	}
+	
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#load(java.lang.Class, java.io.Serializable)
 	 */

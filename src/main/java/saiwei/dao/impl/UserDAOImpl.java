@@ -4,6 +4,8 @@
 package saiwei.dao.impl;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import org.hibernate.Criteria;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Repository;
 
 import saiwei.dao.IUserDAO;
 import saiwei.model.Profile;
+import saiwei.model.RelationShip;
+import saiwei.model.RelationShipType;
 import saiwei.model.User;
 
 import common.BaseDAO;
@@ -47,6 +51,34 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
 		}
 		session.saveOrUpdate(user);
 		return profile;
+	}
+	
+	public List<User> findfollowing(String IdNum){
+		Session session = sessionFactory.getCurrentSession();
+		session.createQuery("");
+		return null;
+	}
+	
+	@SuppressWarnings("unchecked")
+	public static List<User> findfollowingINCriteria(Session session,String userIdNum){
+		Criteria criteria = session.createCriteria(User.class);
+		criteria.add(Restrictions.eq("IdNum", userIdNum));
+		User user = (User)criteria.uniqueResult();
+		
+		Criteria criteria2 = session.createCriteria(RelationShip.class);
+		criteria2.add(Restrictions.eq("name", "following"));
+		RelationShipType type = (RelationShipType)criteria2.uniqueResult();
+		
+		Criteria criteria3 = session.createCriteria(RelationShip.class);
+		criteria3.add(Restrictions.eq("founder", user)).add(Restrictions.eq("relationship", type));
+		List<RelationShip> relationships = criteria3.list();
+		
+		List<User> followings = new ArrayList<User>();
+		
+		for(RelationShip relationship : relationships){
+			followings.add(relationship.getLinked_person());
+		}
+		return followings;
 	}
 	
 }

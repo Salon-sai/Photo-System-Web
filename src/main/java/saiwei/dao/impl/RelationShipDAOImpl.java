@@ -27,7 +27,6 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 		User following = (User)session.createQuery("").uniqueResult();
 		
 		
-		
 		return false;
 	}
 	

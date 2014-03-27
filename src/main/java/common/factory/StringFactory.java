@@ -1,5 +1,7 @@
 package common.factory;
 
+import org.hibernate.dialect.FirebirdDialect;
+
 public class StringFactory {
 	
 	public static String FristLetterToBigCase(String str) {
@@ -44,4 +46,11 @@ public class StringFactory {
 		FristLetterToBigCase(propertyName, builder);
 		return builderMergeredAfter(builder, "set");
 	}
+	
+	public static String buildGetterName(String propertyName){
+		StringBuilder builder = new StringBuilder();
+		FristLetterToBigCase(propertyName, builder);
+		return builderMergeredAfter(builder, "get");
+	}
+	
 }

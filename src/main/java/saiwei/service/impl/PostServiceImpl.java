@@ -3,6 +3,7 @@
  */
 package saiwei.service.impl;
 
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -44,5 +45,10 @@ public class PostServiceImpl extends
 		post.setPoster(poster);
 		post.setPhotos(photos);
 		super.save(post);
+	}
+	
+	public List<Post> findPostByUserFollowing(){
+		
+		return null;
 	}
 }

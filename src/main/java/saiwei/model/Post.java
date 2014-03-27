@@ -3,6 +3,7 @@
  */
 package saiwei.model;
 
+import java.util.Date;
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -13,6 +14,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OrderBy;
 import javax.persistence.Table;
 
 import common.BaseModel;
@@ -36,6 +38,10 @@ public class Post extends BaseModel {
 	@ManyToOne
 	@JoinColumn(name="poster_id")
 	private User poster;
+	
+	@Column(name="postdate",nullable=false)
+	@OrderBy("asc")
+	private Date postdate;
 	
 	@OneToMany(mappedBy="post")
 	private Set<Comment> comments;
@@ -111,5 +117,13 @@ public class Post extends BaseModel {
 
 	public void setCollecters(Set<User> collecters) {
 		this.collecters = collecters;
+	}
+
+	public Date getPostdate() {
+		return postdate;
+	}
+
+	public void setPostdate(Date postdate) {
+		this.postdate = postdate;
 	}
 }

@@ -1,6 +1,5 @@
 package common.factory;
 
-import org.hibernate.dialect.FirebirdDialect;
 
 public class StringFactory {
 	

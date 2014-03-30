@@ -29,4 +29,8 @@ public class RelationShipServiceImpl extends
 		this.dao = dao;
 	}
 	
+	public boolean savefollowing(String founderId,String followingId){
+		return false;
+	}
+	
 }

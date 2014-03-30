@@ -160,8 +160,25 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 		return list;
 	}
 
+	/**
+	 * 
+	 * @param params
+	 * @param classType
+	 * @return
+	 */
 	public Object uniqueElement(Map<String,Object> params,String classType){
-		List<?> list  = this.findByPropertiesInHql(sessionFactory.getCurrentSession(), params, classType);
+		return this.uniqueElement(sessionFactory.getCurrentSession(), params, classType);
+	}
+	
+	/**
+	 * 
+	 * @param session
+	 * @param params
+	 * @param classType
+	 * @return
+	 */
+	public Object uniqueElement(Session session,Map<String,Object> params,String classType){
+		List<?> list  = this.findByPropertiesInHql(session, params, classType);
 		int size = list.size();
 		if(size == 0) return null;
 		Object first = list.get(0);

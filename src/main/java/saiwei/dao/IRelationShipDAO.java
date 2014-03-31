@@ -13,4 +13,6 @@ import common.IDAOTemplate;
  */
 public interface IRelationShipDAO extends IDAOTemplate<RelationShip> {
 
+	public boolean foundrelationship(String founderId,String linked_persionId,String typeName);
+	
 }

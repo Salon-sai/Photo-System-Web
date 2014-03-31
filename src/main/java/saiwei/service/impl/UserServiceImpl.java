@@ -57,7 +57,5 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		return dao.updateProfileByUser(params, IdNumber);
 	}
 	
-	public List<User> findUserRelationShip(String userId,String relationshipType){
-		return null;
-	}
+
 }

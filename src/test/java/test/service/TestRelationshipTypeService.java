@@ -28,4 +28,5 @@ public class TestRelationshipTypeService extends CommonTester{
 		service.save(type3);
 	}
 	
+
 }

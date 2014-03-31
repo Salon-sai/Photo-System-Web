@@ -28,6 +28,7 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 	
 	private static final String queryString = "from User as model where model.IdNumber=:IdNumber";
 	private static final String queryString1 = "from RelationShipType as model where model.name=:name";
+	private static final String RELATIONSHIP_CLASSTYPE = "RelationShip";
 	
 	/**
 	 * 
@@ -61,8 +62,14 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 		}
 	}
 	
+	/**
+	 * 
+	 * @param userId
+	 * @param typeName
+	 * @return
+	 */
 	@SuppressWarnings("unchecked")
-	public List<?> findUserRelationship(String userId,String typeName){
+	public List<User> findUserRelationship(String userId,String typeName){
 		Session session = sessionFactory.getCurrentSession();
 		
 		User user = (User)session.createQuery(queryString)
@@ -71,10 +78,13 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 				.setParameter("name", typeName).uniqueResult();
 		
 		Map<String,Object> params = new HashMap<String, Object>();
-		params.put("founder", user);
-		params.put("relationship", type);
 		
-		List<RelationShip> relationships =	(List<RelationShip>)this.findByPropertiesInHql(session, params, "Relationship");
+		params.put("relationship", type);
+		params.put("founder", user);
+		
+		List<RelationShip> relationships =	
+				(List<RelationShip>)this.getQueryByPropertiesInHql(session, params, RELATIONSHIP_CLASSTYPE)
+				.setMaxResults(10).list();
 		
 		List<User> linked_people = new ArrayList<User>();
 		for(RelationShip relationship : relationships){

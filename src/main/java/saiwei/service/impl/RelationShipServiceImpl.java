@@ -29,8 +29,8 @@ public class RelationShipServiceImpl extends
 		this.dao = dao;
 	}
 	
-	public boolean savefollowing(String founderId,String followingId){
-		return false;
+	public boolean addrelationship(String founderId,String linked_persionId,String typeName){
+		return this.dao.foundrelationship(founderId, linked_persionId, typeName);
 	}
 	
 }

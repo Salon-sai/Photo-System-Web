@@ -15,4 +15,6 @@ import common.IServiceTemplate;
 public interface IRelationShipService extends
 		IServiceTemplate<IRelationShipDAO, RelationShip> {
 
+	public boolean addrelationship(String founderId,String linked_persionId,String typeName);
+	
 }

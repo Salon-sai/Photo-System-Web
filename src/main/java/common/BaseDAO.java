@@ -116,19 +116,22 @@ public abstract class BaseDAO<E> implements IDAOTemplate<E> {
 	 * @return
 	 */
 	public List<?> findByPropertiesInHql(Session session,Map<String,Object> params,String classType){
-		List<?> list = null;
+		return this.getQueryByPropertiesInHql(session, params, classType).list();
+	}
+	
+	public Query getQueryByPropertiesInHql(Session session,Map<String,Object> params,String classType){
+		Query query = null;
 		String queryString = "from " + classType + " as model where ";
 		try{
 			for(String key : params.keySet()){
 				queryString += "model." + key + "=:" + key + " and ";
 			}
 			queryString = queryString.substring(0, queryString.lastIndexOf("and "));
-			Query query = session.createQuery(queryString);
-			list = query.setProperties(params).list();
+			query = session.createQuery(queryString).setProperties(params);
 		}catch(Exception e){
-			logger.error(e);
+			e.printStackTrace();
 		}
-		return list;
+		return query;
 	}
 	
 	public List<?> findByPropertiesInCriteria(Map<String,Object> params,Class<?> classType){

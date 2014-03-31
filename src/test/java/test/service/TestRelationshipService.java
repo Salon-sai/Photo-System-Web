@@ -1,7 +1,10 @@
 package test.service;
 
+import java.util.List;
+
 import org.junit.Test;
 
+import saiwei.model.User;
 import saiwei.service.IRelationShipService;
 import test.common.CommonTester;
 
@@ -9,7 +12,7 @@ public class TestRelationshipService extends CommonTester{
 
 	private IRelationShipService relationshipService ;
 	
-	@Test
+//	@Test
 	public void testfollowing(){
 		long oldTime = System.currentTimeMillis();
 		relationshipService = (IRelationShipService)context.getBean("relationshipService");
@@ -17,5 +20,11 @@ public class TestRelationshipService extends CommonTester{
 		logger.info(System.currentTimeMillis() - oldTime + "ms");
 	}
 	
-	
+	@Test
+	public void testfindrelationship(){
+		long oldTime = System.currentTimeMillis();
+		relationshipService = (IRelationShipService)context.getBean("relationshipService");
+		List<User> users = relationshipService.findUserRelationShip("a", "following");
+		logger.info(System.currentTimeMillis() - oldTime + "ms");		
+	}
 }

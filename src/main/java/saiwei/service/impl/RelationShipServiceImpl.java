@@ -3,12 +3,15 @@
  */
 package saiwei.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
 import saiwei.dao.IRelationShipDAO;
 import saiwei.model.RelationShip;
+import saiwei.model.User;
 import saiwei.service.IRelationShipService;
 
 import common.AbstractTemplateService;
@@ -33,4 +36,7 @@ public class RelationShipServiceImpl extends
 		return this.dao.foundrelationship(founderId, linked_persionId, typeName);
 	}
 	
+	public List<User> findUserRelationShip(String userId,String relationshipType){
+		return this.dao.findUserRelationship(userId, relationshipType);
+	}
 }

@@ -16,12 +16,20 @@ public class TestUserService extends CommonTester {
 		User user = new User();
 		user.setName("a");
 		user.setPassword("a");
-		user.setIdNumber("a");
+		user.setIdNumber("b");
 		
 		Profile profile = new Profile();
 		user.setProfile(profile);
 
 		IUserService userservice = (IUserService)context.getBean("userService");
+		userservice.save(user);
+		
+		user.setIdNumber("c");
+		user.setProfile(new Profile());
+		userservice.save(user);
+		
+		user.setIdNumber("d");
+		user.setProfile(new Profile());
 		userservice.save(user);
 	}
 	

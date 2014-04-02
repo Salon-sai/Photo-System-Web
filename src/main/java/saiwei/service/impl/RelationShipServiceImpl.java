@@ -10,6 +10,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import saiwei.dao.IRelationShipDAO;
+import saiwei.model.Post;
 import saiwei.model.RelationShip;
 import saiwei.model.User;
 import saiwei.service.IRelationShipService;
@@ -38,5 +39,9 @@ public class RelationShipServiceImpl extends
 	
 	public List<User> findUserRelationShip(String userId,String relationshipType){
 		return this.dao.findUserRelationship(userId, relationshipType);
+	}
+	
+	public List<Post> findPostByRelationship(String userId,String relationshipType){
+		return this.dao.findPostByRelathiship(userId, relationshipType);
 	}
 }

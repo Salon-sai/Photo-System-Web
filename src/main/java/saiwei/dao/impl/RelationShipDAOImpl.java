@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import saiwei.dao.IRelationShipDAO;
+import saiwei.model.Post;
 import saiwei.model.RelationShip;
 import saiwei.model.RelationShipType;
 import saiwei.model.User;
@@ -69,9 +71,7 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 	 * @return
 	 */
 	@SuppressWarnings("unchecked")
-	public List<User> findUserRelationship(String userId,String typeName){
-		Session session = sessionFactory.getCurrentSession();
-		
+	public List<User> findUserRelationship(Session session,String userId,String typeName){
 		User user = (User)session.createQuery(queryString)
 				.setParameter("IdNumber", userId).uniqueResult();
 		RelationShipType type = (RelationShipType)session.createQuery(queryString1)
@@ -91,6 +91,30 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 			linked_people.add(relationship.getLinked_person());
 		}
 		return linked_people;
+	}
+	
+	public List<User> findUserRelationship(String userId,String typeName){
+		return this.findUserRelationship(sessionFactory.getCurrentSession(), userId, typeName);
+	}
+	
+	public List<Post> findPostByRelathiship(String userId,String typeName){
+		Session session = sessionFactory.getCurrentSession();
+		List<User> users = this.findUserRelationship(session, userId, typeName);
+		List<Post> postes = new ArrayList<Post>();
+		
+		for(User user : users){
+			Set<Post> userposts = user.getOwn_posts();
+			
+			int length = 10;
+			if(userposts.size() < 10){
+				length = userposts.size();
+			}
+			for(int i = 0; i < length;i++){
+				postes.add(null);
+			}
+		}
+		
+		return null;
 	}
 	
 }

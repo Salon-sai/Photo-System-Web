@@ -5,6 +5,7 @@ package saiwei.dao.impl;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -100,21 +101,16 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 	public List<Post> findPostByRelathiship(String userId,String typeName){
 		Session session = sessionFactory.getCurrentSession();
 		List<User> users = this.findUserRelationship(session, userId, typeName);
-		List<Post> postes = new ArrayList<Post>();
-		
+		List<Post> posts = new ArrayList<Post>();
 		for(User user : users){
 			Set<Post> userposts = user.getOwn_posts();
-			
 			int length = 10;
-			if(userposts.size() < 10){
-				length = userposts.size();
-			}
-			for(int i = 0; i < length;i++){
-				postes.add(null);
+			Iterator<Post> iterator_posts = userposts.iterator();
+			while(iterator_posts.hasNext() || length < 0){
+				posts.add(iterator_posts.next());
 			}
 		}
-		
-		return null;
+		return posts;
 	}
 	
 }

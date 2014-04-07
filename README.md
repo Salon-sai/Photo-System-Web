@@ -30,10 +30,11 @@ Photo-System-Web
 
 插件依赖
 ------------------------------
-1、GMimage
+1、GraphicsMagick
 
 当中调用GraphicsMagick进行图片处理。
 
 
-================
 待续.....
+
+================

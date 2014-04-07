@@ -7,7 +7,8 @@ import java.util.List;
 
 public class SortFatory {
 	
-	public static List<Object> insertByDate(List<Object> list,Object object,String proportyName) throws NoSuchMethodException, SecurityException{
+	@SuppressWarnings({ "rawtypes", "unchecked" })
+	public static List<Object> insertByDate(List list,Object object,String proportyName) throws NoSuchMethodException, SecurityException{
 		String methodName = StringFactory.buildGetterName(proportyName);
 		Method getMethod = object.getClass().getMethod(methodName);
 		if(list != null && !list.isEmpty()){

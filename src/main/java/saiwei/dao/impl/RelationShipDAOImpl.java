@@ -20,6 +20,7 @@ import saiwei.model.RelationShipType;
 import saiwei.model.User;
 
 import common.BaseDAO;
+import common.factory.SortFatory;
 
 /**
  * @author sai
@@ -107,7 +108,16 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 			int length = 10;
 			Iterator<Post> iterator_posts = userposts.iterator();
 			while(iterator_posts.hasNext() || length < 0){
-				posts.add(iterator_posts.next());
+				try {
+					SortFatory.insertByDate(posts, iterator_posts.next(), "");
+				} catch (NoSuchMethodException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (SecurityException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+//				posts.add(iterator_posts.next());
 			}
 		}
 		return posts;

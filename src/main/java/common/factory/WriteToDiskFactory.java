@@ -12,9 +12,13 @@ public class WriteToDiskFactory {
 	/**
 	 * 
 	 * @param parentFileName
+	 * 		target file parent path
 	 * @param file
+	 * 		source file
 	 * @param fileName
-	 * @return filetargetFile Name
+	 * 		target file name,but exclude file path.
+	 * @return filetargetFileName
+	 * 		target file name	
 	 * 
 	 * save file to disk
 	 */
@@ -41,7 +45,7 @@ public class WriteToDiskFactory {
 		if(targetFile == null || !targetFile.exists()){
 			return null;
 		}
-		return targetFile.getName();
+		return targetFile.getAbsolutePath();
 	}
 	
 }

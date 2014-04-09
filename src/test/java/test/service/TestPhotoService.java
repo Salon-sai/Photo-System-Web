@@ -23,7 +23,7 @@ public class TestPhotoService extends CommonTester {
 	 * Tester test photoService generate photo of fit scale.
 	 * If the path is null or not exists , Test  is fail;
 	 */
-//	@Test
+	@Test
 	public void testzoomphoto(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		String path = photoService.zoomImage("C:/Users/sai/Desktop/20120604789.jpg");

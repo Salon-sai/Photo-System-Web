@@ -4,6 +4,8 @@
 package saiwei.service.impl;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -28,8 +30,8 @@ public class PhotoServiceImpl extends
 	
 	private static final String PARENT_IMAGE_OLD = "F:/PhotoSystem_Photo_OLD";
 	private static final String PARENT_IMAGE_NEW = "F:/PhotoSystem_Photo_NEW";
-	private static final int CUT_WIDTH = 100;
-	private static final int CUT_HEIGHT = 100;
+	private static final Integer CUT_WIDTH = 300;
+	private static final Integer CUT_HEIGHT = 300;
 	
 	@Resource(name="photoDAO")
 	@Override
@@ -54,12 +56,25 @@ public class PhotoServiceImpl extends
 	
 	public String zoomImage(String imagePath){
 		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
-				imagePath.substring(imagePath.lastIndexOf("/")));
+				imagePath.substring(imagePath.lastIndexOf("/")),Integer.toString(CUT_WIDTH),"*",Integer.toString(CUT_WIDTH));
 		if(ImageFactory.zoomImage(imagePath, newImagePath, CUT_WIDTH, CUT_HEIGHT)){
 			return newImagePath;
 		}else{
 			return null;
 		}
-		
 	}
+	
+	public void saveToDB(Photo photo){
+		super.save(photo);
+	}
+	
+	public void savePhotosByList(File[] files,String[] fileName){
+		List<Photo> photoes = new ArrayList<Photo>();
+		for(int i  = 0; i < fileName.length;i++){
+			String filepath = this.saveToDisk(files[i], fileName[i]);
+			this.zoomImage(filepath);
+			Photo photo = new Photo();
+		}
+	}
+	
 }

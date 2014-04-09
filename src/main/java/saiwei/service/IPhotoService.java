@@ -19,4 +19,6 @@ public interface IPhotoService extends IServiceTemplate<IPhotoDAO, Photo> {
 	public String zoomImage(String imagePath);
 	
 	public String saveToDisk(File file,String fileName);
+	
+	public void saveToDB(Photo photo);
 }

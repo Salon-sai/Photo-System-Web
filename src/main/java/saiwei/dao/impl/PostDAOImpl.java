@@ -36,13 +36,9 @@ public class PostDAOImpl extends BaseDAO<Post> implements IPostDAO {
 			List<Post> posts = criteria.setMaxResults(3).list();
 			showpost.addAll(posts);
 		}
-		
 		return null;
 	}
 	
-	public List<Post> findPostByUserFollowingINSQL(String userIdNum){
-		
-		return null;
-	}
+
 	
 }

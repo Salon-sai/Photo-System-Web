@@ -56,7 +56,7 @@ public class TestUserService extends CommonTester {
 		post.setContent("bbb");
 		
 		IPostService postservice = (IPostService)context.getBean("postService");
-		postservice.save(post,user,null);
+//		postservice.save(post,user,null);
 	}
 	
 	public void likethispost(){

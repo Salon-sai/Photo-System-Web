@@ -17,4 +17,6 @@ import common.BaseDAO;
 @Repository("photoDAO")
 public class PhotoDAOImpl extends BaseDAO<Photo> implements IPhotoDAO {
 
+
+	
 }

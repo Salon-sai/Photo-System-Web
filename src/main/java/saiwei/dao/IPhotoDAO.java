@@ -13,4 +13,6 @@ import common.IDAOTemplate;
  */
 public interface IPhotoDAO extends IDAOTemplate<Photo> {
 
+	
+	
 }

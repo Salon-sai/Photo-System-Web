@@ -54,6 +54,12 @@ public class PhotoServiceImpl extends
 		return filepath;
 	}
 	
+	/**
+	 * 
+	 * @param imagePath
+	 * 		source image file path
+	 * 
+	 */
 	public String zoomImage(String imagePath){
 		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
 				imagePath.substring(imagePath.lastIndexOf("/")),Integer.toString(CUT_WIDTH),"*",Integer.toString(CUT_WIDTH));
@@ -64,17 +70,34 @@ public class PhotoServiceImpl extends
 		}
 	}
 	
+	/**
+	 * @param photo
+	 * 
+	 */
 	public void saveToDB(Photo photo){
 		super.save(photo);
 	}
 	
-	public void savePhotosByList(File[] files,String[] fileName){
-		List<Photo> photoes = new ArrayList<Photo>();
+	/**
+	 * 
+	 * @param files
+	 * 		file list
+	 * @param fileName
+	 * 		file name list
+	 * @return photos
+	 * 		
+	 */
+	public List<Photo> savePhotosByList(File[] files,String[] fileName){
+		List<Photo> photos = new ArrayList<Photo>();
 		for(int i  = 0; i < fileName.length;i++){
 			String filepath = this.saveToDisk(files[i], fileName[i]);
-			this.zoomImage(filepath);
+			String modifyFilepath = this.zoomImage(filepath);
 			Photo photo = new Photo();
+			photo.setOriginalPhotoURL(filepath);
+			photo.setAutomodifyPhotoURL(modifyFilepath);
+			photos.add(photo);
 		}
+		return photos;
 	}
 	
 }

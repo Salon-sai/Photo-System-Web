@@ -3,6 +3,7 @@
  */
 package saiwei.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -13,7 +14,6 @@ import org.springframework.stereotype.Service;
 import saiwei.dao.IPostDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
-import saiwei.model.User;
 import saiwei.service.IPostService;
 
 import common.AbstractTemplateService;
@@ -40,15 +40,16 @@ public class PostServiceImpl extends
 	 * @param poster
 	 * @param photos
 	 */
-	public void save(Post post,User poster,Set<Photo> photos) {
+	public void save(Post post,String posterId,Set<Photo> photos) {
 		// TODO Auto-generated method stub
-		post.setPoster(poster);
 		post.setPhotos(photos);
-		super.save(post);
+		post.setPostdate(new Date());
+		dao.save(posterId, post);
 	}
 	
 	public List<Post> findPostByUserFollowing(){
 		
 		return null;
 	}
+	
 }

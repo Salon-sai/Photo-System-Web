@@ -13,4 +13,6 @@ import common.IDAOTemplate;
  */
 public interface IPostDAO extends IDAOTemplate<Post> {
 
+	public void save(String posterId,Post post);
+	
 }

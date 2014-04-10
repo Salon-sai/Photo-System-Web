@@ -39,6 +39,18 @@ public class PostDAOImpl extends BaseDAO<Post> implements IPostDAO {
 		return null;
 	}
 	
-
+	/**
+	 * @param posterId
+	 * 		poster id
+	 * @param post
+	 * 		service offer post which has date of posting and photos
+	 */
+	public void save(String posterId,Post post){
+		Session session = sessionFactory.getCurrentSession();
+		User poster = (User)session.createQuery("from User as model where model.IdNumber=:IdNumber")
+			.setParameter("IdNumber", posterId).uniqueResult();
+		post.setPoster(poster);
+		session.save(post);
+	}
 	
 }

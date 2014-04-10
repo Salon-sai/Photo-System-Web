@@ -8,7 +8,6 @@ import java.util.Set;
 import saiwei.dao.IPostDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
-import saiwei.model.User;
 
 import common.IServiceTemplate;
 
@@ -18,6 +17,6 @@ import common.IServiceTemplate;
  */
 public interface IPostService extends IServiceTemplate<IPostDAO, Post> {
 	
-	public void save(Post post,User poster,Set<Photo> photos);
+	public void save(Post post,String posterId,Set<Photo> photos);
 	
 }

@@ -24,7 +24,7 @@ public class TestPostService extends CommonTester {
 		IUserService userservice = (IUserService)context.getBean("userService");
 		IPostService postservice = (IPostService)context.getBean("postService");
 		
-		User poster = userservice.login("a", "a");
+		User poster = userservice.login("b", "a");
 		
 		Post post = new Post();
 		post.setPoster(poster);

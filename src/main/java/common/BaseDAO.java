@@ -19,14 +19,20 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import saiwei.model.ModelClassType;
+
 /**
  * @author sai
  *
  */
 @MappedSuperclass
-public abstract class BaseDAO<E> implements IDAOTemplate<E> {
+public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<E> {
 
 	private static final Logger logger = Logger.getLogger(BaseDAO.class);
+	protected static final String FROMMODEL = "from ";
+	protected static final String HQLMODEL = " as model ";
+	protected static final String WHEREMODEL = " where ";
+	
 	
 	protected SessionFactory sessionFactory;
 

@@ -108,7 +108,7 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 			Iterator<Post> iterator_posts = userposts.iterator();
 			while(iterator_posts.hasNext() || length < 0){
 				try {
-					SortFatory.insertByDate(posts, iterator_posts.next(), "");
+					SortFatory.insertByDate(posts, iterator_posts.next(), "postdate");
 				} catch (NoSuchMethodException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

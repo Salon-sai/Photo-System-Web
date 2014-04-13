@@ -13,4 +13,6 @@ import common.IDAOTemplate;
  */
 public interface ICommentDAO extends IDAOTemplate<Comment> {
 
+	public void save(Comment transientInstance,String posterId,String recipientId,String postId);
+	
 }

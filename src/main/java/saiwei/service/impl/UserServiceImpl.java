@@ -37,14 +37,18 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	@SuppressWarnings("unchecked")
 	public User login(String idNum, String password){
 		Map<String, Object> params = new HashMap<String, Object>();
+		User user ;
 		params.put("IdNumber", idNum);
 		//change to MD5
 		params.put("password", MD5Factory.getMD5(password.getBytes()));
 		List<User> list = (List<User>)this.findByProperties(params, User.class);
 		if(list.isEmpty() || list == null)
 			return null;
-		else
-			return list.get(0);
+		else{
+			user = list.get(0);
+		}
+			
+			return user;
 	}
 	
 	

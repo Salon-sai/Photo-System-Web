@@ -9,6 +9,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import saiwei.dao.IUserDAO;
@@ -27,6 +28,8 @@ import common.factory.MD5Factory;
 public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		implements IUserService {
 
+	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+	
 	@Override
 	@Resource(name="userDAO")
 	public void setDao(IUserDAO dao) {
@@ -37,7 +40,6 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	@SuppressWarnings("unchecked")
 	public User login(String idNum, String password){
 		Map<String, Object> params = new HashMap<String, Object>();
-		User user ;
 		params.put("IdNumber", idNum);
 		//change to MD5
 		params.put("password", MD5Factory.getMD5(password.getBytes()));
@@ -45,10 +47,8 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		if(list.isEmpty() || list == null)
 			return null;
 		else{
-			user = list.get(0);
+			return list.get(0);
 		}
-			
-			return user;
 	}
 	
 	

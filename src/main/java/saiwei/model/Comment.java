@@ -3,6 +3,8 @@
  */
 package saiwei.model;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
@@ -31,6 +33,9 @@ public class Comment extends BaseModel {
 	@ManyToOne
 	@JoinColumn(name="poster_id")
 	private User poster;
+	
+	@Column(name="postDate")
+	private Date postdate;
 	
 	@ManyToOne
 	@JoinColumn(name="recipients_id")
@@ -72,5 +77,13 @@ public class Comment extends BaseModel {
 
 	public void setPost(Post post) {
 		this.post = post;
+	}
+
+	public Date getPostdate() {
+		return postdate;
+	}
+
+	public void setPostdate(Date postdate) {
+		this.postdate = postdate;
 	}
 }

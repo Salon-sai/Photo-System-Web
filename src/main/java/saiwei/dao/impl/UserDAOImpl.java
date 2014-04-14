@@ -81,4 +81,17 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
 		return followings;
 	}
 	
+	/**
+	 * 
+	 * @param session
+	 * 		hibernate session create before execute this function
+	 * @param IdNum
+	 * 		Id number is one of identifications in user
+	 * @return
+	 */
+	public static User findByIdNum(Session session,String IdNum){
+		return (User)session.createQuery("from User as model where model.IdNumber=:IdNumber")
+			.setParameter("IdNumber", IdNum).uniqueResult();
+	}
+	
 }

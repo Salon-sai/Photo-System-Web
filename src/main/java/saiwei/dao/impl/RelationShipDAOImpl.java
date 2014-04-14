@@ -30,7 +30,6 @@ import common.factory.SortFatory;
 public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 		IRelationShipDAO {
 	
-	private static final String queryString = "from User as model where model.IdNumber=:IdNumber";
 	private static final String queryString1 = "from RelationShipType as model where model.name=:name";
 	
 	/**
@@ -45,10 +44,8 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 			Session session = sessionFactory.getCurrentSession();
 			RelationShip relationship = new RelationShip();
 			
-			User founder = (User)session.createQuery(queryString)
-					.setParameter("IdNumber", founderId).uniqueResult();
-			User linked_person = (User)session.createQuery(queryString)
-					.setParameter("IdNumber", linked_persionId).uniqueResult();
+			User founder = UserDAOImpl.findByIdNum(session, founderId);
+			User linked_person = UserDAOImpl.findByIdNum(session, linked_persionId);
 			RelationShipType type = (RelationShipType)session.createQuery(queryString1)
 					.setParameter("name", typeName).uniqueResult();
 			
@@ -73,8 +70,7 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 	 */
 	@SuppressWarnings("unchecked")
 	public List<User> findUserRelationship(Session session,String userId,String typeName){
-		User user = (User)session.createQuery(queryString)
-				.setParameter("IdNumber", userId).uniqueResult();
+		User user = UserDAOImpl.findByIdNum(session, userId);
 		RelationShipType type = (RelationShipType)session.createQuery(queryString1)
 				.setParameter("name", typeName).uniqueResult();
 		

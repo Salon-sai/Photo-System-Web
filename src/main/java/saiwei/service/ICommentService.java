@@ -14,4 +14,6 @@ import common.IServiceTemplate;
  */
 public interface ICommentService extends IServiceTemplate<ICommentDAO, Comment> {
 
+	public void save(String content,String posterId,String recipientId,String postId);
+	
 }

@@ -3,6 +3,8 @@
  */
 package saiwei.service.impl;
 
+import java.util.Date;
+
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
@@ -27,6 +29,13 @@ public class CommentServiceImpl extends
 	public void setDao(ICommentDAO dao) {
 		// TODO Auto-generated method stub
 		this.dao = dao;
+	}
+	
+	public void save(String content,String posterId,String recipientId,String postId){
+		Comment comment = new Comment();
+		comment.setPostdate(new Date());
+		comment.setContent(content);
+		dao.save(comment, posterId, recipientId, postId);
 	}
 
 }

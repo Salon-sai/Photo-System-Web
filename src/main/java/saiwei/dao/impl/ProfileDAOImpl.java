@@ -16,5 +16,8 @@ import common.BaseDAO;
  */
 @Repository("profileDAO")
 public class ProfileDAOImpl extends BaseDAO<Profile> implements IProfileDAO {
+	
+	
 
+	
 }

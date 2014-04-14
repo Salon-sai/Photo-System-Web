@@ -28,6 +28,7 @@ public class ProfileServiceImpl extends
 		this.dao = dao;
 	}
 
-	
-	
+	public String fitheadPhoto(String imagePath,String userId){
+		return null;
+	}
 }

@@ -30,6 +30,10 @@ public class PhotoServiceImpl extends
 	
 	private static final String PARENT_IMAGE_OLD = "F:/PhotoSystem_Photo_OLD";
 	private static final String PARENT_IMAGE_NEW = "F:/PhotoSystem_Photo_NEW";
+	private static final String PARENT_HEAD_PHOTO = "F:/PhotoSystem_Head_PHOTO";
+	
+	private static final Integer HEAD_PHOTO_WIDTH = 110;
+	private static final Integer HEAD_PHOTO_HEIGHT = 110;
 	private static final Integer CUT_WIDTH = 300;
 	private static final Integer CUT_HEIGHT = 300;
 	
@@ -68,6 +72,39 @@ public class PhotoServiceImpl extends
 		}else{
 			return null;
 		}
+	}
+	
+	/**
+	 * 
+	 * @param imagePath
+	 * @return
+	 */
+	public String zoomtoHeadPhoto(String imagePath){
+		String newImagePath = StringFactory.MergerString(PARENT_HEAD_PHOTO,File.separator,
+				imagePath.substring(imagePath.lastIndexOf("/")),Integer.toString(HEAD_PHOTO_HEIGHT),"*",Integer.toString(HEAD_PHOTO_WIDTH));
+		if(ImageFactory.zoomImage(imagePath, newImagePath, HEAD_PHOTO_WIDTH, HEAD_PHOTO_HEIGHT)){
+			return newImagePath;
+		}else
+			return null;
+	}
+	
+	/**
+	 * 
+	 * @param imagePath
+	 * 		source image path
+	 * @param width
+	 * 		the width of photo you want
+	 * @param height
+	 * 		the height of photo you want
+	 * @return
+	 */
+	public String zoomtoHeadPhoto(String imagePath, int width, int height){
+		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
+				imagePath.substring(imagePath.lastIndexOf("/")),Integer.toString(width),"*",Integer.toString(height));
+		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
+			return newImagePath;
+		}else
+			return null;
 	}
 	
 	/**

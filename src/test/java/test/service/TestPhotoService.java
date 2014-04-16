@@ -23,7 +23,7 @@ public class TestPhotoService extends CommonTester {
 	 * Tester test photoService generate photo of fit scale.
 	 * If the path is null or not exists , Test  is fail;
 	 */
-	@Test
+//	@Test
 	public void testzoomphoto(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		String path = photoService.zoomImage("C:/Users/sai/Desktop/20120604789.jpg");
@@ -38,7 +38,7 @@ public class TestPhotoService extends CommonTester {
 	 * Tester test photoService save photo to disk.
 	 * If the path is null or not exists , Test  is fail;
 	 */
-	@Test
+//	@Test
 	public void testsaveToDisk() throws IOException{
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		File sourceFile = new File("C:/Users/sai/Desktop/20120604789.jpg");
@@ -50,6 +50,11 @@ public class TestPhotoService extends CommonTester {
 		}
 	}
 	
-	
+	@Test
+	public void testDeletePhoto(){
+		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
+		boolean flag = photoService.deletephoto("8a8a1f79456a99d701456a99df530002");
+		TestCase.assertEquals(true, flag);
+	}
 	
 }

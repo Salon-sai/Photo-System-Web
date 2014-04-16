@@ -10,7 +10,6 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
@@ -46,12 +45,7 @@ public class Post extends BaseModel {
 	@OneToMany(mappedBy="post")
 	private Set<Comment> comments;
 
-	@OneToMany(cascade=CascadeType.ALL)
-	@JoinTable(
-			name="post_photos",
-			joinColumns=@JoinColumn(name="post_id"),
-			inverseJoinColumns=@JoinColumn(name="photo_id")
-	)
+	@OneToMany(mappedBy="post",cascade=CascadeType.ALL)
 	private Set<Photo> photos;
 	
 	@ManyToMany(

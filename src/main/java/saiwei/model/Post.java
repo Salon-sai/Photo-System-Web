@@ -46,7 +46,7 @@ public class Post extends BaseModel {
 	@OneToMany(mappedBy="post")
 	private Set<Comment> comments;
 
-	@OneToMany
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinTable(
 			name="post_photos",
 			joinColumns=@JoinColumn(name="post_id"),

@@ -98,9 +98,9 @@ public class PhotoServiceImpl extends
 	 * 		the height of photo you want
 	 * @return
 	 */
-	public String zoomtoHeadPhoto(String imagePath, int width, int height){
+	public String zoomPhoto(String imagePath, int width, int height){
 		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
-				imagePath.substring(imagePath.lastIndexOf("/")),Integer.toString(width),"*",Integer.toString(height));
+				imagePath.substring(imagePath.lastIndexOf("/")));
 		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
 			return newImagePath;
 		}else
@@ -120,14 +120,14 @@ public class PhotoServiceImpl extends
 	 * @param files
 	 * 		file list
 	 * @param fileName
-	 * 		file name list
+	 * 		file name list,but exclude file path.
 	 * @return photos
 	 * 		
 	 */
-	public List<Photo> savePhotosByList(File[] files,String[] fileName){
+	public List<Photo> savePhotosByList(File[] files,String[] fileNames){
 		List<Photo> photos = new ArrayList<Photo>();
-		for(int i  = 0; i < fileName.length;i++){
-			String filepath = this.saveToDisk(files[i], fileName[i]);
+		for(int i  = 0; i < fileNames.length;i++){
+			String filepath = this.saveToDisk(files[i], fileNames[i]);
 			String modifyFilepath = this.zoomImage(filepath);
 			Photo photo = new Photo();
 			photo.setOriginalPhotoURL(filepath);

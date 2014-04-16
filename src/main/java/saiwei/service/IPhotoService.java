@@ -26,4 +26,6 @@ public interface IPhotoService extends IServiceTemplate<IPhotoDAO, Photo> {
 	public String zoomPhoto(String imagePath, int width, int height);
 	
 	public List<Photo> savePhotosByList(File[] files,String[] fileNames);
+	
+	public boolean deletephoto(String photoId);
 }

@@ -29,10 +29,14 @@ import common.factory.WriteToDiskFactory;
 public class PhotoServiceImpl extends
 		AbstractTemplateService<IPhotoDAO, Photo> implements IPhotoService {
 	
+	private static final Logger logger = Logger.getLogger(PhotoServiceImpl.class);
+	
+	private static final Class<?> PHOTOCLASS = Photo.class;
+	
 	private static final String PARENT_IMAGE_OLD = "F:/PhotoSystem_Photo_OLD";
 	private static final String PARENT_IMAGE_NEW = "F:/PhotoSystem_Photo_NEW";
 	private static final String PARENT_HEAD_PHOTO = "F:/PhotoSystem_Head_PHOTO";
-	private static final Logger logger = Logger.getLogger(PhotoServiceImpl.class);
+	
 	
 	private static final Integer HEAD_PHOTO_WIDTH = 110;
 	private static final Integer HEAD_PHOTO_HEIGHT = 110;
@@ -140,4 +144,35 @@ public class PhotoServiceImpl extends
 		return photos;
 	}
 	
+	/**
+	 * 
+	 * @param Filepath
+	 * 		file path is absolute path
+	 * 
+	 */
+	public boolean deleteInDisk(String Filepath){
+		return new File(Filepath).delete();
+	}
+	
+	/**
+	 * 
+	 * @param photoId
+	 * 		photo id in the database
+	 * @return
+	 */
+	public boolean deletephoto(String photoId){
+		boolean flag = false ;
+		Photo photo = dao.findById(photoId, PHOTOCLASS);
+		flag = this.deleteInDisk(photo.getAutomodifyPhotoURL()) 
+				&& this.deleteInDisk(photo.getOriginalPhotoURL());
+		try{
+			dao.delete(photo);
+			logger.info("delete photo success");
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error("delete photo fail",e);
+			flag = false;
+		}
+		return flag;
+	}
 }

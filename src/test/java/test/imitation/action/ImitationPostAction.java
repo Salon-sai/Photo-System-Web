@@ -7,6 +7,8 @@ import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 
+import junit.framework.TestCase;
+
 import org.junit.Test;
 
 import saiwei.model.Photo;
@@ -21,7 +23,7 @@ import test.common.CommonTester;
  */
 public class ImitationPostAction extends CommonTester {
 
-	@Test
+//	@Test
 	public void testsavePost(){
 		IPostService postService = (IPostService)context.getBean("postService");
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
@@ -37,7 +39,16 @@ public class ImitationPostAction extends CommonTester {
 		
 		postService.save(post, "a", photos);
 		
-		
+		for(Photo photo : post.getPhotos()){
+			TestCase.assertEquals(true, new File(photo.getAutomodifyPhotoURL()).exists());
+		}
+	}
+	
+	@Test
+	public void deletePost(){
+		IPostService postService = (IPostService)context.getBean("postService");
+		Post post = postService.get("8a8a1f794569d0ee014569d11a6b0000", Post.class);
+		postService.delete(post);
 	}
 	
 }

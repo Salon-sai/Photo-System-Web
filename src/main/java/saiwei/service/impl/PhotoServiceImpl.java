@@ -9,6 +9,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import saiwei.dao.IPhotoDAO;
@@ -31,6 +32,7 @@ public class PhotoServiceImpl extends
 	private static final String PARENT_IMAGE_OLD = "F:/PhotoSystem_Photo_OLD";
 	private static final String PARENT_IMAGE_NEW = "F:/PhotoSystem_Photo_NEW";
 	private static final String PARENT_HEAD_PHOTO = "F:/PhotoSystem_Head_PHOTO";
+	private static final Logger logger = Logger.getLogger(PhotoServiceImpl.class);
 	
 	private static final Integer HEAD_PHOTO_WIDTH = 110;
 	private static final Integer HEAD_PHOTO_HEIGHT = 110;
@@ -55,6 +57,7 @@ public class PhotoServiceImpl extends
 	 */
 	public String saveToDisk(File file,String fileName){
 		String filepath = WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD, file, fileName);
+//		logger.info(filepath);
 		return filepath;
 	}
 	
@@ -66,7 +69,7 @@ public class PhotoServiceImpl extends
 	 */
 	public String zoomImage(String imagePath){
 		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
-				imagePath.substring(imagePath.lastIndexOf("/")),Integer.toString(CUT_WIDTH),"*",Integer.toString(CUT_WIDTH));
+				imagePath.substring(imagePath.lastIndexOf(File.separator)));
 		if(ImageFactory.zoomImage(imagePath, newImagePath, CUT_WIDTH, CUT_HEIGHT)){
 			return newImagePath;
 		}else{

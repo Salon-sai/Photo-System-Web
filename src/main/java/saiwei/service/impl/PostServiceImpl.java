@@ -34,7 +34,8 @@ public class PostServiceImpl extends
 	}
 	
 	/**
-	 * user save the post with photos
+	 * 		user save the post with photos.In the function, submitted post should
+	 * have context.
 	 * 
 	 * @param post
 	 * @param poster

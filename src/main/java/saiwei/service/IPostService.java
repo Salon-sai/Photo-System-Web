@@ -19,4 +19,5 @@ public interface IPostService extends IServiceTemplate<IPostDAO, Post> {
 	
 	public void save(Post post,String posterId,Set<Photo> photos);
 	
+	public boolean deletePost(String postId);
 }

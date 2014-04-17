@@ -5,7 +5,9 @@ package saiwei.service.impl;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -150,8 +152,22 @@ public class PhotoServiceImpl extends
 	 * 		file path is absolute path
 	 * 
 	 */
-	public boolean deleteInDisk(String Filepath){
+	public static boolean deleteInDisk(String Filepath){
 		return new File(Filepath).delete();
+	}
+	
+	/**
+	 * 
+	 * @param photos
+	 * @return
+	 */
+	public static boolean deletePhotosInDisk(Set<Photo> photos){
+		boolean flag = true;
+		for(Photo photo : photos){
+			flag = flag && new File(photo.getAutomodifyPhotoURL()).delete()
+				&& new File(photo.getOriginalPhotoURL()).delete();
+		}
+		return flag;
 	}
 	
 	/**
@@ -161,10 +177,10 @@ public class PhotoServiceImpl extends
 	 * @return
 	 */
 	public boolean deletephoto(String photoId){
-		boolean flag = false ;
+		boolean flag = true ;
 		Photo photo = dao.findById(photoId, PHOTOCLASS);
-		flag = this.deleteInDisk(photo.getAutomodifyPhotoURL()) 
-				&& this.deleteInDisk(photo.getOriginalPhotoURL());
+		flag = PhotoServiceImpl.deleteInDisk(photo.getAutomodifyPhotoURL()) 
+				&& PhotoServiceImpl.deleteInDisk(photo.getOriginalPhotoURL());
 		try{
 			dao.delete(photo);
 			logger.info("delete photo success");

@@ -33,14 +33,37 @@ public class RelationShipServiceImpl extends
 		this.dao = dao;
 	}
 	
+	/**
+	 * @param founderId
+	 * 		user of committed relationship id
+	 * @param linked_persionId
+	 *		user of linked relationship id
+	 * @param typeName
+	 * 		relationship type
+	 * 		
+	 */
 	public boolean addrelationship(String founderId,String linked_persionId,String typeName){
 		return this.dao.foundrelationship(founderId, linked_persionId, typeName);
 	}
 	
+	/**
+	 * @param userId
+	 * 		user id
+	 * @return
+	 * 		users of list by committing relationship type and your id.
+	 */
 	public List<User> findUserRelationShip(String userId,String relationshipType){
 		return this.dao.findUserRelationship(userId, relationshipType);
 	}
 	
+	/**
+	 * 	@param userId
+	 * 		user id
+	 * 	@param relationshipType
+	 * 		relationship type name
+	 * 	@return
+	 * 		posts of list by your committing relationship type and your id.
+	 */
 	public List<Post> findPostByRelationship(String userId,String relationshipType){
 		return this.dao.findPostByRelathiship(userId, relationshipType);
 	}

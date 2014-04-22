@@ -23,7 +23,7 @@ import test.common.CommonTester;
  */
 public class ImitationPostAction extends CommonTester {
 
-//	@Test
+	@Test
 	public void testsavePost(){
 		IPostService postService = (IPostService)context.getBean("postService");
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
@@ -44,10 +44,10 @@ public class ImitationPostAction extends CommonTester {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void deletePost(){
 		IPostService postService = (IPostService)context.getBean("postService");
-		Post post = postService.get("8a8a1f794569d0ee014569d11a6b0000", Post.class);
+		Post post = postService.get("8a8a1f79456a99d701456a99df470000", Post.class);
 		postService.delete(post);
 	}
 	

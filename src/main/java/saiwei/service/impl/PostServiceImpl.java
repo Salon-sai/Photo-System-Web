@@ -49,6 +49,9 @@ public class PostServiceImpl extends
 	public void save(Post post,String posterId,Set<Photo> photos) {
 		// TODO Auto-generated method stub
 		post.setPhotos(photos);
+		for(Photo photo : photos){
+			photo.setPost(post);
+		}
 		post.setPostdate(new Date());
 		dao.save(posterId, post);
 	}

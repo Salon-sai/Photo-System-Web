@@ -59,7 +59,7 @@ public class PostServiceImpl extends
 	}
 	
 	/**
-	 * 
+	 * delete post and delete photos of this post 
 	 * @param postId
 	 * @return
 	 */
@@ -77,4 +77,15 @@ public class PostServiceImpl extends
 		return flag ;
 	}
 	
+	/**
+	 * 
+	 * @param userNum
+	 * @param postId
+	 * @return
+	 */
+	public boolean saveLikePost(String userNum,String postId){
+		boolean flag = false;
+
+		return flag;
+	}
 }

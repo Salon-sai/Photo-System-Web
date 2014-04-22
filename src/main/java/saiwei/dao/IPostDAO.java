@@ -17,4 +17,5 @@ public interface IPostDAO extends IDAOTemplate<Post> {
 	
 	public boolean saveLikePost(String userNum,String postId);
 	
+	public boolean removeLikePost(String userNum,String postId);
 }

@@ -4,9 +4,7 @@
 package saiwei.dao.impl;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -67,18 +65,38 @@ public class PostDAOImpl extends BaseDAO<Post> implements IPostDAO {
 			Post post = (Post)session.load(Post.class, postId);
 			User user = UserDAOImpl.findByIdNum(session, userNum);
 			
-			Set<User> favorites = post.getFavorite();
-			if(favorites == null){
-				post.setFavorite(new HashSet<User>());
-			}
-			favorites.add(user);
-			session.saveOrUpdate(post);
-			flag = true;
+			flag =	user.getFavorite_posts().add(post);
+			
+			session.saveOrUpdate(user);
 		}catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 			logger.error("save like post fail", e);
 		}
 		return flag;
+	}
+	
+	/**
+	 * 
+	 * @param userId
+	 * @param postId
+	 * @return
+	 */
+	public boolean removeLikePost(String userNum,String postId){
+		boolean flag = false;
+		Session session = sessionFactory.getCurrentSession();
+		try{
+			Post post = (Post)session.load(Post.class, postId);
+			User user = UserDAOImpl.findByIdNum(session, userNum);
+			
+			user.getFavorite_posts().remove(post);
+			
+			session.update(user);
+			flag = true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error("remove Like Post fail", e);
+		}
+		return flag ;
 	}
 }

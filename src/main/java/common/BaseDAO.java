@@ -28,7 +28,7 @@ import saiwei.model.ModelClassType;
 @MappedSuperclass
 public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<E> {
 
-	private static final Logger logger = Logger.getLogger(BaseDAO.class);
+	protected static final Logger logger = Logger.getLogger(BaseDAO.class);
 	protected static final String FROMMODEL = "from ";
 	protected static final String HQLMODEL = " as model ";
 	protected static final String WHEREMODEL = " where ";

@@ -84,8 +84,16 @@ public class PostServiceImpl extends
 	 * @return
 	 */
 	public boolean saveLikePost(String userNum,String postId){
-		boolean flag = false;
-
-		return flag;
+		return dao.saveLikePost(userNum, postId);
+	}
+	
+	/**
+	 * 
+	 * @param userNum
+	 * @param postId
+	 * @return
+	 */
+	public boolean deleteLikePost(String userNum,String postId){
+		return dao.removeLikePost(userNum, postId);
 	}
 }

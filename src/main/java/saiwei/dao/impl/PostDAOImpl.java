@@ -99,4 +99,51 @@ public class PostDAOImpl extends BaseDAO<Post> implements IPostDAO {
 		}
 		return flag ;
 	}
+	
+	/**
+	 * 
+	 * @param userNum
+	 * @param postId
+	 * @return
+	 */
+	public boolean saveCollectPost(String userNum,String postId){
+		Session session = sessionFactory.getCurrentSession();
+		boolean flag = true;
+		try{
+			Post post = (Post)session.load(Post.class, postId);
+			User user = UserDAOImpl.findByIdNum(session, userNum);
+			flag = flag && user.getCollect_posts().add(post);
+			session.update(user);
+			flag = flag && true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error("save collect post fail",e);
+		}
+		return flag;
+	}
+	
+	/**
+	 * 
+	 * @param userNum
+	 * @param postId
+	 * @return
+	 */
+	public boolean removeCollectPost(String userNum,String postId){
+		boolean flag = false;
+		Session session = sessionFactory.getCurrentSession();
+		try{
+			Post post = (Post)session.load(Post.class, postId);
+			User user = UserDAOImpl.findByIdNum(session, userNum);
+			
+			user.getCollect_posts().remove(post);
+			
+			session.update(user);
+			flag = true;
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error("remove Like Post fail", e);
+		}
+		return flag ;
+	}
+	
 }

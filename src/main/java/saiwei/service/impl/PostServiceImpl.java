@@ -99,4 +99,25 @@ public class PostServiceImpl extends
 	public boolean deleteLikePost(String userNum,String postId){
 		return dao.removeLikePost(userNum, postId);
 	}
+	
+	/**
+	 * 
+	 * @param userNum
+	 * @param postId
+	 * @return
+	 */
+	public boolean saveCollectPost(String userNum,String postId){
+		return dao.saveCollectPost(userNum, postId);
+	}
+	
+	/**
+	 * 
+	 * @param userNum
+	 * @param postId
+	 * @return
+	 */
+	public boolean deleteCollectPost(String userNum,String postId){
+		return dao.removeCollectPost(userNum, postId);
+	}
+	
 }

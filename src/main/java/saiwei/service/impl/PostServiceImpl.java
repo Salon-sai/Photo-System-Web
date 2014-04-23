@@ -4,7 +4,6 @@
 package saiwei.service.impl;
 
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -54,11 +53,6 @@ public class PostServiceImpl extends
 		}
 		post.setPostdate(new Date());
 		dao.save(posterId, post);
-	}
-	
-	public List<Post> findPostByUserFollowing(){
-		
-		return null;
 	}
 	
 	/**

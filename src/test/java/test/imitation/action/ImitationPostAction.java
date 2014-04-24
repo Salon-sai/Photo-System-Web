@@ -28,7 +28,7 @@ public class ImitationPostAction extends CommonTester {
 		IPostService postService = (IPostService)context.getBean("postService");
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		Post post = new Post();
-		post.setContent("Test post context with English,测试post提交中文");
+		post.setContent("Test post context with English,测试post提交中文aaaaa");
 //		IUserService userService = (IUserService)context.getBean("userService");		
 //		User use = (User)userService.login("b", "a");
 		
@@ -47,7 +47,7 @@ public class ImitationPostAction extends CommonTester {
 //	@Test
 	public void deletePost(){
 		IPostService postService = (IPostService)context.getBean("postService");
-		Post post = postService.get("8a8a1f79456a99d701456a99df470000", Post.class);
+		Post post = postService.get("8a8a1f79458da8fa01458da9015d0000", Post.class);
 		postService.delete(post);
 	}
 	

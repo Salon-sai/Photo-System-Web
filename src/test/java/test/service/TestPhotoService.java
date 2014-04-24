@@ -5,11 +5,14 @@ package test.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Date;
 
 import junit.framework.TestCase;
 
 import org.junit.Test;
 
+import saiwei.model.Photo;
+import saiwei.model.Post;
 import saiwei.service.IPhotoService;
 import test.common.CommonTester;
 
@@ -50,11 +53,30 @@ public class TestPhotoService extends CommonTester {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testDeletePhoto(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		boolean flag = photoService.deletephoto("8a8a1f79456a99d701456a99df530002");
 		TestCase.assertEquals(true, flag);
 	}
 	
+//	@Test
+	public void testsavePhoto(){
+		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
+		photoService.delete("297e7ce8458ea70e01458ea713fb0000", Photo.class);
+	}
+	
+	@Test
+	public void testsavePostAndPhoto(){
+		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
+		
+		Post post = new Post();
+		post.setContent("test a");
+		post.setPostdate(new Date());
+		
+		File[] files = {new File("C:/Users/sai/Desktop/1860268121180814475.jpg"),new File("C:/Users/sai/Desktop/2254896038529372747.jpg")};
+		String[] fileNames = {"1860268121180814475.jpg","2254896038529372747.jpg"};
+		
+		photoService.savePhotoWithPost(post, files, fileNames);
+	}
 }

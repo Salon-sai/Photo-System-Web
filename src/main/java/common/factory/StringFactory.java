@@ -52,4 +52,11 @@ public class StringFactory {
 		return builderMergeredAfter(builder, "get");
 	}
 	
+	public static String getFileNameWithNosuffix(String fileName){
+		return fileName.substring(0,fileName.lastIndexOf("."));
+	}
+	
+	public static String getFileNamesuffix(String fileName){
+		return fileName.substring(fileName.lastIndexOf("."));
+	}
 }

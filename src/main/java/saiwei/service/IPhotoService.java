@@ -8,6 +8,7 @@ import java.util.List;
 
 import saiwei.dao.IPhotoDAO;
 import saiwei.model.Photo;
+import saiwei.model.Post;
 
 import common.IServiceTemplate;
 
@@ -28,4 +29,6 @@ public interface IPhotoService extends IServiceTemplate<IPhotoDAO, Photo> {
 	public List<Photo> savePhotosByList(File[] files,String[] fileNames);
 	
 	public boolean deletephoto(String photoId);
+	
+	public boolean savePhotoWithPost(Post post,File[] files,String[] fileNames);
 }

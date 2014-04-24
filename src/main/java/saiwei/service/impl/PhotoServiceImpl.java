@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import saiwei.dao.IPhotoDAO;
 import saiwei.model.Photo;
+import saiwei.model.Post;
 import saiwei.service.IPhotoService;
 
 import common.AbstractTemplateService;
@@ -34,9 +35,9 @@ public class PhotoServiceImpl extends
 	
 	private static final Class<?> PHOTOCLASS = Photo.class;
 	
-	private static final String PARENT_IMAGE_OLD = "F:/PhotoSystem_Photo_OLD";
-	private static final String PARENT_IMAGE_NEW = "F:/PhotoSystem_Photo_NEW";
-	private static final String PARENT_HEAD_PHOTO = "F:/PhotoSystem_Head_PHOTO";
+	private static final String PARENT_IMAGE_OLD = "F:\\PhotoSystem_Photo_OLD";
+	private static final String PARENT_IMAGE_NEW = "F:\\PhotoSystem_Photo_NEW";
+	private static final String PARENT_HEAD_PHOTO = "F:\\PhotoSystem_Head_PHOTO";
 	
 	
 	private static final Integer HEAD_PHOTO_WIDTH = 110;
@@ -73,8 +74,12 @@ public class PhotoServiceImpl extends
 	 * 
 	 */
 	public String zoomImage(String imagePath){
+		String suffix = StringFactory.getFileNamesuffix(imagePath);
+		
 		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
-				imagePath.substring(imagePath.lastIndexOf(File.separator)));
+				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
+				,Integer.toString(CUT_WIDTH),"_",Integer.toString(CUT_HEIGHT),suffix);
+		
 		if(ImageFactory.zoomImage(imagePath, newImagePath, CUT_WIDTH, CUT_HEIGHT)){
 			return newImagePath;
 		}else{
@@ -88,8 +93,12 @@ public class PhotoServiceImpl extends
 	 * @return
 	 */
 	public String zoomtoHeadPhoto(String imagePath){
+		String suffix = StringFactory.getFileNamesuffix(imagePath);
+		
 		String newImagePath = StringFactory.MergerString(PARENT_HEAD_PHOTO,File.separator,
-				imagePath.substring(imagePath.lastIndexOf("/")),Integer.toString(HEAD_PHOTO_HEIGHT),"*",Integer.toString(HEAD_PHOTO_WIDTH));
+				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
+				,Integer.toString(HEAD_PHOTO_HEIGHT),"_",Integer.toString(HEAD_PHOTO_WIDTH),suffix);
+		
 		if(ImageFactory.zoomImage(imagePath, newImagePath, HEAD_PHOTO_WIDTH, HEAD_PHOTO_HEIGHT)){
 			return newImagePath;
 		}else
@@ -107,8 +116,10 @@ public class PhotoServiceImpl extends
 	 * @return
 	 */
 	public String zoomPhoto(String imagePath, int width, int height){
+		String suffix = StringFactory.getFileNamesuffix(imagePath);
 		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
-				imagePath.substring(imagePath.lastIndexOf("/")));
+				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
+				,Integer.toString(width),"_",Integer.toString(height),suffix);
 		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
 			return newImagePath;
 		}else
@@ -189,5 +200,30 @@ public class PhotoServiceImpl extends
 			flag = false;
 		}
 		return flag;
+	}
+	
+	/**
+	 * 
+	 * @param post
+	 * @param files
+	 * @param fileNames
+	 * @return
+	 */
+	public boolean savePhotoWithPost(Post post,File[] files,String[] fileNames){
+		for(int i = 0; i < files.length; i++){
+			Photo photo = new Photo();
+			photo.setPost(post);
+			save(photo);
+			
+			String suffix = StringFactory.getFileNamesuffix(fileNames[i]);
+			String AUTOGeneratefileName = StringFactory.MergerString(fileNames[i],suffix);
+			
+			String sourcePath = this.saveToDisk(files[i], AUTOGeneratefileName);
+			String modifyFilepath = this.zoomImage(sourcePath);
+			
+			photo.setOriginalPhotoURL(sourcePath);
+			photo.setAutomodifyPhotoURL(modifyFilepath);
+		}
+		return false;
 	}
 }

@@ -146,9 +146,14 @@ public class PhotoServiceImpl extends
 	public List<Photo> savePhotosByList(File[] files,String[] fileNames){
 		List<Photo> photos = new ArrayList<Photo>();
 		for(int i  = 0; i < fileNames.length;i++){
-			String filepath = this.saveToDisk(files[i], fileNames[i]);
-			String modifyFilepath = this.zoomImage(filepath);
 			Photo photo = new Photo();
+			photo.setId((String)UUID_GENERATOR.generate());
+			
+			String suffix = StringFactory.getFileNamesuffix(fileNames[i]);
+			String fileSerializableName = StringFactory.MergerString(photo.getId(),suffix);
+			
+			String filepath = this.saveToDisk(files[i], fileSerializableName);
+			String modifyFilepath = this.zoomImage(filepath);
 			photo.setOriginalPhotoURL(filepath);
 			photo.setAutomodifyPhotoURL(modifyFilepath);
 			photos.add(photo);
@@ -203,6 +208,7 @@ public class PhotoServiceImpl extends
 	}
 	
 	/**
+	 * spare method save the photo
 	 * 
 	 * @param post
 	 * @param files

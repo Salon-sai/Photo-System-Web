@@ -91,6 +91,7 @@ public class ImageUtils {
 	 * @throws IOException 
 	 */
 	public static void crop(File srcImageFile,File targetImageFile,int width,int height, int x,int y) throws IOException{
+		@SuppressWarnings("unused")
 		BufferedImage srcimage = ImageIO.read(srcImageFile);
 	}
 }

@@ -9,7 +9,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import saiwei.dao.IUserDAO;
@@ -28,7 +27,7 @@ import common.factory.MD5Factory;
 public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		implements IUserService {
 
-	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
+//	private static final Logger logger = Logger.getLogger(UserServiceImpl.class);
 	
 	@Override
 	@Resource(name="userDAO")

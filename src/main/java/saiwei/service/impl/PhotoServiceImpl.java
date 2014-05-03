@@ -4,6 +4,7 @@
 package saiwei.service.impl;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -19,7 +20,8 @@ import saiwei.model.Post;
 import saiwei.service.IPhotoService;
 
 import common.AbstractTemplateService;
-import common.factory.ImageFactory;
+import common.factory.ImageUtils;
+import common.factory.OSInfo;
 import common.factory.StringFactory;
 import common.factory.WriteToDiskFactory;
 
@@ -35,10 +37,13 @@ public class PhotoServiceImpl extends
 	
 	private static final Class<?> PHOTOCLASS = Photo.class;
 	
-	private static final String PARENT_IMAGE_OLD = "F:\\PhotoSystem_Photo_OLD";
-	private static final String PARENT_IMAGE_NEW = "F:\\PhotoSystem_Photo_NEW";
-	private static final String PARENT_HEAD_PHOTO = "F:\\PhotoSystem_Head_PHOTO";
+	private static final String PARENT_IMAGE_OLD_WIN = "F:\\PhotoSystem_Photo_OLD";
+	private static final String PARENT_IMAGE_NEW_WIN = "F:\\PhotoSystem_Photo_NEW";
+	private static final String PARENT_HEAD_PHOTO_WIN = "F:\\PhotoSystem_Head_PHOTO";
 	
+	private static final String PARENT_IMAGE_OLD_LINUX = "/media/photosystem_old";
+	private static final String PARENT_IMAGE_NEW_LINUX = "/media/photoSystem_new";
+	private static final String PARENT_HEAD_PHOTO_LINUX = "/media/photoSystem_headphoto";
 	
 	private static final Integer HEAD_PHOTO_WIDTH = 110;
 	private static final Integer HEAD_PHOTO_HEIGHT = 110;
@@ -62,7 +67,12 @@ public class PhotoServiceImpl extends
 	 * 		return absolute file path
 	 */
 	public String saveToDisk(File file,String fileName){
-		String filepath = WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD, file, fileName);
+		String filepath = null;
+		if(OSInfo.isWindows()){
+			WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD_WIN, file, fileName);
+		}else if(OSInfo.isLinux()){
+			WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD_LINUX, file, fileName);
+		}
 //		logger.info(filepath);
 		return filepath;
 	}
@@ -73,18 +83,25 @@ public class PhotoServiceImpl extends
 	 * 		source image file path
 	 * 
 	 */
-	public String zoomImage(String imagePath){
-		String suffix = StringFactory.getFileNamesuffix(imagePath);
-		
-		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
-				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
-				,Integer.toString(CUT_WIDTH),"_",Integer.toString(CUT_HEIGHT),suffix);
-		
-		if(ImageFactory.zoomImage(imagePath, newImagePath, CUT_WIDTH, CUT_HEIGHT)){
-			return newImagePath;
-		}else{
-			return null;
-		}
+	public String zoomImagestand(String imagePath){
+		return this.zoomPhoto(imagePath, CUT_WIDTH, CUT_HEIGHT);
+//		String suffix = StringFactory.getFileNamesuffix(imagePath);
+//		String newImagePath = null;
+//		StringBuilder stringbuffer = new StringBuilder();
+//		if(OSInfo.isWindows()){
+//			stringbuffer.append(PARENT_IMAGE_NEW_WIN);
+//		}else if(OSInfo.isLinux()){
+//			stringbuffer.append(PARENT_IMAGE_NEW_LINUX);
+//		}
+//		newImagePath = StringFactory.builderMergeredAfter(stringbuffer, File.separator,
+//				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
+//				,Integer.toString(CUT_WIDTH),"_",Integer.toString(CUT_HEIGHT),suffix);
+//		
+//		if(ImageFactory.zoomImage(imagePath, newImagePath, CUT_WIDTH, CUT_HEIGHT)){
+//			return newImagePath;
+//		}else{
+//			return null;
+//		}
 	}
 	
 	/**
@@ -94,15 +111,28 @@ public class PhotoServiceImpl extends
 	 */
 	public String zoomtoHeadPhoto(String imagePath){
 		String suffix = StringFactory.getFileNamesuffix(imagePath);
-		
-		String newImagePath = StringFactory.MergerString(PARENT_HEAD_PHOTO,File.separator,
+		String newImagePath = null;
+		StringBuilder stringbuffer = new StringBuilder();
+		if(OSInfo.isWindows()){
+			stringbuffer.append(PARENT_HEAD_PHOTO_WIN);
+		}else if(OSInfo.isLinux()){
+			stringbuffer.append(PARENT_HEAD_PHOTO_LINUX);
+		}
+		newImagePath = StringFactory.builderMergeredAfter(stringbuffer,File.separator,
 				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
 				,Integer.toString(HEAD_PHOTO_HEIGHT),"_",Integer.toString(HEAD_PHOTO_WIDTH),suffix);
 		
-		if(ImageFactory.zoomImage(imagePath, newImagePath, HEAD_PHOTO_WIDTH, HEAD_PHOTO_HEIGHT)){
-			return newImagePath;
-		}else
+		try {
+			if(ImageUtils.scale(imagePath, newImagePath, HEAD_PHOTO_WIDTH, HEAD_PHOTO_HEIGHT, suffix)){
+//		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
+				return newImagePath;
+			}else
+				return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
+		}
 	}
 	
 	/**
@@ -117,13 +147,27 @@ public class PhotoServiceImpl extends
 	 */
 	public String zoomPhoto(String imagePath, int width, int height){
 		String suffix = StringFactory.getFileNamesuffix(imagePath);
-		String newImagePath = StringFactory.MergerString(PARENT_IMAGE_NEW,File.separator,
+		String newImagePath = null;
+		StringBuilder stringbuffer = new StringBuilder();
+		if(OSInfo.isWindows()){
+			stringbuffer.append(PARENT_IMAGE_NEW_WIN);
+		}else if(OSInfo.isLinux()){
+			stringbuffer.append(PARENT_IMAGE_NEW_LINUX);
+		}
+		newImagePath = StringFactory.builderMergeredAfter(stringbuffer,File.separator,
 				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
 				,Integer.toString(width),"_",Integer.toString(height),suffix);
-		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
-			return newImagePath;
-		}else
+		try {
+			if(ImageUtils.scale(imagePath, newImagePath, width, height, suffix)){
+//		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
+				return newImagePath;
+			}else
+				return null;
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 			return null;
+		}
 	}
 	
 	/**
@@ -153,7 +197,7 @@ public class PhotoServiceImpl extends
 			String fileSerializableName = StringFactory.MergerString(photo.getId(),suffix);
 			
 			String filepath = this.saveToDisk(files[i], fileSerializableName);
-			String modifyFilepath = this.zoomImage(filepath);
+			String modifyFilepath = this.zoomImagestand(filepath);
 			photo.setOriginalPhotoURL(filepath);
 			photo.setAutomodifyPhotoURL(modifyFilepath);
 			photos.add(photo);
@@ -225,7 +269,7 @@ public class PhotoServiceImpl extends
 			String AUTOGeneratefileName = StringFactory.MergerString(fileNames[i],suffix);
 			
 			String sourcePath = this.saveToDisk(files[i], AUTOGeneratefileName);
-			String modifyFilepath = this.zoomImage(sourcePath);
+			String modifyFilepath = this.zoomImagestand(sourcePath);
 			
 			photo.setOriginalPhotoURL(sourcePath);
 			photo.setAutomodifyPhotoURL(modifyFilepath);

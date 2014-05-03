@@ -29,7 +29,7 @@ public class TestPhotoService extends CommonTester {
 //	@Test
 	public void testzoomphoto(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
-		String path = photoService.zoomImage("C:/Users/sai/Desktop/20120604789.jpg");
+		String path = photoService.zoomImagestand("C:/Users/sai/Desktop/20120604789.jpg");
 		if(path == null){
 			TestCase.fail("is null");
 		}else if(!(new File(path).exists())){

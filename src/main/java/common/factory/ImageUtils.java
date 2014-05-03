@@ -22,8 +22,8 @@ public class ImageUtils {
 	 * @param suffix
 	 * @throws IOException
 	 */
-	public static void scale(String srcImageFile,String targetImageFile,int scale,String suffix) throws IOException{
-		ImageUtils.scale(new File(srcImageFile), new File(targetImageFile), scale,suffix);
+	public static boolean scale(String srcImageFile,String targetImageFile,int scale,String suffix) throws IOException{
+		return ImageUtils.scale(new File(srcImageFile), new File(targetImageFile), scale,suffix);
 	}
 	
 	/**
@@ -34,7 +34,8 @@ public class ImageUtils {
 	 * @param suffix
 	 * @throws IOException
 	 */
-	public static void scale(File srcImageFile,File targetImageFile,int scale,String suffix) throws IOException{
+	public static boolean scale(File srcImageFile,File targetImageFile,int scale,String suffix) throws IOException{
+		boolean flag = true;
 		BufferedImage srcimage = ImageIO.read(srcImageFile);
 
 		int width = srcimage.getWidth()*scale;
@@ -46,7 +47,13 @@ public class ImageUtils {
 		Graphics graphics = targetimage.getGraphics();
 		graphics.drawImage(image, 0, 0, null);
 		graphics.dispose();
-		ImageIO.write(targetimage, suffix, targetImageFile);
+		flag = flag && ImageIO.write(targetimage, suffix, targetImageFile);
+		
+		return flag;
+	}
+	
+	public static boolean scale(String srcImageFile,String targetImageFile,int width,int height,String suffix) throws IOException{
+		return ImageUtils.scale(new File(srcImageFile), new File(targetImageFile), width, height, suffix);
 	}
 	
 	/**
@@ -58,7 +65,8 @@ public class ImageUtils {
 	 * @param suffix
 	 * @throws IOException
 	 */
-	public static void scale(File srcImageFile,File targetImageFile,int width,int height,String suffix) throws IOException{
+	public static boolean scale(File srcImageFile,File targetImageFile,int width,int height,String suffix) throws IOException{
+		boolean flag = true;
 		BufferedImage srcimage = ImageIO.read(srcImageFile);
 		
 		Image image = srcimage.getScaledInstance(width, height, Image.SCALE_DEFAULT);
@@ -67,7 +75,8 @@ public class ImageUtils {
 		Graphics graphics = targetImage.getGraphics();
 		graphics.drawImage(image, width, height, null);
 		graphics.dispose();
-		ImageIO.write(targetImage, suffix, targetImageFile);
+		flag = flag && ImageIO.write(targetImage, suffix, targetImageFile);
+		return flag;
 	}
 	
 	/**

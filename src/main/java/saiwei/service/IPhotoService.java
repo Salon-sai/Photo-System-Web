@@ -9,7 +9,6 @@ import java.util.List;
 import saiwei.dao.IPhotoDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
-
 import common.IServiceTemplate;
 
 /**
@@ -18,7 +17,7 @@ import common.IServiceTemplate;
  */
 public interface IPhotoService extends IServiceTemplate<IPhotoDAO, Photo> {
 
-	public String zoomImage(String imagePath);
+	public String zoomImagestand(String imagePath);
 	
 	public String saveToDisk(File file,String fileName);
 	

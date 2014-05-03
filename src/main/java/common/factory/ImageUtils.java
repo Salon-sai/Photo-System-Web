@@ -2,7 +2,11 @@ package common.factory;
 
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.CropImageFilter;
+import java.awt.image.FilteredImageSource;
+import java.awt.image.ImageFilter;
 import java.io.File;
 import java.io.IOException;
 
@@ -74,10 +78,11 @@ public class ImageUtils {
 	 * @param height
 	 * @param x
 	 * @param y
-	 * @throws IOException 
+	 * @param suffix
+	 * @throws IOException
 	 */
-	public static void crop(String srcImageFile,String targetImageFile,int width, int height, int x, int y) throws IOException{
-		ImageUtils.crop(new File(srcImageFile), new File(targetImageFile), width, height, x, y);
+	public static void crop(String srcImageFile,String targetImageFile,int width, int height, int x, int y,String suffix) throws IOException{
+		ImageUtils.crop(new File(srcImageFile), new File(targetImageFile), width, height, x, y,suffix);
 	}
 	
 	/**
@@ -88,10 +93,27 @@ public class ImageUtils {
 	 * @param height
 	 * @param x
 	 * @param y
-	 * @throws IOException 
+	 * @param suffix
+	 * @throws IOException
 	 */
-	public static void crop(File srcImageFile,File targetImageFile,int width,int height, int x,int y) throws IOException{
-		@SuppressWarnings("unused")
-		BufferedImage srcimage = ImageIO.read(srcImageFile);
+	public static void crop(File srcImageFile,File targetImageFile,int width,int height, int x,int y,String suffix) throws IOException{
+		BufferedImage bufferedimage = ImageIO.read(srcImageFile);
+		int srcWidth = bufferedimage.getWidth();
+		int srcHeight = bufferedimage.getHeight();
+		if(srcWidth > 0 && srcHeight > 0){
+			Image image = bufferedimage.getScaledInstance(srcWidth, height, Image.SCALE_DEFAULT);
+			
+			ImageFilter cropFilter = new CropImageFilter(x, y, width, height);
+			Image cropImage = Toolkit.getDefaultToolkit().createImage(new FilteredImageSource(image.getSource(), cropFilter));
+			
+			BufferedImage bufferedtarget = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+			
+			Graphics graphics = bufferedtarget.getGraphics();
+			graphics.drawImage(cropImage, 0, 0, width, height, null);
+			graphics.dispose();
+			
+			ImageIO.write(bufferedtarget, suffix, targetImageFile);
+		}
+		
 	}
 }

@@ -29,7 +29,7 @@ Photo-System-Web
 
 插件依赖
 ------------------------------
-1、GraphicsMagick
+1、GraphicsMagick(windows底下 准备不使用)
 
 当中调用GraphicsMagick进行图片处理。
 

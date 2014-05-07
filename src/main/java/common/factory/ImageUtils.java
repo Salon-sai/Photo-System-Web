@@ -70,10 +70,10 @@ public class ImageUtils {
 		BufferedImage srcimage = ImageIO.read(srcImageFile);
 		
 		Image image = srcimage.getScaledInstance(width, height, Image.SCALE_DEFAULT);
-		BufferedImage targetImage = new BufferedImage(width, height, Image.SCALE_DEFAULT);
+		BufferedImage targetImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 		
 		Graphics graphics = targetImage.getGraphics();
-		graphics.drawImage(image, width, height, null);
+		graphics.drawImage(image, 0, 0, null);
 		graphics.dispose();
 		flag = flag && ImageIO.write(targetImage, suffix, targetImageFile);
 		return flag;

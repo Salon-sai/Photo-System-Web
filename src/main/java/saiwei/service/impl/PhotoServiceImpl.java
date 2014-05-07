@@ -118,7 +118,7 @@ public class PhotoServiceImpl extends
 		}else if(OSInfo.isLinux()){
 			stringbuffer.append(PARENT_HEAD_PHOTO_LINUX);
 		}
-		newImagePath = StringFactory.builderMergeredAfter(stringbuffer,File.separator,
+		newImagePath = StringFactory.builderMergeredBefore(stringbuffer,File.separator,
 				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
 				,Integer.toString(HEAD_PHOTO_HEIGHT),"_",Integer.toString(HEAD_PHOTO_WIDTH),suffix);
 		
@@ -147,16 +147,7 @@ public class PhotoServiceImpl extends
 	 */
 	public String zoomPhoto(String imagePath, int width, int height){
 		String suffix = StringFactory.getFileNamesuffix(imagePath);
-		String newImagePath = null;
-		StringBuilder stringbuffer = new StringBuilder();
-		if(OSInfo.isWindows()){
-			stringbuffer.append(PARENT_IMAGE_NEW_WIN);
-		}else if(OSInfo.isLinux()){
-			stringbuffer.append(PARENT_IMAGE_NEW_LINUX);
-		}
-		newImagePath = StringFactory.builderMergeredAfter(stringbuffer,File.separator,
-				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
-				,Integer.toString(width),"_",Integer.toString(height),suffix);
+		String newImagePath = this.filePathchange(imagePath, width, height);
 		try {
 			if(ImageUtils.scale(imagePath, newImagePath, width, height, suffix)){
 //		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
@@ -275,5 +266,38 @@ public class PhotoServiceImpl extends
 			photo.setAutomodifyPhotoURL(modifyFilepath);
 		}
 		return false;
+	}
+	
+	/**
+	 * 
+	 * @param imagePath
+	 * @param x
+	 * @param y
+	 * @param width
+	 * @param height
+	 * @return
+	 */
+	public String cropImage(String imagePath, int x, int y, int width, int height){
+		String newimageFileName = this.filePathchange(imagePath, width, height);
+		try{
+			ImageUtils.crop(imagePath, newimageFileName, width, height, x, y, StringFactory.getFileNamesuffix(imagePath));
+		}catch (Exception e) {
+			// TODO: handle exception
+			logger.error("", e);
+		}
+		return null;
+	}
+	
+	private String filePathchange(String imagePath,int width, int height){
+		String suffix = StringFactory.getFileNamesuffix(imagePath);
+		StringBuilder stringbuffer = new StringBuilder();
+		if(OSInfo.isWindows()){
+			stringbuffer.append(PARENT_IMAGE_NEW_WIN);
+		}else if(OSInfo.isLinux()){
+			stringbuffer.append(PARENT_IMAGE_NEW_LINUX);
+		}
+		return StringFactory.builderMergeredBefore(stringbuffer,File.separator,
+				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
+				,Integer.toString(width),"_",Integer.toString(height), ".",suffix);
 	}
 }

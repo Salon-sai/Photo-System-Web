@@ -57,6 +57,6 @@ public class StringFactory {
 	}
 	
 	public static String getFileNamesuffix(String fileName){
-		return fileName.substring(fileName.lastIndexOf("."));
+		return fileName.substring(fileName.lastIndexOf(".")+1);
 	}
 }

@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
 import saiwei.model.RelationShip;
+import saiwei.service.IRelationShipService;
 import common.BaseAction;
 
 /**
@@ -15,7 +16,8 @@ import common.BaseAction;
  */
 @Namespace("/relationship")
 @Action("relationshipAction")
-public class RelationshipAction extends BaseAction<RelationShip> {
+public class RelationshipAction extends
+	BaseAction<RelationShip,IRelationShipService> {
 
 	/**
 	 * 

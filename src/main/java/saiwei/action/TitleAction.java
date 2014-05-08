@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
 import saiwei.model.Title;
+import saiwei.service.ITitleService;
 import common.BaseAction;
 
 /**
@@ -15,7 +16,7 @@ import common.BaseAction;
  */
 @Namespace("/title")
 @Action("titleAction")
-public class TitleAction extends BaseAction<Title> {
+public class TitleAction extends BaseAction<Title,ITitleService> {
 
 	/**
 	 * 

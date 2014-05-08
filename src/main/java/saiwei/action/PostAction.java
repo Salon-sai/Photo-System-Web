@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
 import saiwei.model.Post;
+import saiwei.service.IPostService;
 import common.BaseAction;
 
 /**
@@ -15,7 +16,7 @@ import common.BaseAction;
  */
 @Namespace("/post")
 @Action("postAction")
-public class PostAction extends BaseAction<Post> {
+public class PostAction extends BaseAction<Post,IPostService> {
 
 	/**
 	 * 

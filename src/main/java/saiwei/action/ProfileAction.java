@@ -7,6 +7,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
 import saiwei.model.Profile;
+import saiwei.service.IProfileService;
 import common.BaseAction;
 
 /**
@@ -15,7 +16,7 @@ import common.BaseAction;
  */
 @Namespace("/profile")
 @Action("profileAction")
-public class ProfileAction extends BaseAction<Profile> {
+public class ProfileAction extends BaseAction<Profile,IProfileService> {
 
 	/**
 	 * 

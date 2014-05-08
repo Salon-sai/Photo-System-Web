@@ -7,7 +7,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
 import saiwei.model.UserType;
-
+import saiwei.service.IUserTypeService;
 import common.BaseAction;
 
 /**
@@ -16,7 +16,7 @@ import common.BaseAction;
  */
 @Namespace("/usertype")
 @Action("userTypeAction")
-public class UserTypeAction extends BaseAction<UserType> {
+public class UserTypeAction extends BaseAction<UserType,IUserTypeService> {
 
 	/**
 	 * 

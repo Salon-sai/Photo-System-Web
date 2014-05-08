@@ -7,6 +7,8 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
 import saiwei.model.Comment;
+import saiwei.service.ICommentService;
+
 import common.BaseAction;
 
 /**
@@ -15,7 +17,8 @@ import common.BaseAction;
  */
 @Namespace("/comment")
 @Action("commentAction")
-public class CommentAction extends BaseAction<Comment> {
+public class CommentAction extends 
+	BaseAction<Comment,ICommentService> {
 
 	/**
 	 * 

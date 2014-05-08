@@ -34,4 +34,8 @@ public class LoginAction extends ActionSupport{
 			return INPUT;
 		return SUCCESS;
 	}
+	
+	public String login(){
+		return SUCCESS;
+	}
 }

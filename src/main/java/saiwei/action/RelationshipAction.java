@@ -3,14 +3,18 @@
  */
 package saiwei.action;
 
-import saiwei.model.RelationShip;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
 
+import saiwei.model.RelationShip;
 import common.BaseAction;
 
 /**
  * @author sai
  *
  */
+@Namespace("/relationship")
+@Action("relationshipAction")
 public class RelationshipAction extends BaseAction<RelationShip> {
 
 	/**

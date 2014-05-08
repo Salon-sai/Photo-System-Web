@@ -3,14 +3,18 @@
  */
 package saiwei.action;
 
-import saiwei.model.Comment;
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
 
+import saiwei.model.Comment;
 import common.BaseAction;
 
 /**
  * @author sai
  *
  */
+@Namespace("/comment")
+@Action("commentAction")
 public class CommentAction extends BaseAction<Comment> {
 
 	/**

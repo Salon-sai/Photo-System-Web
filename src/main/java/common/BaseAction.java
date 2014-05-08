@@ -3,6 +3,9 @@
  */
 package common;
 
+import javax.persistence.MappedSuperclass;
+
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -11,6 +14,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author sai
  *
  */
+@MappedSuperclass
+@ParentPackage("basePackage")
 public class BaseAction<E> extends ActionSupport {
 
 	/**

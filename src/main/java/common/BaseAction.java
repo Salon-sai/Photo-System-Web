@@ -6,6 +6,7 @@ package common;
 import javax.persistence.MappedSuperclass;
 
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -16,6 +17,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("rawtypes")
 @MappedSuperclass
 @ParentPackage("basePackage")
+@Result(type="json")
 public class BaseAction<E,S extends IServiceTemplate> extends ActionSupport {
 
 	/**

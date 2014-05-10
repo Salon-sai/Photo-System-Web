@@ -11,7 +11,7 @@ import test.common.CommonTester;
 
 public class TestUserService extends CommonTester {
 	
-//	@Test
+	@Test
 	public void testsave(){
 		User user = new User();
 		user.setName("a");
@@ -33,7 +33,7 @@ public class TestUserService extends CommonTester {
 		userservice.save(user);
 	}
 	
-	@Test
+//	@Test
 	public void testlogin(){
 		IUserService userservice = (IUserService)context.getBean("userService");
 		User user = userservice.login("b", "a");

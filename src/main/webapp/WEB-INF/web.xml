@@ -9,7 +9,10 @@
 	<!-- configure spring configuration location -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:spring.xml</param-value>
+		<param-value>
+			classpath:spring.xml,
+			classpath:spring-hibernate.xml
+		</param-value>
 	</context-param>
 
   	<listener>
@@ -25,7 +28,7 @@
 	</filter>
 	<filter>
 		<filter-name>LoginFilter</filter-name>
-		<filter-class>saiwei.filter</filter-class>
+		<filter-class>saiwei.filter.CheckLoginFilter</filter-class>
 	</filter>
 
 	<filter-mapping>

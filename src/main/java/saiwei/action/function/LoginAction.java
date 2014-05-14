@@ -1,5 +1,7 @@
 package saiwei.action.function;
 
+import java.util.Map;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -20,6 +22,7 @@ public class LoginAction extends ActionSupport{
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	private Map<String, Object> session;
 	private User user;
 	private IUserService userService;
 	private String idNum;
@@ -33,14 +36,9 @@ public class LoginAction extends ActionSupport{
 	)
 	public String checkLogin(){
 		user = userService.login(idNum, password);
+		session.put("user", user);
 		if(user == null)
 			return INPUT;
-		return SUCCESS;
-	}
-	
-	@Action(value="login",
-			results={@Result(name="success",location="/WEB-INF/user/home.jsp")})
-	public String login(){
 		return SUCCESS;
 	}
 	
@@ -73,5 +71,13 @@ public class LoginAction extends ActionSupport{
 
 	public void setPassword(String password) {
 		this.password = password;
+	}
+
+	public Map<String, Object> getSession() {
+		return session;
+	}
+
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 }

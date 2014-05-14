@@ -56,6 +56,7 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 			user.setTags(null);
 			user.setReceive_comments(null);
 			user.setSend_comments(null);
+			user.setProfile(null);
 		}
 		return user;
 	}

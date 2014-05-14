@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${entity.name }
+	${sessionScope.user.name }
+	<h1>aaa</h1>
 </body>
 </html>

@@ -6,15 +6,28 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>Login</title>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('#blogin').click(function(e){
+				var id = $('#idNum').val();
+				var password = $('#password').val();
+				$.post('login/checklogin.action',
+						{idNum: id,password: password},
+						function(returnData,status){
+							alert(returnData.user.id);
+						});
+			});
+		});
+	</script>
 </head>
 <body>
 	
 	<form action="">
 		<label for="idNum">ID</label>
-		<input type="text" name="idNum" required="required"/><br>
+		<input type="text" id="idNum" required="required"/><br>
 		<label for="password">Password</label>
-		<input type="password" name="password"><br>
-		<input type="button" value="login">
+		<input type="password" id="password"><br>
+		<input type="button" id="blogin" value="login">
 	</form>
 </body>
 </html>

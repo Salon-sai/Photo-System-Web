@@ -2,6 +2,7 @@ package saiwei.action.function;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 
 import saiwei.model.User;
@@ -10,6 +11,7 @@ import saiwei.service.IUserService;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+@ParentPackage("basePackage")
 @Action(value="loginAction")
 @Namespace("/login")
 public class LoginAction extends ActionSupport{

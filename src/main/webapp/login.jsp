@@ -14,7 +14,7 @@
 				$.post('login/checklogin.action',
 						{idNum: id,password: password},
 						function(returnData,status){
-							alert(returnData.user.id);
+							window.location.href="user/loginUser.action";
 						});
 			});
 		});

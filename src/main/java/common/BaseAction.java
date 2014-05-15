@@ -9,6 +9,7 @@ import javax.persistence.MappedSuperclass;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.interceptor.SessionAware;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -19,7 +20,7 @@ import com.opensymphony.xwork2.ActionSupport;
 @SuppressWarnings("rawtypes")
 @MappedSuperclass
 @ParentPackage("basePackage")
-public class BaseAction<E,S extends IServiceTemplate> extends ActionSupport {
+public class BaseAction<E,S extends IServiceTemplate> extends ActionSupport implements SessionAware{
 
 	/**
 	 * 

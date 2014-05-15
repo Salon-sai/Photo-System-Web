@@ -37,11 +37,11 @@
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/user</url-pattern>
+		<url-pattern>/user/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/manger</url-pattern>
+		<url-pattern>/manger/*</url-pattern>
 	</filter-mapping>
   
   <welcome-file-list>

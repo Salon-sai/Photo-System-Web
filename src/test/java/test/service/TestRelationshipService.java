@@ -16,7 +16,7 @@ public class TestRelationshipService extends CommonTester{
 	public void testfollowing(){
 		long oldTime = System.currentTimeMillis();
 		relationshipService = (IRelationShipService)context.getBean("relationshipService");
-		relationshipService.addrelationship("a", "d", "following");
+		relationshipService.addrelationship("b", "c", "following");
 		logger.info(System.currentTimeMillis() - oldTime + "ms");
 	}
 	
@@ -25,15 +25,15 @@ public class TestRelationshipService extends CommonTester{
 		long oldTime = System.currentTimeMillis();
 		relationshipService = (IRelationShipService)context.getBean("relationshipService");
 		@SuppressWarnings("unused")
-		List<User> users = relationshipService.findUserRelationShip("a", "following");
+		List<User> users = relationshipService.findUserRelationShip("b", "following");
 		logger.info(System.currentTimeMillis() - oldTime + "ms");		
 	}
 	
-	@Test
+//	@Test
 	public void testfindpostbyfollowing(){
 		long oldTime = System.currentTimeMillis();
 		relationshipService = (IRelationShipService)context.getBean("relationshipService");
-		relationshipService.findPostByRelationship("a", "following");
+		relationshipService.findPostByRelationship("b", "following");
 		logger.info(System.currentTimeMillis() - oldTime + "ms");
 	}
 }

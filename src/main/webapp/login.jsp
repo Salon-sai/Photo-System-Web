@@ -11,10 +11,13 @@
 			$('#blogin').click(function(e){
 				var id = $('#idNum').val();
 				var password = $('#password').val();
-				$.post('login/checklogin.action',
+				$.post('${pageContext.request.contextPath }/sso/checklogin.action',
 						{idNum: id,password: password},
 						function(returnData,status){
-							window.location.href="user/loginUser.action";
+							if(returnData.user != null)
+								window.location.href="${pageContext.request.contextPath }/sso/loginUser.action";
+							else
+								alert("password invaild");
 						});
 			});
 		});

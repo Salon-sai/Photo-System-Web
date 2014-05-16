@@ -39,12 +39,8 @@
 		<filter-name>LoginFilter</filter-name>
 		<url-pattern>/user/*</url-pattern>
 	</filter-mapping>
-	<filter-mapping>
-		<filter-name>LoginFilter</filter-name>
-		<url-pattern>/manger/*</url-pattern>
-	</filter-mapping>
   
   <welcome-file-list>
-    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>login.jsp</welcome-file>
   </welcome-file-list>
 </web-app>

@@ -21,7 +21,7 @@ public class CheckLoginFilter implements Filter {
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -30,10 +30,19 @@ public class CheckLoginFilter implements Filter {
 		// TODO Auto-generated method stub
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpSession session = req.getSession();
+		System.out.println("CheckLoginFilter invoke");
+		String url = req.getRequestURI();
+		if(url.endsWith("login.jsp")){
+			chain.doFilter(request, response);
+			return ;
+		}else if(url.endsWith("user/")){
+			req.getRequestDispatcher("/user/home.jsp").forward(request, response);
+			return ;
+		}
 		if(null != session.getAttribute("user")){
 			chain.doFilter(request, response);
 		}else{
-			req.getRequestDispatcher("login.jsp").forward(request, response);
+			req.getRequestDispatcher("/login.jsp").forward(request, response);
 		}
 	}
 

@@ -7,7 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${sessionScope.user.name }
-	<h1>aaa</h1>
+	${sessionScope.user.id }<br>
+	
+	<a href="${pageContext.request.contextPath }/sso/logout.action">log out</a>
 </body>
 </html>

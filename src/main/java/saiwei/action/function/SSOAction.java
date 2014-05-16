@@ -15,9 +15,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 @ParentPackage("basePackage")
-@Action(value="loginAction")
-@Namespace("/login")
-public class LoginAction extends ActionSupport implements SessionAware{
+@Namespace("/sso")
+public class SSOAction extends ActionSupport implements SessionAware{
 
 	/**
 	 * 
@@ -42,6 +41,25 @@ public class LoginAction extends ActionSupport implements SessionAware{
 			return INPUT;
 		return SUCCESS;
 	}
+
+	@Action(value="loginUser",
+			results={
+			@Result(name="success",type="redirect",location="/user/home.jsp"),
+			@Result(name="input",type="redirect",location="/")})
+	public String login(){
+		user = (User)session.get("user");
+		return user == null ? INPUT : SUCCESS;
+	}
+	
+	@Action(value="logout",
+			results={
+			@Result(name=SUCCESS,type="redirect",location="/")
+	})
+	public String logout(){
+		session.remove("user");
+		return SUCCESS;
+	}
+	
 	
 	/**
 	 * getter and setter

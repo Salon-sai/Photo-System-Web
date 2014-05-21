@@ -5,6 +5,7 @@ package saiwei.action;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.Result;
 
 import saiwei.model.Comment;
 import saiwei.service.ICommentService;
@@ -15,7 +16,6 @@ import common.BaseAction;
  *
  */
 @Namespace("/comment")
-@Action("commentAction")
 public class CommentAction extends 
 	BaseAction<Comment,ICommentService> {
 
@@ -28,17 +28,33 @@ public class CommentAction extends
 	private String content;
 	private String recipientId;
 	private String postId;
+	private Comment comment;
 	
 	@Override
+	@Action(value="saveComment",
+		results={@Result(type="json",name="success",
+			params={"excludeNullProperties","ture"}),
+				@Result(type="json",name="input",
+			params={"excludeNullProperties","ture"})
+	})
 	public String add() {
 		// TODO Auto-generated method stub
-		entity = service.save(content, posterId, recipientId, postId);
+		comment = service.save(content, posterId, recipientId, postId);
 		if(entity == null){
 			return INPUT;
 		}
 		return SUCCESS;
 	}
 	
+	@Action(value="deteleComment",
+			results={@Result(type="json",name="success",
+			params={"excludeNullProperties","ture"}),
+				@Result(type="json",name="input",
+			params={"excludeNullProperties","ture"})
+	})
+	public String detele(){
+		return SUCCESS;
+	}
 	/**
 	 * 
 	 * @return
@@ -69,5 +85,11 @@ public class CommentAction extends
 	}
 	public void setPostId(String postId) {
 		this.postId = postId;
+	}
+	public Comment getComment() {
+		return comment;
+	}
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 }

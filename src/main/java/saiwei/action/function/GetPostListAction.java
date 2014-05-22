@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.interceptor.SessionAware;
 
 import saiwei.model.Post;
 import saiwei.model.User;
@@ -20,7 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
  *
  */
 @ParentPackage("basePackage")
-public class GetPostListAction extends ActionSupport {
+public class GetPostListAction extends ActionSupport implements SessionAware{
 
 	/**
 	 * 

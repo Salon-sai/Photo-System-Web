@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Result;
 
 import saiwei.model.Comment;
 import saiwei.service.ICommentService;
+
 import common.BaseAction;
 
 /**
@@ -25,6 +26,7 @@ public class CommentAction extends
 	private static final long serialVersionUID = 1L;
 
 	private String posterId;
+	private String commentId;
 	private String content;
 	private String recipientId;
 	private String postId;
@@ -53,8 +55,16 @@ public class CommentAction extends
 			params={"excludeNullProperties","ture"})
 	})
 	public String detele(){
+		try{
+			service.delete(commentId, Comment.class);
+		}catch(Exception e){
+			logger.error("comment action delete", e);
+		}
 		return SUCCESS;
 	}
+	
+	
+	
 	/**
 	 * 
 	 * @return

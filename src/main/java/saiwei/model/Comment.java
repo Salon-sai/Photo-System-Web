@@ -35,14 +35,14 @@ public class Comment extends BaseModel {
 	private User poster;
 	
 	@Column(name="postDate")
-	private Date postdate;
+	protected Date postdate;
 	
 	@ManyToOne
 	@JoinColumn(name="recipients_id")
 	private User recipients;
 	
 	@Column(name="content")
-	private String content;
+	protected String content;
 
 	/**
 	 * getter and setter

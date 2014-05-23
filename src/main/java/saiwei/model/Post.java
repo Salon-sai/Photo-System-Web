@@ -32,7 +32,7 @@ public class Post extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="content")
-	private String content;
+	protected String content;
 	
 	@ManyToOne
 	@JoinColumn(name="poster_id")
@@ -40,7 +40,7 @@ public class Post extends BaseModel {
 	
 	@Column(name="postdate",nullable=false)
 	@OrderBy("asc")
-	private Date postdate;
+	protected Date postdate;
 	
 	@OneToMany(mappedBy="post")
 	private Set<Comment> comments;

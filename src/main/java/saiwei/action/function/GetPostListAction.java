@@ -10,7 +10,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.interceptor.SessionAware;
 
-import saiwei.model.Post;
+import saiwei.bean.PostBean;
 import saiwei.model.User;
 import saiwei.service.IRelationShipService;
 
@@ -29,7 +29,7 @@ public class GetPostListAction extends ActionSupport implements SessionAware{
 	private static final long serialVersionUID = 1L;
 	
 	private Map<String,Object> session ;
-	private List<Post> posts;
+	private List<PostBean> posts;
 	private String errorMessage;
 	
 	private IRelationShipService relationshipService;
@@ -37,7 +37,7 @@ public class GetPostListAction extends ActionSupport implements SessionAware{
 	@Action(value="")
 	public String followingPost(){
 		User user = (User)session.get("user");
-		posts = relationshipService.findPostByRelationship(user.getId(), "following");
+		posts = relationshipService.getPostbyRelationship(user.getId(), "following");
 		return SUCCESS;
 	}
 	
@@ -51,11 +51,8 @@ public class GetPostListAction extends ActionSupport implements SessionAware{
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
-	public List<Post> getPosts() {
+	public List<PostBean> getPosts() {
 		return posts;
-	}
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
 	}
 	public String getErrorMessage() {
 		return errorMessage;

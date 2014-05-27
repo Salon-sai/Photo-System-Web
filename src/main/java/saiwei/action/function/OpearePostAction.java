@@ -7,6 +7,7 @@ import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -19,7 +20,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author sai
  *
  */
-@Namespace("basePackage")
+@ParentPackage("basePackage")
+@Namespace("/post")
 public class OpearePostAction extends ActionSupport implements SessionAware{
 
 	/**

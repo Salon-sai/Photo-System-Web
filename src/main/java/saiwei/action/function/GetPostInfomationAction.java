@@ -8,6 +8,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 
@@ -21,6 +22,7 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author sai
  *
  */
+@ParentPackage("basePackage")
 public class GetPostInfomationAction extends ActionSupport implements
 		SessionAware {
 	

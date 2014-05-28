@@ -25,6 +25,7 @@ public class SSOAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 	private User user;
 	private IUserService userService;
+	private String returnMsg;
 	private String idNum;
 	private String password;
 	
@@ -36,9 +37,11 @@ public class SSOAction extends ActionSupport implements SessionAware{
 	)
 	public String checkLogin(){
 		user = userService.login(idNum, password);
-		session.put("user", user);
-		if(user == null)
+		if(user == null){
+			this.returnMsg = "id or password worry";
 			return INPUT;
+		}
+		session.put("user", user);
 		return SUCCESS;
 	}
 
@@ -67,36 +70,22 @@ public class SSOAction extends ActionSupport implements SessionAware{
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
-
 	public User getUser() {
 		return user;
 	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
-	public String getIdNum() {
-		return idNum;
-	}
-
 	public void setIdNum(String idNum) {
 		this.idNum = idNum;
 	}
-
-	public String getPassword() {
-		return password;
-	}
-
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	public Map<String, Object> getSession() {
 		return session;
 	}
-
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
+	}
+	public String getReturnMsg() {
+		return returnMsg;
 	}
 }

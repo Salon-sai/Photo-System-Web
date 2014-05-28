@@ -52,23 +52,15 @@ public class BaseAction<E,S extends IServiceTemplate> extends ActionSupport impl
 	public S getService() {
 		return service;
 	}
-
 	public void setService(S service) {
 		this.service = service;
 	}
-
 	public E getEntity() {
 		return entity;
 	}
-
 	public void setEntity(E entity) {
 		this.entity = entity;
 	}
-
-	public Map<String, Object> getSession() {
-		return session;
-	}
-
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}

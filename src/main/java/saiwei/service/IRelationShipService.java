@@ -5,11 +5,11 @@ package saiwei.service;
 
 import java.util.List;
 
+import saiwei.bean.PostBean;
 import saiwei.dao.IRelationShipDAO;
 import saiwei.model.Post;
 import saiwei.model.RelationShip;
 import saiwei.model.User;
-
 import common.IServiceTemplate;
 
 /**
@@ -25,4 +25,5 @@ public interface IRelationShipService extends
 	
 	public List<Post> findPostByRelationship(String userId,String relationshipType);
 	
+	public List<PostBean> getPostbyRelationship(String userId,String relationshipType);
 }

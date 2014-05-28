@@ -23,4 +23,5 @@ public class PostAction extends BaseAction<Post,IPostService> {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	
 }

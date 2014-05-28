@@ -4,6 +4,7 @@
 package saiwei.service.impl;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -11,11 +12,12 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 
+import saiwei.bean.CommentBean;
 import saiwei.dao.IPostDAO;
+import saiwei.model.Comment;
 import saiwei.model.Photo;
 import saiwei.model.Post;
 import saiwei.service.IPostService;
-
 import common.AbstractTemplateService;
 
 /**
@@ -114,4 +116,19 @@ public class PostServiceImpl extends
 		return dao.removeCollectPost(userNum, postId);
 	}
 	
+	/**
+	 * 
+	 * @param postId
+	 * @return
+	 */
+	public Set<CommentBean> getCommentsByPost(String postId){
+		Post post = this.get(postId, classType);
+		Set<Comment> comments = post.getComments();
+		Set<CommentBean> commentbeans = new HashSet<CommentBean>();
+		for(Comment comment : comments){
+			CommentBean bean = new CommentBean(comment);
+			commentbeans.add(bean);
+		}
+		return commentbeans;
+	}
 }

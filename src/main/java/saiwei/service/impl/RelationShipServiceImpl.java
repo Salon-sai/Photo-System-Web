@@ -3,18 +3,19 @@
  */
 package saiwei.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import saiwei.bean.PostBean;
 import saiwei.dao.IRelationShipDAO;
 import saiwei.model.Post;
 import saiwei.model.RelationShip;
 import saiwei.model.User;
 import saiwei.service.IRelationShipService;
-
 import common.AbstractTemplateService;
 
 /**
@@ -66,5 +67,25 @@ public class RelationShipServiceImpl extends
 	 */
 	public List<Post> findPostByRelationship(String userId,String relationshipType){
 		return this.dao.findPostByRelathiship(userId, relationshipType);
+	}
+	
+	/**
+	 * 	@param userId
+	 * 		user id
+	 * 	@param relationshipType
+	 * 		relationship type name
+	 * 	@return
+	 * 		posts of list by your committing relationship type and your id.
+	 * 		But it is different to the function of findPostByRelationship, Because 
+	 * 		this function is return bean without preserve entity.
+	 */
+	public List<PostBean> getPostbyRelationship(String userId,String relationshipType){
+		List<Post> posts = this.findPostByRelationship(userId, relationshipType);
+		List<PostBean> postbeans = new ArrayList<PostBean>();
+		for(Post post : posts){
+			PostBean bean = new PostBean(post);
+			postbeans.add(bean);
+		}
+		return postbeans;
 	}
 }

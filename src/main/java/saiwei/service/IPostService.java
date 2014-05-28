@@ -5,6 +5,7 @@ package saiwei.service;
 
 import java.util.Set;
 
+import saiwei.bean.CommentBean;
 import saiwei.dao.IPostDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
@@ -28,4 +29,6 @@ public interface IPostService extends IServiceTemplate<IPostDAO, Post> {
 	public boolean deleteCollectPost(String userNum,String postId);
 	
 	public boolean saveCollectPost(String userNum,String postId);
+
+	public Set<CommentBean> getCommentsByPost(String postId);
 }

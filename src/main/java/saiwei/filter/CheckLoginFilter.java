@@ -30,9 +30,8 @@ public class CheckLoginFilter implements Filter {
 		// TODO Auto-generated method stub
 		HttpServletRequest req = (HttpServletRequest)request;
 		HttpSession session = req.getSession();
-		System.out.println("CheckLoginFilter invoke");
 		String url = req.getRequestURI();
-		if(url.endsWith("login.jsp")){
+		if(url.endsWith("login.jsp") || url.endsWith("register")){
 			chain.doFilter(request, response);
 			return ;
 		}else if(url.endsWith("user/")){

@@ -2,11 +2,11 @@
 	    <div class="mlistimg js-447673">
 	        <div class="w-img" style="z-index:1;">
 	            <a href="http://laolaojia.lofter.com/" target="_blank">
-	                <img class="js-447673" src="../home_ui/saved_resource">
+	                <img class="js-447673" src="../home_ui/saved_resource"/>
 	            </a>
 	            <div class="w-img w-img-1" style="display: none;">
 	                <a href="http://www.lofter.com/#" target="_blank">
-	                    <img class="js-447673">
+	                    <img class="js-447673"/>
 	                </a>
 	            </div>
 	        </div>

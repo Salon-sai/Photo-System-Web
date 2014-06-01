@@ -3,7 +3,9 @@
  */
 package saiwei.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +13,9 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import saiwei.bean.PostBean;
 import saiwei.dao.IUserDAO;
+import saiwei.model.Post;
 import saiwei.model.Profile;
 import saiwei.model.User;
 import saiwei.service.IUserService;
@@ -71,5 +75,40 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		return dao.updateProfileByUser(params, IdNumber);
 	}
 	
-
+	/**
+	 * 
+	 * 获取自己的post，一次最多能拿十个post
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<PostBean> getOwnPosts(String userId){
+		User user = dao.findById(userId, User.class);
+		List<PostBean> postbeans = new ArrayList<PostBean>();
+		Iterator<Post> posts = user.getOwn_posts().iterator();
+		int i = 0;
+		while(i < 10 && posts.hasNext()){
+			PostBean bean = new PostBean(posts.next());
+			postbeans.add(bean);
+			i++;
+		}
+		return postbeans;
+	}
+	
+	/**
+	 * 
+	 * @param user
+	 * @return
+	 */
+	public List<PostBean> getOwnPosts(User user){
+		List<PostBean> postbeans = new ArrayList<PostBean>();
+		Iterator<Post> posts = user.getOwn_posts().iterator();
+		int i = 0;
+		while(i < 10 && posts.hasNext()){
+			PostBean bean = new PostBean(posts.next());
+			postbeans.add(bean);
+			i++;
+		}
+		return postbeans;
+	}
 }

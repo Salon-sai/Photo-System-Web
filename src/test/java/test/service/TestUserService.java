@@ -68,10 +68,10 @@ public class TestUserService extends CommonTester {
 	public void testsaveperson(){
 		IUserService userservice = (IUserService)context.getBean("userService");
 		User user = new User();
-		user.setId("a");
+		user.setId("ab");
 		user.setPassword("a");
 		user.setIdNumber("a");
-		user.setName("a");
+		user.setName("啊");
 		userservice.save(user);
 	}
 	

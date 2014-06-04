@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import common.factory.UUIDGenerator;
-
 
 
 /**
@@ -16,8 +14,7 @@ import common.factory.UUIDGenerator;
 public abstract class AbstractTemplateService<D extends IDAOTemplate<E>,E>{
 	
 	protected D dao = null ;
-	protected static final UUIDGenerator UUID_GENERATOR = new UUIDGenerator();
-	
+
 	public D getDao() {
 		return dao;
 	}

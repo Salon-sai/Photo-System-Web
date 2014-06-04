@@ -23,8 +23,8 @@ import test.common.CommonTester;
  */
 public class ImitationPostAction extends CommonTester {
 
-	@Test
-	public void testsavePost(){
+//	@Test
+	public void testsavePostInWindows(){
 		IPostService postService = (IPostService)context.getBean("postService");
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		Post post = new Post();
@@ -49,6 +49,24 @@ public class ImitationPostAction extends CommonTester {
 		IPostService postService = (IPostService)context.getBean("postService");
 		Post post = postService.get("8a8a1f79458da8fa01458da9015d0000", Post.class);
 		postService.delete(post);
+	}
+	
+	@Test
+	public void testsavePostInLinux(){
+		IPostService postService = (IPostService)context.getBean("postService");
+		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
+		Post post = new Post();
+		post.setContent("Test post context with English,测试post提交中文aaaaa");
+		File[] files = {new File("/home/sai/1384480949246.jpg")};
+		String[] fileNames = {"1384480949246.jpg"};
+		
+		Set<Photo> photos = new HashSet<Photo>(photoService.savePhotosByList(files, fileNames));
+		
+		postService.save(post, "b", photos);
+		
+		for(Photo photo : post.getPhotos()){
+			TestCase.assertEquals(true, new File(photo.getAutomodifyPhotoURL()).exists());
+		}
 	}
 	
 }

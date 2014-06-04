@@ -7,6 +7,7 @@ import saiwei.model.Profile;
 import saiwei.model.User;
 import saiwei.service.IPostService;
 import saiwei.service.IUserService;
+import sun.usagetracker.UsageTrackerClient;
 import test.common.CommonTester;
 
 public class TestUserService extends CommonTester {
@@ -33,7 +34,7 @@ public class TestUserService extends CommonTester {
 		userservice.save(user);
 	}
 	
-	@Test
+//	@Test
 	public void testlogin(){
 		IUserService userservice = (IUserService)context.getBean("userService");
 		User user = userservice.login("b", "a");
@@ -63,6 +64,16 @@ public class TestUserService extends CommonTester {
 		
 	}
 	
+	@Test
+	public void testsaveperson(){
+		IUserService userservice = (IUserService)context.getBean("userService");
+		User user = new User();
+		user.setId("a");
+		user.setPassword("a");
+		user.setIdNumber("a");
+		user.setName("a");
+		userservice.save(user);
+	}
 	
 
 }

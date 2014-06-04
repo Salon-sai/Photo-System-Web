@@ -41,9 +41,9 @@ public class PhotoServiceImpl extends
 	private static final String PARENT_IMAGE_NEW_WIN = "F:\\PhotoSystem_Photo_NEW";
 	private static final String PARENT_HEAD_PHOTO_WIN = "F:\\PhotoSystem_Head_PHOTO";
 	
-	private static final String PARENT_IMAGE_OLD_LINUX = "/media/photosystem_old";
-	private static final String PARENT_IMAGE_NEW_LINUX = "/media/photoSystem_new";
-	private static final String PARENT_HEAD_PHOTO_LINUX = "/media/photoSystem_headphoto";
+	private static final String PARENT_IMAGE_OLD_LINUX = "/home/sai/photosystem_old";
+	private static final String PARENT_IMAGE_NEW_LINUX = "/home/sai/photoSystem_new";
+	private static final String PARENT_HEAD_PHOTO_LINUX = "/home/sai/photoSystem_headphoto";
 	
 	private static final Integer HEAD_PHOTO_WIDTH = 110;
 	private static final Integer HEAD_PHOTO_HEIGHT = 110;
@@ -69,9 +69,9 @@ public class PhotoServiceImpl extends
 	public String saveToDisk(File file,String fileName){
 		String filepath = null;
 		if(OSInfo.isWindows()){
-			WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD_WIN, file, fileName);
+			filepath = WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD_WIN, file, fileName);
 		}else if(OSInfo.isLinux()){
-			WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD_LINUX, file, fileName);
+			filepath = WriteToDiskFactory.writetodisk(PARENT_IMAGE_OLD_LINUX, file, fileName);
 		}
 //		logger.info(filepath);
 		return filepath;
@@ -148,8 +148,14 @@ public class PhotoServiceImpl extends
 	public String zoomPhoto(String imagePath, int width, int height){
 		String suffix = StringFactory.getFileNamesuffix(imagePath);
 		String newImagePath = this.filePathchange(imagePath, width, height);
+		File newImage = new File(newImagePath);
+		File oldImage = new File(imagePath);
+		File newpath = newImage.getParentFile();
+		if(!newpath.exists()){
+			newpath.mkdirs();
+		}
 		try {
-			if(ImageUtils.scale(imagePath, newImagePath, width, height, suffix)){
+			if(ImageUtils.scale(oldImage, newImage, width, height, suffix)){
 //		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
 				return newImagePath;
 			}else
@@ -182,10 +188,10 @@ public class PhotoServiceImpl extends
 		List<Photo> photos = new ArrayList<Photo>();
 		for(int i  = 0; i < fileNames.length;i++){
 			Photo photo = new Photo();
-			photo.setId((String)UUID_GENERATOR.generate());
+			dao.save(photo);
 			
 			String suffix = StringFactory.getFileNamesuffix(fileNames[i]);
-			String fileSerializableName = StringFactory.MergerString(photo.getId(),suffix);
+			String fileSerializableName = StringFactory.MergerString(photo.getId(),".",suffix);
 			
 			String filepath = this.saveToDisk(files[i], fileSerializableName);
 			String modifyFilepath = this.zoomImagestand(filepath);

@@ -14,6 +14,8 @@ import org.apache.struts2.interceptor.SessionAware;
 
 import saiwei.bean.CommentBean;
 import saiwei.model.Post;
+import saiwei.model.User;
+import saiwei.service.ICommentService;
 import saiwei.service.IPostService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -40,6 +42,7 @@ public class GetPostInfomationAction extends ActionSupport implements
 	private Set<CommentBean> comments;
 	
 	private IPostService postService;
+	private ICommentService commentService;
 	
 	@Action(value="getcomments",results={
 			@Result(name=SUCCESS,type="json",
@@ -52,6 +55,16 @@ public class GetPostInfomationAction extends ActionSupport implements
 			comments = postService.getCommentsByPost(postId);
 		}catch(Exception e){
 			logger.error("cant get the comment", e);
+			return INPUT;
+		}
+		return SUCCESS;
+	}
+	
+	public String getSendComment(){
+		try{
+			User user = (User)session.get("user");
+			comments = commentService.getOwnSendComments(user);
+		}catch(Exception e){
 			return INPUT;
 		}
 		return SUCCESS;
@@ -79,5 +92,8 @@ public class GetPostInfomationAction extends ActionSupport implements
 	}
 	public void setPostService(IPostService postService) {
 		this.postService = postService;
+	}
+	public void setCommentService(ICommentService commentService) {
+		this.commentService = commentService;
 	}
 }

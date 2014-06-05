@@ -5,12 +5,13 @@ package saiwei.action.function;
 
 import java.io.File;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.interceptor.SessionAware;
 
 import saiwei.model.Photo;
@@ -37,18 +38,27 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	private File[] image;
 	private String[] imageFilename;
 	private String[] imageContentType;
-	private String context;
+	private String content;
 	private Map<String,Object> session;
 	private IPostService postService;
 	private IPhotoService photoService;
 	
-	public String publishtext(){
+	@Action(value="publishPost",
+			results={
+				@Result(name=SUCCESS,type="json",
+						params={"excludeNullProperties","ture"}),
+				@Result(name=INPUT,type="json",
+						params={"excludeNullProperties","ture"})})
+	public String publishpost(){
 		User user = (User)session.get("user");
 		Set<Photo> photos = new HashSet<Photo>(photoService.savePhotosByList(image, imageFilename));
 		Post post = new Post();
+		post.setContent(content);
 		postService.save(post, user.getIdNumber(), photos);
 		return SUCCESS;
 	}
+	
+	
 
 	/**
 	 * 
@@ -72,7 +82,7 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	public void setPhotoService(IPhotoService photoService) {
 		this.photoService = photoService;
 	}
-	public void setContext(String context) {
-		this.context = context;
+	public void setContent(String content) {
+		this.content = content;
 	}
 }

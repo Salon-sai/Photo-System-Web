@@ -38,8 +38,8 @@ public class HomeAction extends ActionSupport implements SessionAware {
 	
 	@Action(value="*home",params={"userId","{1}"},
 			results={
-			@Result(name=SUCCESS,type=""),
-			@Result(name=INPUT,type="")})
+			@Result(name=SUCCESS,type="redirect",location="/"),
+			@Result(name=INPUT,type="redirect",location="/")})
 	public String otherhomePost(){
 		posts = userService.getOwnPosts(userId);
 		return SUCCESS;
@@ -47,8 +47,8 @@ public class HomeAction extends ActionSupport implements SessionAware {
 	
 	@Action(value="home",
 			results={
-			@Result(name=SUCCESS,type=""),
-			@Result(name=INPUT,type="")})
+			@Result(name=SUCCESS,type="redirect",location="/"),
+			@Result(name=INPUT,type="redirect",location="/")})
 	public String homePost(){
 		User user = (User)session.get("user");
 		posts = userService.getOwnPosts(user);

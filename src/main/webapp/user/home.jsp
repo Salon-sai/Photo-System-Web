@@ -10,6 +10,13 @@
 	<meta name="keywords" content="">
 	<meta name="description" content="">
 	
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap-theme.min.css">
+	
+	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
+	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+
+	
 	<script type="text/javascript" src="../home_ui/js/ga.js"></script><script type="text/javascript">
 	(function(window,document){
 	    if(top!=window) top.location=location.href;
@@ -99,10 +106,10 @@
 		<div id="publishBarArea" class="publishBarArea">
 		  <ul id="publishPostBar" class="m-nav2">
 			<li class="user"><a href="http://kaxiuptd.lofter.com/"><img src="../home_ui/143270763245961553.jpg"></a></li>
-		        <li><a class="publishlink n21" href="http://www.lofter.com/#publish=text" bakhref="/blog/kaxiuptd/new/text/">文字</a></li>
-		        <li><a class="publishlink n22" href="http://www.lofter.com/#publish=photo" bakhref="/blog/kaxiuptd/new/photo/">图片</a></li>
-		        <li><a class="publishlink n23" href="http://www.lofter.com/#publish=music" bakhref="/blog/kaxiuptd/new/music/">音乐</a></li>
-		        <li><a class="publishlink publishlink-video n24" href="http://www.lofter.com/#publish=video" bakhref="/blog/kaxiuptd/new/video/">视频</a></li>
+		        <li><a class="publishlink n21" id="publish_text_bn" href="" data-toggle="modal" data-target="#publish_text">文字</a></li>
+		        <li><a class="publishlink n22" href="" data-toggle="modal" data-target="#publish_photo">图片</a></li>
+		        <li><a class="publishlink n23" href="" >音乐</a></li>
+		        <li><a class="publishlink publishlink-video n24" href="">视频</a></li>
 		  </ul>
 		</div>
 		<div style="display:none" id="tempSaveTipArea" class="tempSaveTipArea"><div class="tempsavetipwrap">你还有一篇未发布的文章。<a class="gotemppost" href="http://www.lofter.com/#">查看</a><a class="closetip icon2-8" href="http://www.lofter.com/#" hidefocus="true">&nbsp;</a></div></div>
@@ -472,8 +479,31 @@
 	</div>
 	</div>
 
+	<div class="modal fade" id="public_text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		  <div class="modal-dialog">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+		        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+		      </div>
+		      <div class="modal-body">
+		        <fieldset>
+		        	<div>
+		        		<label for="photo">Photo</label>
+		        		<input type="file" name="photo">
+		        	</div>
+		        </fieldset>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" class="btn btn-primary">Save changes</button>
+		      </div>
+		    </div><!-- /.modal-content -->
+		  </div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+  	  </div>
 	</div>
-	</div>
+	
 	<div class="m-loadm" id="loadmore" style="display: none;">
 	    <div class="loadm">
 	        载入更多内容
@@ -511,10 +541,20 @@
 	</div>
 
 
-<script src="../home_ui/core.js" type="text/javascript"></script>
-<script src="../home_ui/pt_page_newpublish_dashboardnew.js" type="text/javascript"></script>
-    
-  
+
+    <script type="text/javascript">
+    	$(function(){
+    		$('#publish_text_bn').click(function(){
+    			$('#public_text').modal({keyboard : false});
+    		});
+    		
+    		$(":file [name='photo']").chage(function(){
+    			
+    		});
+    	});
+    </script>
+  	<script src="../home_ui/js/core.js" type="text/javascript"></script>
+	<script src="../home_ui/js/pt_page_newpublish_dashboardnew.js" type="text/javascript"></script>
 
 	<iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;"></iframe>
 	<div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:null,&quot;tsbc&quot;:null,&quot;pun&quot;:null,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div>

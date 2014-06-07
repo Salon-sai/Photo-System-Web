@@ -11,8 +11,7 @@
       <!--<link rel="stylesheet" type="text/css" href="./styles.css">-->
     <link rel="stylesheet" type="text/css" href="login_files/css/login.css">
 
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/jquery-2.1.1.min.js"></script>
 
     <script type="text/javascript">
 

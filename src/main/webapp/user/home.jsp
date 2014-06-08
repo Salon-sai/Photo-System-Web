@@ -17,12 +17,13 @@
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
 
 	
-	<script type="text/javascript" src="../home_ui/js/ga.js"></script><script type="text/javascript">
-	(function(window,document){
-	    if(top!=window) top.location=location.href;
-	    document.uniqueID!=document.uniqueID&&!!location.hash&&(location.hash=location.hash);
-	    window.focus();
-	})(this,document);
+	<script type="text/javascript" src="../home_ui/js/ga.js"></script>
+	<script type="text/javascript">
+		(function(window,document){
+		    if(top!=window) top.location=location.href;
+		    document.uniqueID!=document.uniqueID&&!!location.hash&&(location.hash=location.hash);
+		    window.focus();
+		})(this,document);
 	</script>
     
 	<link href="../home_ui/css/pt_lib_macro.css" type="text/css" rel="stylesheet">
@@ -105,7 +106,7 @@
 	<div class="g-mn" id="main">
 		<div id="publishBarArea" class="publishBarArea">
 		  <ul id="publishPostBar" class="m-nav2">
-			<li class="user"><a href="http://kaxiuptd.lofter.com/"><img src="../home_ui/143270763245961553.jpg"></a></li>
+			<li class="user"><a href="${pageContext.request.contextPath }"><img src="../home_ui/143270763245961553.jpg"></a></li>
 		        <li><a class="publishlink n21" id="publish_text_bn" href="" data-toggle="modal" data-target="#publish_text">文字</a></li>
 		        <li><a class="publishlink n22" href="" data-toggle="modal" data-target="#publish_photo">图片</a></li>
 		        <li><a class="publishlink n23" href="" >音乐</a></li>
@@ -488,9 +489,11 @@
 		      </div>
 		      <div class="modal-body">
 		        <fieldset>
-		        	<div>
-		        		<label for="photo">Photo</label>
-		        		<input type="file" name="photo">
+		        	<div id='photo0'>
+		        		<label for='photo'>Photo</label>
+		        		<input type='file' name='photo'>
+		        		<br>
+		        		<img width='558'>
 		        	</div>
 		        </fieldset>
 		      </div>
@@ -543,14 +546,50 @@
 
 
     <script type="text/javascript">
+    	function createphotoDIV(html,id){
+    		var newhtml = html
+    			.replace(id,'photo'+(Number(id.substr(id.length-1))+1));
+    		$('#'+id).before(newhtml);
+    	}
+    	
+    	function removephotoDIV(){
+    		$(this).parent().remove();
+    	}; 	
+    
     	$(function(){
     		$('#publish_text_bn').click(function(){
     			$('#public_text').modal({keyboard : false});
     		});
     		
-    		$(":file [name='photo']").chage(function(){
-    			
+    		$(":file[name='photo']").change(function(){
+    			var img = $(this).siblings('img');
+    			var flag = false;
+    			if(!img.attr('src')){
+    				flag = true;
+    			}
+    			var objurl = getObjectURL(this.files[0]);
+    			console.log('objURL = '+objurl);
+    			if(objurl && flag){
+    				var id = $(this).parent().attr('id');
+    				var html = $(this).parents('fieldset').html();
+    				createphotoDIV(html,id);
+    				img.attr('src',objurl);
+    			}else if(objurl){
+    				img.attr('src',objurl);
+    			}
     		});
+    		
+    		function getObjectURL(file){
+    			var url = null;
+    			if(window.createObjectURL != undefined){//basic
+    				url = window.createObjectURL(file);
+    			}else if(window.URL != undefined){ // firefox
+    				url = window.URL.createObjectURL(file);
+    			}else if(window.webkitURL != undefined){ //chrome or webkit
+    				url = window.webkitURL.createObjectURL(file);
+    			}
+    			return url;
+    		};
     	});
     </script>
   	<script src="../home_ui/js/core.js" type="text/javascript"></script>

@@ -15,6 +15,7 @@
 	
 	<script type="text/javascript" src="../js/jquery-2.1.1.min.js"></script>
 	<script type="text/javascript" src="../js/bootstrap.min.js"></script>
+	<script type="text/javascript" src="../js/ajaxfileupload.js"></script>
 
 	
 	<script type="text/javascript" src="../home_ui/js/ga.js"></script>
@@ -491,7 +492,7 @@
 		        <fieldset>
 		        	<div id='photo0'>
 		        		<label for='photo'>Photo</label>
-		        		<input type='file' name='photo'>
+		        		<input type='file' name='image'>
 		        		<br>
 		        		<img width='558'>
 		        	</div>
@@ -499,7 +500,7 @@
 		      </div>
 		      <div class="modal-footer">
 		        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-		        <button type="button" class="btn btn-primary">Save changes</button>
+		        <button type="button" class="btn btn-primary" id="publish_bn">Publish</button>
 		      </div>
 		    </div><!-- /.modal-content -->
 		  </div><!-- /.modal-dialog -->
@@ -547,49 +548,67 @@
 
     <script type="text/javascript">
     	function createphotoDIV(html,id){
+    		var newid = 'image'+(Number(id.substr(id.length-1))+1);
     		var newhtml = html
-    			.replace(id,'photo'+(Number(id.substr(id.length-1))+1));
+    			.replace(id,newid);
     		$('#'+id).before(newhtml);
-    	}
+    		$('#'+newid).children(':file').bind('change',function(e){
+    			imagechange(e.target);
+    		});
+    	};
     	
     	function removephotoDIV(){
     		$(this).parent().remove();
-    	}; 	
-    
+    	};
+		
+		function getObjectURL(file){
+			var url = null;
+			if(window.createObjectURL != undefined){//basic
+				url = window.createObjectURL(file);
+			}else if(window.URL != undefined){ // firefox
+				url = window.URL.createObjectURL(file);
+			}else if(window.webkitURL != undefined){ //chrome or webkit
+				url = window.webkitURL.createObjectURL(file);
+			}
+			return url;
+		};
+		
+		function imagechange(target){
+			var img = $(target).siblings('img');
+			var flag = false;
+			if(!img.attr('src')){
+				flag = true;
+			}
+			var objurl = getObjectURL(target.files[0]);
+			console.log('objURL = '+objurl);
+			if(objurl && flag){
+				var id = $(target).parent().attr('id');
+				var html = $(target).parent().prop('outerHTML');
+				createphotoDIV(html,id);
+				img.attr('src',objurl);
+			}else if(objurl){
+				img.attr('src',objurl);
+			}
+		}
+		
     	$(function(){
     		$('#publish_text_bn').click(function(){
     			$('#public_text').modal({keyboard : false});
     		});
     		
-    		$(":file[name='photo']").change(function(){
-    			var img = $(this).siblings('img');
-    			var flag = false;
-    			if(!img.attr('src')){
-    				flag = true;
-    			}
-    			var objurl = getObjectURL(this.files[0]);
-    			console.log('objURL = '+objurl);
-    			if(objurl && flag){
-    				var id = $(this).parent().attr('id');
-    				var html = $(this).parents('fieldset').html();
-    				createphotoDIV(html,id);
-    				img.attr('src',objurl);
-    			}else if(objurl){
-    				img.attr('src',objurl);
-    			}
+    		$(":file[name='image']").change(function(e){
+    			imagechange(e.target);
     		});
     		
-    		function getObjectURL(file){
-    			var url = null;
-    			if(window.createObjectURL != undefined){//basic
-    				url = window.createObjectURL(file);
-    			}else if(window.URL != undefined){ // firefox
-    				url = window.URL.createObjectURL(file);
-    			}else if(window.webkitURL != undefined){ //chrome or webkit
-    				url = window.webkitURL.createObjectURL(file);
-    			}
-    			return url;
-    		};
+    		$('#publish_bn').click(function(){
+    			$.ajaxFileUpload(
+    					{
+    						url : '${pageContext.request.contextPath }/publish/publishPost.action',
+    						fileElementId : 'image',
+    						dataType : 'json'
+    					});
+    		});
+
     	});
     </script>
   	<script src="../home_ui/js/core.js" type="text/javascript"></script>

@@ -508,6 +508,24 @@
   	  </div>
 	</div>
 	
+	<div class="modal fade" id="message">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+	        <p>AAAA</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
 	<div class="m-loadm" id="loadmore" style="display: none;">
 	    <div class="loadm">
 	        载入更多内容
@@ -589,7 +607,13 @@
 			}else if(objurl){
 				img.attr('src',objurl);
 			}
-		}
+		};
+		
+		function requestMessage(message){
+			$('#message').find('p').html(message);
+			$('#message').modal();
+			setTimeout(function(){$('#message').find('.close').trigger('click');}, 900);
+		};
 		
     	$(function(){
     		$('#publish_text_bn').click(function(){
@@ -601,14 +625,16 @@
     		});
     		
     		$('#publish_bn').click(function(){
-    			$.ajaxFileUpload(
+      			$.ajaxFileUpload(
     					{
     						url : '${pageContext.request.contextPath }/publish/publishPost.action',
     						fileElementId : 'image',
-    						dataType : 'json'
-    					});
+    						dataType : 'json',
+    						success : function(data, status){
+    							requestMessage('success');
+    						}
+    					});      			
     		});
-
     	});
     </script>
   	<script src="../home_ui/js/core.js" type="text/javascript"></script>

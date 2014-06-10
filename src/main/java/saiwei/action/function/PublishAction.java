@@ -36,7 +36,7 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	private static final long serialVersionUID = 1L;
 	
 	private File[] image;
-	private String[] imageFilename;
+	private String[] imageFileName;
 	private String[] imageContentType;
 	private String content;
 	private Map<String,Object> session;
@@ -51,7 +51,7 @@ public class PublishAction extends ActionSupport implements SessionAware{
 						params={"excludeNullProperties","ture"})})
 	public String publishpost(){
 		User user = (User)session.get("user");
-		Set<Photo> photos = new HashSet<Photo>(photoService.savePhotosByList(image, imageFilename));
+		Set<Photo> photos = new HashSet<Photo>(photoService.savePhotosByList(image, imageFileName));
 		Post post = new Post();
 		post.setContent(content);
 		postService.save(post, user.getIdNumber(), photos);
@@ -70,8 +70,8 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	public void setImage(File[] image) {
 		this.image = image;
 	}
-	public void setImageFilename(String[] imageFilename) {
-		this.imageFilename = imageFilename;
+	public void setImageFileName(String[] imageFileName) {
+		this.imageFileName = imageFileName;
 	}
 	public void setImageContentType(String[] imageContentType) {
 		this.imageContentType = imageContentType;

@@ -41,7 +41,6 @@ jQuery.extend({
 		for(var i in fileElementNames){
 			var oldElements = $("input[name='"+fileElementNames[i]+"']");
 			oldElements.each(function(){
-				alert($(this).parent().html());
 				var newElement = $($(this)).clone();
 				$(oldElements).attr('id', fileId);
 				$(oldElements).before(newElement);

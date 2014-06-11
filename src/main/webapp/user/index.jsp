@@ -28,7 +28,7 @@
     
     <body class="g-homepage">
         <iframe id="control_frame" allowtransparency="true" style="position:fixed;_position:absolute;clear:both; width: 390px; height: 32px; z-index:1337; top:0; right:15px;zoom:1; border:0px; background-color:transparent; overflow:hidden;"
-        src="./control.html" frameborder="0" height="32px" scrolling="no" width="390px">
+        src="./control.jsp" frameborder="0" height="32px" scrolling="no" width="390px">
         </iframe>
         </iframe>
         <div class="g-doc">

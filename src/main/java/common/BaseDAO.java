@@ -145,6 +145,7 @@ public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<
 	}
 	
 	/**
+		dao.
 	 * 
 	 * @param session
 	 * @param params
@@ -265,6 +266,11 @@ public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<
 			Object[][] values, Class<?> classType) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	public void saveOrUpdate(E e){
+		Session session = sessionFactory.getCurrentSession();
+		session.saveOrUpdate(e);
 	}
 	
 	/**

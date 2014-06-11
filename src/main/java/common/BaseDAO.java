@@ -268,6 +268,15 @@ public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<
 	}
 	
 	/**
+	 * lock 将游离对象转换为持久化对象 (未实现)
+	 */
+	@SuppressWarnings("deprecation")
+	public void lock(E e){
+		Session session = sessionFactory.getCurrentSession();
+		session.lock(e, LockMode.OPTIMISTIC);
+	}
+	
+	/**
 	 * getter and setter
 	 * @return
 	 */

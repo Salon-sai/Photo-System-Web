@@ -6,6 +6,8 @@ package saiwei.action.function;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
@@ -47,8 +49,8 @@ public class HomeAction extends ActionSupport implements SessionAware {
 	
 	@Action(value="home",
 			results={
-			@Result(name=SUCCESS,type="redirect",location="/"),
-			@Result(name=INPUT,type="redirect",location="/")})
+			@Result(name=SUCCESS,location="/user/index.jsp"),
+			@Result(name=INPUT,location="/user/index.jsp")})
 	public String homePost(){
 		User user = (User)session.get("user");
 		posts = userService.getOwnPosts(user);
@@ -61,6 +63,7 @@ public class HomeAction extends ActionSupport implements SessionAware {
 	public void setSession(Map<String, Object> session) {
 		this.session = session;
 	}
+	@Resource(name="userService")
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}

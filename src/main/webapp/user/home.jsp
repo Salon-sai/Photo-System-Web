@@ -49,7 +49,7 @@
     <h1 class="m-logo"><a href="LOFTER.html">LOFTER-网易轻博</a></h1>
     <div class="m-nav" id="topbar">
 	        <ul class="nav1 tbtag">
-	            <li class="j-crt"><a rel="nofollow" href="../home_ui/LOFTER.html">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
+	            <li class="j-crt"><a rel="nofollow" href="${pageContext.request.contextPath }/user">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
 				<li class=""><a href="http://www.lofter.com/view?act=dashboardclick_20130514_01">浏览</a></li>
 				<li style="display:none;" id="arturl"><a target="_blank" rel="nofollow" href="http://www.lofter.com/art?act=qbart_20140403_09">ART</a><a target="_blank" href="http://www.lofter.com/art?act=qbart_20140403_09" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc">绘画</span></a></li>
 	            <li>
@@ -76,7 +76,7 @@
 	        <div class="nav2 m-ssch-act" id="schtagbox">
 	        	<div class="ssch tbtag">
 	                <form class="xtag">
-	                	<a href="http://www.lofter.com/#" class="btn xtag"></a>
+	                	<a href="${pageContext.request.contextPath }/user" class="btn xtag"></a>
 	                	<label class="xtag" style="display:none;">搜索标签、博客</label>
 	                    <input type="text" placeholder="搜索标签、博客" class="xtag" onfocus="this.isfocus = true;">
 	                    <div class="xtag a-show-mask f-op0">
@@ -107,7 +107,7 @@
 	<div class="g-mn" id="main">
 		<div id="publishBarArea" class="publishBarArea">
 		  <ul id="publishPostBar" class="m-nav2">
-			<li class="user"><a href="${pageContext.request.contextPath }"><img src="../home_ui/143270763245961553.jpg"></a></li>
+			<li class="user"><a href="${pageContext.request.contextPath }/user/home.action"><img src="../home_ui/143270763245961553.jpg"></a></li>
 		        <li><a class="publishlink n21" id="publish_text_bn" href="" data-toggle="modal" data-target="#publish_text">文字</a></li>
 		        <li><a class="publishlink n22" href="" data-toggle="modal" data-target="#publish_photo">图片</a></li>
 		        <li><a class="publishlink n23" href="" >音乐</a></li>
@@ -633,7 +633,8 @@
     						success : function(data, status){
     							requestMessage('success');
     						}
-    					});      			
+    					});
+      				requestMessage('success');
     		});
     	});
     </script>

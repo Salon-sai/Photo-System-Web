@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
     
@@ -74,233 +75,26 @@
                 <div class="g-mn">
                     <div class="g-mnc">
                         <div class="m-postlst box">
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_005.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_004.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_011.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_002.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- <div class="f-cb"> 
-                            </div> -->
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_010.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_014.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_009.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_007.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- <div class="f-cb"> 
-                           	 </div>-->
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_008.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_006.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_012.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
-                            <!-- <div class="f-cb"> 
-                            </div>-->
-                            <div class="m-post m-post-img">
-                                <a class="plink" href="#"
-                                title="点击进入详细页面">
-                                    <span class="pic">
-                                        <img src="../sample_picture/a_013.jpeg">
-                                    </span>
-                                    <span class="layer">
-                                    </span>
-                                    <span class="lnk">
-                                        <span class="date">
-                                            <span class="date-icn">
-                                            </span>
-                                            2014 - 02 - 03
-                                        </span>
-                                    </span>
-                                </a>
-                            </div>
+                        	<c:forEach var="post" items="${posts }">
+                        		<div class="m-post m-post-img">
+	                                <a class="plink" href="#"
+	                                title="点击进入详细页面">
+	                                    <span class="pic">
+	                                        <!-- <img src="../sample_picture/a_005.jpeg"> -->
+	                                        <img alt="" src="<s:url action="../photo/photoAction!viewImage?photo_id=%{#attr.post.photo_id[0]}"></s:url>">
+	                                    </span>
+	                                    <span class="layer">
+	                                    </span>
+	                                    <span class="lnk">
+	                                        <span class="date">
+	                                            <span class="date-icn">
+	                                            </span>
+	                                            ${post.postdate }
+	                                        </span>
+	                                    </span>
+	                                </a>
+	                            </div>
+                        	</c:forEach>
                             <div class="f-cb">
                             </div>
                         </div>

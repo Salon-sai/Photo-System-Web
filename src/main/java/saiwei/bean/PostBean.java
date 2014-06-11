@@ -3,8 +3,9 @@
  */
 package saiwei.bean;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -27,7 +28,7 @@ public class PostBean extends Post {
 	private String posterNumber;
 	// key is userId , value is user name
 	private Map<String,Object> favoriter;
-	private Set<String> photo_id;
+	private List<String> photo_id;
 	
 	/**
 	 * 
@@ -53,7 +54,7 @@ public class PostBean extends Post {
 		this.posterName = post.getPoster().getName();
 		this.posterNumber = post.getPoster().getId();
 		
-		photo_id = new HashSet<String>();
+		photo_id = new ArrayList<String>();
 		for(Photo photo : post.getPhotos()){
 			photo_id.add(photo.getId());
 		}
@@ -81,10 +82,12 @@ public class PostBean extends Post {
 	public void setFavoriter(Map<String, Object> favoriter) {
 		this.favoriter = favoriter;
 	}
-	public Set<String> getPhoto_id() {
+
+	public List<String> getPhoto_id() {
 		return photo_id;
 	}
-	public void setPhoto_id(Set<String> photo_id) {
+
+	public void setPhoto_id(List<String> photo_id) {
 		this.photo_id = photo_id;
 	}
 }

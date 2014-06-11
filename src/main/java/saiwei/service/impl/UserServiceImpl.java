@@ -52,15 +52,15 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 			return null;
 		}else{
 			user = list.get(0);
-			user.setCollect_posts(null);
-			user.setFavorite_posts(null);
-			user.setFound_relationship(null);
-			user.setLinked_relationship(null);
-			user.setOwn_posts(null);
-			user.setTags(null);
-			user.setReceive_comments(null);
-			user.setSend_comments(null);
-			user.setProfile(null);
+//			user.setCollect_posts(null);
+//			user.setFavorite_posts(null);
+//			user.setFound_relationship(null);
+//			user.setLinked_relationship(null);
+//			user.setOwn_posts(null);
+//			user.setTags(null);
+//			user.setReceive_comments(null);
+//			user.setSend_comments(null);
+//			user.setProfile(null);
 		}
 		return user;
 	}
@@ -101,6 +101,7 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	 * @return
 	 */
 	public List<PostBean> getOwnPosts(User user){
+		dao.saveOrUpdate(user);
 		List<PostBean> postbeans = new ArrayList<PostBean>();
 		Iterator<Post> posts = user.getOwn_posts().iterator();
 		int i = 0;

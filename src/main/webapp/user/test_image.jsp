@@ -10,11 +10,22 @@
 </head>
 <body>
 	
-	<div>
-		<img alt="" src='<s:url action="../photo/photoAction!viewImage?photo_id=ff808181468350f801468351b09e0000"></s:url>'/>
-	</div>
+<%--  	<div>
+		<img alt="" src='<s:url action="../photo/photoAction!viewImage?photo_id=%{photos[0].id}"></s:url>'/>
+	</div>  --%>
 	
-	
-
+<%--  	<c:forEach items="${photos }" var="photo">
+		<img alt="" src='<s:url action="../photo/photoAction!viewImage?photo_id=%{#attr.photo.id}"></s:url>'>
+	</c:forEach> --%>
+	<br>
+	<c:out value="${image.id }"></c:out> 
+	<br><br>
+	<c:forEach items="${posts }" var="post">
+		<s:property value="#attr.post.photo_id[0]"/><br>
+		<%-- <c:forEach items="${post.photo_id }" var="id">
+			<s:property value="#attr.id"/><br>
+		</c:forEach><br> --%>
+		<%-- ${post.photo_id.size }  --%>
+	</c:forEach>
 </body>
 </html>

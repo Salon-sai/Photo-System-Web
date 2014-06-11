@@ -92,7 +92,7 @@
 	                        ï¼ä»åå®¢æåå¯è§ï¼
 	                    </span><!-- display: none; -->
 	                    <span class="whosep js-447673" style="display:none;">
-	                        - æ¨èè&nbsp;
+	                        - æ¨èè
 	                        <a href="http://www.lofter.com/#" class="js-447673" target="_blank">
 	                            hername
 	                        </a>
@@ -123,7 +123,7 @@
 	                        </span>
 	                        <span>
 	                            <a href="http://www.lofter.com/#" target="_blank" class="w-img2 w-img2-3">
-	                                <img class="js-447673">
+	                                <img class="js-447673"></img>
 	                            </a>
 	                            <a href="http://www.lofter.com/#" class="js-447673">
 	                                å»ç²¾
@@ -137,7 +137,7 @@
 	                            <div class="img" style="width: 164px; height: auto;">
 	                                <div class="imgc">
 	                                    <a href="http://www.lofter.com/#" hidefocus="true">
-	                                        <img class="js-692987" style="width: 164px;" src="../home_ui/1337006139475871986.jpg">
+	                                        <img class="js-692987" style="width: 164px;" src="../home_ui/1337006139475871986.jpg"></img>
 	                                    </a>
 	                                </div>
 	                                <div class="zoom" style="display: none;">

@@ -1,7 +1,9 @@
 package saiwei.action;
 
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
@@ -11,6 +13,7 @@ import org.apache.struts2.ServletActionContext;
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 
+import saiwei.bean.PhotoBean;
 import saiwei.model.Photo;
 import saiwei.service.IPhotoService;
 import common.BaseAction;
@@ -24,6 +27,8 @@ import common.BaseAction;
 @Action("photoAction")
 public class PhotoAction extends BaseAction<Photo,IPhotoService>{
 
+	private Set<PhotoBean> photos;
+	
 	/**
 	 * 
 	 */
@@ -32,31 +37,54 @@ public class PhotoAction extends BaseAction<Photo,IPhotoService>{
 	private String photo_id;
 	
 	public String viewImage(){
-		HttpServletResponse respone = null;
+		HttpServletResponse response = null;
 		ServletOutputStream out = null;
 		try{
-			respone = ServletActionContext.getResponse();
-			respone.setContentType("multipart/form-data");
-			out = respone.getOutputStream();
-			Photo photo = service.get(photo_id, Photo.class);
-			File image = new File(photo.getAutomodifyPhotoURL());
-			FileInputStream is = new FileInputStream(image);
-			byte[] buffer = new byte[1024];
-			int length = 0;
-			while(-1 != (length = is.read(buffer))){
-				out.write(buffer, 0, length);
-			}
-			is.close();
+			response = ServletActionContext.getResponse();
+			response.setContentType("multipart/form-data");
+			out = response.getOutputStream();
+			service.photowriteToOutStream(photo_id, out);
 			out.flush();
 		}catch(Exception e){
 			logger.error("view image fail",	e);
+		}finally{
+			if(out != null){
+				try {
+					out.close();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		return null;
 	}
+	
+	public String allphotolist(){
+		this.photos = new HashSet<PhotoBean>();
+		
+		try {
+			PhotoBean bean = new PhotoBean(null);
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		return SUCCESS;
+	}
 
+	/**
+	 * 
+	 * getter and setter
+	 */
 	public void setPhoto_id(String photo_id) {
 		this.photo_id = photo_id;
 	}
+	public void setPhotos(Set<PhotoBean> photos) {
+		this.photos = photos;
+	}
+
 	@Override
 	@Resource(name="photoService")
 	public void setService(IPhotoService service) {

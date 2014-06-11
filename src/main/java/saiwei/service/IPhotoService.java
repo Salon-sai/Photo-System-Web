@@ -4,6 +4,9 @@
 package saiwei.service;
 
 import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.List;
 
 import saiwei.dao.IPhotoDAO;
@@ -30,4 +33,6 @@ public interface IPhotoService extends IServiceTemplate<IPhotoDAO, Photo> {
 	public boolean deletephoto(String photoId);
 	
 	public boolean savePhotoWithPost(Post post,File[] files,String[] fileNames);
+	
+	public void photowriteToOutStream(Serializable id,OutputStream out) throws IOException;
 }

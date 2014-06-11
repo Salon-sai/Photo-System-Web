@@ -4,7 +4,11 @@
 package saiwei.service.impl;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -305,5 +309,23 @@ public class PhotoServiceImpl extends
 		return StringFactory.builderMergeredBefore(stringbuffer,File.separator,
 				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
 				,Integer.toString(width),"_",Integer.toString(height), ".",suffix);
+	}
+	
+	/**
+	 * 
+	 * @param id
+	 * @param out
+	 * @throws IOException 
+	 */
+	public void photowriteToOutStream(Serializable id,OutputStream out) throws IOException{
+		Photo photo = this.get(id, PHOTOCLASS);
+		File image = new File(photo.getAutomodifyPhotoURL());
+		InputStream is = new FileInputStream(image);
+		byte[] buffer = new byte[1024];
+		int length = 0;
+		while(-1 != (length = is.read(buffer))){
+			out.write(buffer, 0, length);
+		}
+		is.close();
 	}
 }

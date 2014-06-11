@@ -43,6 +43,10 @@ public class User extends BaseModelHasName {
 	@JoinColumn(name="profile_pk")
 	private Profile profile;
 	
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
+	@JoinColumn(name="theme_pk")
+	private Theme theme;
+	
 	@OneToMany(mappedBy="founder")
 	private Set<RelationShip> found_relationship;
 	
@@ -102,97 +106,80 @@ public class User extends BaseModelHasName {
 	public String getPassword() {
 		return password;
 	}
-	
 	//change to MD5
 	public void setPassword(String password) {
 		this.password = MD5Factory.getMD5(password.getBytes());
 	}
-
 	public Set<RelationShip> getFound_relationship() {
 		return found_relationship;
 	}
-
 	public void setFound_relationship(Set<RelationShip> found_relationship) {
 		this.found_relationship = found_relationship;
 	}
-
 	public Set<RelationShip> getLinked_relationship() {
 		return linked_relationship;
 	}
-
 	public void setLinked_relationship(Set<RelationShip> linked_relationship) {
 		this.linked_relationship = linked_relationship;
 	}
-
 	public Profile getProfile() {
 		return profile;
 	}
-
 	public void setProfile(Profile profile) {
 		this.profile = profile;
 	}
-
 	public Set<Tag> getTags() {
 		return tags;
 	}
-
 	public void setTags(Set<Tag> tags) {
 		this.tags = tags;
 	}
-
 	public Set<Post> getFavorite_posts() {
 		return favorite_posts;
 	}
-
 	public void setFavorite_posts(Set<Post> favorite_posts) {
 		this.favorite_posts = favorite_posts;
 	}
-
 	public Set<Post> getCollect_posts() {
 		return collect_posts;
 	}
-
 	public void setCollect_posts(Set<Post> collect_posts) {
 		this.collect_posts = collect_posts;
 	}
-
 	public Set<Post> getOwn_posts() {
 		return own_posts;
 	}
-
 	public void setOwn_posts(Set<Post> own_posts) {
 		this.own_posts = own_posts;
 	}
-
 	public Set<Comment> getSend_comments() {
 		return send_comments;
 	}
-
 	public void setSend_comments(Set<Comment> send_comments) {
 		this.send_comments = send_comments;
 	}
-
 	public Set<Comment> getReceive_comments() {
 		return receive_comments;
 	}
-
 	public void setReceive_comments(Set<Comment> receive_comments) {
 		this.receive_comments = receive_comments;
 	}
-
 	public UserType getUserType() {
 		return userType;
 	}
-
 	public void setUserType(UserType userType) {
 		this.userType = userType;
 	}
-
 	public String getIdNumber() {
 		return IdNumber;
 	}
-
 	public void setIdNumber(String idNumber) {
 		IdNumber = idNumber;
+	}
+	public Theme getTheme() {
+		return theme;
+	}
+	public void setTheme(Theme theme) {
+		this.theme = theme;
 	}
 }

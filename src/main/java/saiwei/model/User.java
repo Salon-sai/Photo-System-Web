@@ -43,8 +43,8 @@ public class User extends BaseModelHasName {
 	@JoinColumn(name="profile_pk")
 	private Profile profile;
 	
-	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
-	@JoinColumn(name="theme_pk")
+	@ManyToOne
+	@JoinColumn(name="theme_id")
 	private Theme theme;
 	
 	@OneToMany(mappedBy="founder")

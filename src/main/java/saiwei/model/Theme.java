@@ -3,9 +3,12 @@
  */
 package saiwei.model;
 
+import java.util.Set;
+
 import javax.persistence.Column;
-import javax.persistence.FetchType;
-import javax.persistence.OneToOne;
+import javax.persistence.Entity;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import common.BaseModel;
 
@@ -13,6 +16,8 @@ import common.BaseModel;
  * @author sai
  *
  */
+@Entity
+@Table(name="theme",catalog="photosystem")
 public class Theme extends BaseModel {
 
 	/**
@@ -23,23 +28,23 @@ public class Theme extends BaseModel {
 	@Column(name="home_page")
 	private String home_page_url;
 	
-	@OneToOne(mappedBy="user",fetch=FetchType.LAZY)
-	private User user;
+	@OneToMany(mappedBy="theme")
+	private Set<User> users;
 
 	/**
 	 * 
 	 * getter and setter
 	 */
-	public User getUser() {
-		return user;
-	}
 	public String getHome_page_url() {
 		return home_page_url;
 	}
 	public void setHome_page_url(String home_page_url) {
 		this.home_page_url = home_page_url;
 	}
-	public void setUser(User user) {
-		this.user = user;
+	public Set<User> getUsers() {
+		return users;
+	}
+	public void setUsers(Set<User> users) {
+		this.users = users;
 	}
 }

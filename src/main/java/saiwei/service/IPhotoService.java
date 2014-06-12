@@ -35,4 +35,6 @@ public interface IPhotoService extends IServiceTemplate<IPhotoDAO, Photo> {
 	public boolean savePhotoWithPost(Post post,File[] files,String[] fileNames);
 	
 	public void photowriteToOutStream(Serializable id,OutputStream out) throws IOException;
+
+	public void ChromefilterInView(File image,OutputStream out);
 }

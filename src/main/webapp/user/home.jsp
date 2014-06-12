@@ -494,7 +494,8 @@
 		        		<label for='photo'>Photo</label>
 		        		<input type='file' name='image'>
 		        		<br>
-		        		<img width='558'>
+		        		<img name="origin" width='558'>
+		        		<button type="button" class="btn btn-primary" id="publish_bn">Chrome</button>
 		        	</div>
 		        </fieldset>
 		      </div>
@@ -592,7 +593,7 @@
 		};
 		
 		function imagechange(target){
-			var img = $(target).siblings('img');
+			var img = $(target).siblings("[name='origin']");
 			var flag = false;
 			if(!img.attr('src')){
 				flag = true;

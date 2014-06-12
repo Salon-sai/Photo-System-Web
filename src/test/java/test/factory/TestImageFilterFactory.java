@@ -20,7 +20,7 @@ public class TestImageFilterFactory {
 	
 	private static final Logger logger = Logger.getLogger(TestImageFilterFactory.class);
 	
-	@Test
+//	@Test
 	public void testChrome(){
 		logger.info("test begin");
 		try {
@@ -31,6 +31,19 @@ public class TestImageFilterFactory {
 			TestCase.fail();
 		}
 		
+	}
+	
+	@Test
+	public void testGrayFilter(){
+		logger.info("test begin");
+		try {
+			ImageFiltersFactory
+				.GrayscaleFilter("/home/sai/6597578840542108209.jpg", "/home/sai/6597578840542108209_gray.jpg");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("fail", e);
+			TestCase.fail();
+		}
 	}
 	
 }

@@ -40,6 +40,7 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	private String[] imageContentType;
 	private String content;
 	private Map<String,Object> session;
+	private String filterType;
 	private IPostService postService;
 	private IPhotoService photoService;
 	
@@ -84,5 +85,8 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	}
 	public void setContent(String content) {
 		this.content = content;
+	}
+	public void setFilterType(String filterType) {
+		this.filterType = filterType;
 	}
 }

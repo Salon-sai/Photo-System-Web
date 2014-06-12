@@ -22,8 +22,8 @@ import saiwei.dao.IPhotoDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
 import saiwei.service.IPhotoService;
-
 import common.AbstractTemplateService;
+import common.factory.ImageFiltersFactory;
 import common.factory.ImageUtils;
 import common.factory.OSInfo;
 import common.factory.StringFactory;
@@ -206,6 +206,11 @@ public class PhotoServiceImpl extends
 		return photos;
 	}
 	
+	public List<Photo> savePhotosByList(File[] files,String[] fileNames,String filterType){
+		
+		return null;
+	}
+	
 	/**
 	 * 
 	 * @param Filepath
@@ -329,5 +334,12 @@ public class PhotoServiceImpl extends
 		is.close();
 	}
 	
-	
+	public void ChromefilterInView(File image,OutputStream out){
+		try {
+			ImageFiltersFactory.ChromeFilter(image, out);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			logger.error("fail to make filter",e);
+		}
+	}
 }

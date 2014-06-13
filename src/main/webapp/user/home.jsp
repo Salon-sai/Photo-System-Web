@@ -495,7 +495,18 @@
 		        		<input type='file' name='image'>
 		        		<br>
 		        		<img name="origin" width='558'>
-		        		<button type="button" class="btn btn-primary" id="publish_bn">Chrome</button>
+		        		<div class="col-lg-6">
+						    <div class="input-group" style="float: left;">
+						      <span class="input-group-addon" style="width: 40px">
+						        <input name="filterType" type="radio" value="gray">Gray
+						      </span>
+						    </div><!-- /input-group -->
+						    <div class="input-group" style="float: left;">
+						      <span class="input-group-addon" style="width: 40px">
+						        <input name="filterType" type="radio" value="chrome">chrome
+						      </span>
+						    </div><!-- /input-group -->
+					  	</div><!-- /.col-lg-6 -->
 		        	</div>
 		        </fieldset>
 		      </div>
@@ -626,17 +637,19 @@
     		});
     		
     		$('#publish_bn').click(function(){
-      			$.ajaxFileUpload(
+/*     			var radio = $("[name='filterType']").val();
+    			alert(radio); */
+       			$.ajaxFileUpload(
     					{
     						url : '${pageContext.request.contextPath }/publish/publishPost.action',
-    						fileElementId : 'image',
+    						fileElementId : ['image','filterType'],
     						dataType : 'json',
     						success : function(data, status){
     							requestMessage('success');
     						}
     					});
       				requestMessage('success');
-    		});
+    		}); 
     	});
     </script>
   	<script src="../home_ui/js/core.js" type="text/javascript"></script>

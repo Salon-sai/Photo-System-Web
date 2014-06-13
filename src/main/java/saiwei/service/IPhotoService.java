@@ -20,15 +20,15 @@ import common.IServiceTemplate;
  */
 public interface IPhotoService extends IServiceTemplate<IPhotoDAO, Photo> {
 
-	public String zoomImagestand(String imagePath);
+	public File zoomImagestand(String imagePath);
 	
 	public String saveToDisk(File file,String fileName);
 	
 	public void saveToDB(Photo photo);
 	
-	public String zoomPhoto(String imagePath, int width, int height);
+	public File zoomPhoto(String imagePath, int width, int height);
 	
-	public List<Photo> savePhotosByList(File[] files,String[] fileNames);
+	public List<Photo> savePhotosByList(File[] files,String[] fileNames,String filterType) throws Exception;
 	
 	public boolean deletephoto(String photoId);
 	

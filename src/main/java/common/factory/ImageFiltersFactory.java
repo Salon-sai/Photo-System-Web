@@ -25,11 +25,11 @@ public class ImageFiltersFactory {
 	 * @param dest
 	 * @throws IOException 
 	 */
-	public static void ChromeFilter(String src,String dest) throws IOException{
-		ImageFiltersFactory.ChromeFilter(new File(src), new File(dest));
+	public static void chromeFilter(String src,String dest) throws IOException{
+		ImageFiltersFactory.chromeFilter(new File(src), new File(dest));
 	}
 	
-	public static void ChromeFilter(File srcImageFile,File targetImageFile) throws IOException{
+	public static void chromeFilter(File srcImageFile,File targetImageFile) throws IOException{
 		BufferedImage srcimage = ImageIO.read(srcImageFile);
 		BufferedImage chromeImage = null;
 		
@@ -40,7 +40,7 @@ public class ImageFiltersFactory {
 		ImageIO.write(chromeImage, "jpg", targetImageFile);
 	}
 	
-	public static void ChromeFilter(File srcImageFile,OutputStream out) throws IOException{
+	public static void chromeFilter(File srcImageFile,OutputStream out) throws IOException{
 		BufferedImage srcimage = ImageIO.read(srcImageFile);
 		BufferedImage chromeImage = null;
 		
@@ -51,9 +51,9 @@ public class ImageFiltersFactory {
 		ImageIO.write(chromeImage, "jpg", out);
 	}
 	
-	public static void GrayscaleFilter(String src,String target) throws IOException{
+	public static void grayscaleFilter(String src,String target) throws IOException{
 		String format = StringFactory.getFileNamesuffix(src);
-		ImageFiltersFactory.GrayscaleFilter(new File(src), new File(target), format);
+		ImageFiltersFactory.grayscaleFilter(new File(src), new File(target), format);
 	}
 	
 	/**
@@ -63,14 +63,14 @@ public class ImageFiltersFactory {
 	 * @param format
 	 * @throws IOException
 	 */
-	public static void GrayscaleFilter(File srcImageFile,File targetImageFile,String format) throws IOException{
+	public static void grayscaleFilter(File srcImageFile,File targetImageFile,String format) throws IOException{
 		BufferedImage originalPic = ImageIO.read(srcImageFile);
 		int width = originalPic.getWidth();
 		int height = originalPic.getHeight();
 		
 		BufferedImage newPic = new BufferedImage(width, height, BufferedImage.TYPE_3BYTE_BGR);
 		ColorConvertOp cco = new ColorConvertOp(ColorSpace
-				.getInstance(ColorSpace.CS_GRAY	), null);
+				.getInstance(ColorSpace.CS_GRAY), null);
 		
 		cco.filter(originalPic, newPic);
 		

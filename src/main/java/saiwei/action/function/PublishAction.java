@@ -52,7 +52,13 @@ public class PublishAction extends ActionSupport implements SessionAware{
 						params={"excludeNullProperties","ture"})})
 	public String publishpost(){
 		User user = (User)session.get("user");
-		Set<Photo> photos = new HashSet<Photo>(photoService.savePhotosByList(image, imageFileName));
+		Set<Photo> photos = null;
+		try {
+			photos = new HashSet<Photo>(photoService.savePhotosByList(image, imageFileName,filterType));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		Post post = new Post();
 		post.setContent(content);
 		postService.save(post, user.getIdNumber(), photos);

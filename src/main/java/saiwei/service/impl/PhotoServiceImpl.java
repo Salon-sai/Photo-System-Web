@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -87,7 +88,7 @@ public class PhotoServiceImpl extends
 	 * 		source image file path
 	 * 
 	 */
-	public String zoomImagestand(String imagePath){
+	public File zoomImagestand(String imagePath){
 		return this.zoomPhoto(imagePath, CUT_WIDTH, CUT_HEIGHT);
 //		String suffix = StringFactory.getFileNamesuffix(imagePath);
 //		String newImagePath = null;
@@ -149,7 +150,7 @@ public class PhotoServiceImpl extends
 	 * 		the height of photo you want
 	 * @return
 	 */
-	public String zoomPhoto(String imagePath, int width, int height){
+	public File zoomPhoto(String imagePath, int width, int height){
 		String suffix = StringFactory.getFileNamesuffix(imagePath);
 		String newImagePath = this.filePathchange(imagePath, width, height);
 		File newImage = new File(newImagePath);
@@ -161,7 +162,7 @@ public class PhotoServiceImpl extends
 		try {
 			if(ImageUtils.scale(oldImage, newImage, width, height, suffix)){
 //		if(ImageFactory.zoomImage(imagePath, newImagePath, width, height)){
-				return newImagePath;
+				return newImage;
 			}else
 				return null;
 		} catch (IOException e) {
@@ -186,9 +187,15 @@ public class PhotoServiceImpl extends
 	 * @param fileName
 	 * 		file name list,but exclude file path.
 	 * @return photos
+	 * @throws ClassNotFoundException 
+	 * @throws SecurityException 
+	 * @throws NoSuchMethodException 
+	 * @throws InvocationTargetException 
+	 * @throws IllegalArgumentException 
+	 * @throws IllegalAccessException 
 	 * 		
 	 */
-	public List<Photo> savePhotosByList(File[] files,String[] fileNames){
+	public List<Photo> savePhotosByList(File[] files,String[] fileNames,String filterType) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
 		List<Photo> photos = new ArrayList<Photo>();
 		for(int i  = 0; i < fileNames.length;i++){
 			Photo photo = new Photo();
@@ -198,17 +205,18 @@ public class PhotoServiceImpl extends
 			String fileSerializableName = StringFactory.MergerString(photo.getId(),".",suffix);
 			
 			String filepath = this.saveToDisk(files[i], fileSerializableName);
-			String modifyFilepath = this.zoomImagestand(filepath);
+//			String modifyFilepath = this.zoomImagestand(filepath).getAbsolutePath();
+			File modifyFile = this.zoomImagestand(filepath);
+			
+			ImageFiltersFactory.class.getMethod(
+					StringFactory.MergerString(filterType,"Filter"),
+					new Class[]{File.class,File.class,String.class})
+					.invoke(null, modifyFile,modifyFile,suffix);
 			photo.setOriginalPhotoURL(filepath);
-			photo.setAutomodifyPhotoURL(modifyFilepath);
+			photo.setAutomodifyPhotoURL(modifyFile.getAbsolutePath());
 			photos.add(photo);
 		}
 		return photos;
-	}
-	
-	public List<Photo> savePhotosByList(File[] files,String[] fileNames,String filterType){
-		
-		return null;
 	}
 	
 	/**
@@ -275,7 +283,7 @@ public class PhotoServiceImpl extends
 			String AUTOGeneratefileName = StringFactory.MergerString(fileNames[i],suffix);
 			
 			String sourcePath = this.saveToDisk(files[i], AUTOGeneratefileName);
-			String modifyFilepath = this.zoomImagestand(sourcePath);
+			String modifyFilepath = this.zoomImagestand(sourcePath).getAbsolutePath();
 			
 			photo.setOriginalPhotoURL(sourcePath);
 			photo.setAutomodifyPhotoURL(modifyFilepath);
@@ -336,7 +344,7 @@ public class PhotoServiceImpl extends
 	
 	public void ChromefilterInView(File image,OutputStream out){
 		try {
-			ImageFiltersFactory.ChromeFilter(image, out);
+			ImageFiltersFactory.chromeFilter(image, out);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("fail to make filter",e);

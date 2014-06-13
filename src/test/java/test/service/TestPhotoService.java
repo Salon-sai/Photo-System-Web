@@ -31,7 +31,7 @@ public class TestPhotoService extends CommonTester {
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		String path = photoService.zoomImagestand("C:"+File.separator+"Users"
 				+File.separator+"sai"+File.separator+"Desktop"+
-				File.separator+"DSC01543.JPG");
+				File.separator+"DSC01543.JPG").getAbsolutePath();
 		if(path == null){
 			TestCase.fail("is null");
 		}else if(!(new File(path).exists())){
@@ -44,7 +44,7 @@ public class TestPhotoService extends CommonTester {
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		String path = photoService.zoomImagestand("C:"+File.separator+"Users"
 				+File.separator+"sai"+File.separator+"Desktop"+
-				File.separator+"DSC01543.JPG");
+				File.separator+"DSC01543.JPG").getAbsolutePath();
 	}
 	
 	/**

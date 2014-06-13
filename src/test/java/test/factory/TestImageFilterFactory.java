@@ -24,7 +24,7 @@ public class TestImageFilterFactory {
 	public void testChrome(){
 		logger.info("test begin");
 		try {
-			ImageFiltersFactory.ChromeFilter("/home/sai/1384480949246.jpg", "/home/sai/1384480949246_chrome.jpg");
+			ImageFiltersFactory.chromeFilter("/home/sai/1384480949246.jpg", "/home/sai/1384480949246_chrome.jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("fail", e);
@@ -38,7 +38,7 @@ public class TestImageFilterFactory {
 		logger.info("test begin");
 		try {
 			ImageFiltersFactory
-				.GrayscaleFilter("/home/sai/6597578840542108209.jpg", "/home/sai/6597578840542108209_gray.jpg");
+				.grayscaleFilter("/home/sai/6597578840542108209.jpg", "/home/sai/6597578840542108209_gray.jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("fail", e);

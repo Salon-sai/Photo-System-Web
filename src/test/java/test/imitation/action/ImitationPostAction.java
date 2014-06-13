@@ -38,7 +38,14 @@ public class ImitationPostAction extends CommonTester {
 		File[] files = {new File("C:/Users/sai/Desktop/1860268121180814475.jpg"),new File("C:/Users/sai/Desktop/2254896038529372747.jpg")};
 		String[] fileNames = {"1860268121180814475.jpg","2254896038529372747.jpg"};
 		
-		Set<Photo> photos = new HashSet<Photo>(photoService.savePhotosByList(files, fileNames));
+		Set<Photo> photos = null;
+		try {
+			photos = new HashSet<Photo>(photoService.savePhotosByList(files, fileNames,null));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			TestCase.fail("can not save");
+		}
 		
 		postService.save(post, "a", photos);
 		
@@ -47,14 +54,14 @@ public class ImitationPostAction extends CommonTester {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void deletePost(){
 		IPostService postService = (IPostService)context.getBean("postService");
-		Post post = postService.get("ff8081814666dde3014666ddeb820001", Post.class);
+		Post post = postService.get("ff8081814692d09e014692d14d8a0001", Post.class);
 		postService.delete(post);
 	}
 	
-//	@Test
+	@Test
 	public void testsavePostInLinux(){
 		IPostService postService = (IPostService)context.getBean("postService");
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
@@ -62,10 +69,17 @@ public class ImitationPostAction extends CommonTester {
 		post.setContent("Test post context with English,测试post提交中文aaaaa");
 		logger.info(post.getContent().getBytes());
 		
-		File[] files = {new File("/home/sai/1384480949246.jpg")};
-		String[] fileNames = {"1384480949246.jpg"};
+		File[] files = {new File("/home/sai/6597578840542108209.jpg")};
+		String[] fileNames = {"6597578840542108209.jpg"};
 		
-		Set<Photo> photos = new HashSet<Photo>(photoService.savePhotosByList(files, fileNames));
+		Set<Photo> photos = null;
+		try {
+			photos = new HashSet<Photo>(photoService
+					.savePhotosByList(files, fileNames,"grayscale"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		postService.save(post, "b", photos);
 		

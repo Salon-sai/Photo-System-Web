@@ -26,7 +26,7 @@ public class TestPhotoService extends CommonTester {
 	 * Tester test photoService generate photo of fit scale.
 	 * If the path is null or not exists , Test  is fail;
 	 */
-	@Test
+//	@Test
 	public void testzoomphoto(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		String path = photoService.zoomImagestand("C:"+File.separator+"Users"
@@ -39,7 +39,7 @@ public class TestPhotoService extends CommonTester {
 		}
 	}
 	
-	@Test
+//	@Test
 	public void testcrop(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
 		String path = photoService.zoomImagestand("C:"+File.separator+"Users"
@@ -63,10 +63,10 @@ public class TestPhotoService extends CommonTester {
 		}
 	}
 	
-//	@Test
+	@Test
 	public void testDeletePhoto(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
-		boolean flag = photoService.deletephoto("8a8a1f79456a99d701456a99df530002");
+		boolean flag = photoService.deletephoto("ff808181469eb48e01469eb53fbe0000");
 		TestCase.assertEquals(true, flag);
 	}
 	

@@ -15,5 +15,5 @@ import common.IDAOTemplate;
  */
 public interface IUserDAO extends IDAOTemplate<User> {
 
-	public Profile updateProfileByUser(Map<String, Object> params,String IdNumber);
+	public Profile updateProfileByUser(Map<String, Object> params,User user);
 }

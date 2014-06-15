@@ -29,14 +29,21 @@ import common.factory.StringFactory;
 @Repository("userDAO")
 public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
 	
+	@SuppressWarnings("unused")
 	private static final Class<?> classType = User.class;
 	
-	public Profile updateProfileByUser(Map<String, Object> params,String IdNumber){
+	public Profile updateProfileByUser(Map<String, Object> params,User user){
 		Session session = sessionFactory.getCurrentSession();
-		Criteria criteria = session.createCriteria(classType);
-		criteria.add(Restrictions.eq("IdNumber", IdNumber));
-		User user = (User)criteria.list().get(0);
+//		Criteria criteria = session.createCriteria(classType);
+//		criteria.add(Restrictions.eq("IdNumber", IdNumber));
+//		User user = (User)criteria.list().get(0);
 		Profile profile = user.getProfile();
+		if(profile.getHead_photo() != null && params.get("photo") != null){
+			session.delete(profile.getHead_photo());
+		}
+		if(params.get("name") != null){
+			user.setName((String)params.get("name"));
+		}
 		try{
 			for(String key : params.keySet()){
 				if(params.get(key) != null){
@@ -49,7 +56,6 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		session.saveOrUpdate(user);
 		return profile;
 	}
 	

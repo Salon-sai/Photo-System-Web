@@ -38,4 +38,6 @@ public interface IDAOTemplate<E> {
 	public List<?> findByPropertiesInCriteria(Map<String,Object> params,Class<?> classType);
 	
 	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType);
+	
+	public void lock(E e);
 }

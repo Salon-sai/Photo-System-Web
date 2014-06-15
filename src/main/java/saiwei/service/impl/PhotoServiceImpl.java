@@ -9,7 +9,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -23,6 +22,7 @@ import saiwei.dao.IPhotoDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
 import saiwei.service.IPhotoService;
+
 import common.AbstractTemplateService;
 import common.factory.ImageFiltersFactory;
 import common.factory.ImageUtils;
@@ -125,7 +125,7 @@ public class PhotoServiceImpl extends
 		}
 		newImagePath = StringFactory.builderMergeredBefore(stringbuffer,File.separator,
 				StringFactory.getFileNameWithNosuffix(imagePath.substring(imagePath.lastIndexOf(File.separator)+1))
-				,Integer.toString(HEAD_PHOTO_HEIGHT),"_",Integer.toString(HEAD_PHOTO_WIDTH),suffix);
+				,Integer.toString(HEAD_PHOTO_HEIGHT),"_",Integer.toString(HEAD_PHOTO_WIDTH),".",suffix);
 		
 		try {
 			if(ImageUtils.scale(imagePath, newImagePath, HEAD_PHOTO_WIDTH, HEAD_PHOTO_HEIGHT, suffix)){
@@ -187,36 +187,72 @@ public class PhotoServiceImpl extends
 	 * @param fileName
 	 * 		file name list,but exclude file path.
 	 * @return photos
-	 * @throws ClassNotFoundException 
-	 * @throws SecurityException 
-	 * @throws NoSuchMethodException 
-	 * @throws InvocationTargetException 
-	 * @throws IllegalArgumentException 
-	 * @throws IllegalAccessException 
+	 * @throws Exception 
 	 * 		
 	 */
-	public List<Photo> savePhotosByList(File[] files,String[] fileNames,String filterType) throws NoSuchMethodException, SecurityException, IllegalAccessException, IllegalArgumentException, InvocationTargetException{
+	public List<Photo> savePhotosByList(File[] files,String[] fileNames,String filterType) throws Exception{
 		List<Photo> photos = new ArrayList<Photo>();
 		for(int i  = 0; i < fileNames.length;i++){
-			Photo photo = new Photo();
-			dao.save(photo);
+//			Photo photo = new Photo();
+//			dao.save(photo);
 			
-			String suffix = StringFactory.getFileNamesuffix(fileNames[i]);
-			String fileSerializableName = StringFactory.MergerString(photo.getId(),".",suffix);
-			
-			String filepath = this.saveToDisk(files[i], fileSerializableName);
+//			String suffix = StringFactory.getFileNamesuffix(fileNames[i]);
+//			String fileSerializableName = StringFactory.MergerString(photo.getId(),".",suffix);
+//			
+//			String filepath = this.saveToDisk(files[i], fileSerializableName);
 //			String modifyFilepath = this.zoomImagestand(filepath).getAbsolutePath();
-			File modifyFile = this.zoomImagestand(filepath);
-			
+//			File modifyFile = this.zoomImagestand(filepath);
+//			
+//			if(filterType != null){
+//				ImageFiltersFactory.class.getMethod(
+//						StringFactory.MergerString(filterType,"Filter"),
+//						new Class[]{File.class,File.class,String.class})
+//						.invoke(null, modifyFile,modifyFile,suffix);
+//			}
+//			photo.setOriginalPhotoURL(filepath);
+//			photo.setAutomodifyPhotoURL(modifyFile.getAbsolutePath());
+			Photo photo = this.savePhoto(files[i], fileNames[i], filterType);
+			photos.add(photo);
+		}
+		return photos;
+	}
+	
+	public Photo savePhoto(File image,String fileName,String filterType) throws Exception{
+		Photo photo = new Photo();
+		dao.save(photo);
+		
+		String suffix = StringFactory.getFileNamesuffix(fileName);
+		String fileSerializableName = StringFactory.MergerString(photo.getId(),".",suffix);
+		
+		String filepath = this.saveToDisk(image, fileSerializableName);
+//		String modifyFilepath = this.zoomImagestand(filepath).getAbsolutePath();
+		File modifyFile = this.zoomImagestand(filepath);
+		
+		if(filterType != null){
 			ImageFiltersFactory.class.getMethod(
 					StringFactory.MergerString(filterType,"Filter"),
 					new Class[]{File.class,File.class,String.class})
 					.invoke(null, modifyFile,modifyFile,suffix);
-			photo.setOriginalPhotoURL(filepath);
-			photo.setAutomodifyPhotoURL(modifyFile.getAbsolutePath());
-			photos.add(photo);
 		}
-		return photos;
+		photo.setOriginalPhotoURL(filepath);
+		photo.setAutomodifyPhotoURL(modifyFile.getAbsolutePath());
+		return photo;
+	}
+	
+	public Photo saveHeadPhoto(File image,String fileName) throws Exception{
+		Photo photo = new Photo();
+		dao.save(photo);
+		
+		String suffix = StringFactory.getFileNamesuffix(fileName);
+		String fileSerializableName = StringFactory.MergerString(photo.getId(),".",suffix);
+		
+		String filepath = this.saveToDisk(image, fileSerializableName);
+//		String modifyFilepath = this.zoomImagestand(filepath).getAbsolutePath();
+		String modifypath = this.zoomtoHeadPhoto(filepath);
+		
+		photo.setOriginalPhotoURL(filepath);
+		photo.setAutomodifyPhotoURL(modifypath);
+		return photo;
 	}
 	
 	/**

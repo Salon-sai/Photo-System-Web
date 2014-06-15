@@ -653,7 +653,6 @@
     	});
     </script>
   	<script src="../home_ui/js/core.js" type="text/javascript"></script>
-	<script src="../home_ui/js/pt_page_newpublish_dashboardnew.js" type="text/javascript"></script>
 
 	<iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;"></iframe>
 	<div id="GOOGLE_INPUT_CHEXT_FLAG" input="null" input_stat="{&quot;tlang&quot;:null,&quot;tsbc&quot;:null,&quot;pun&quot;:null,&quot;mk&quot;:false,&quot;ss&quot;:true}" style="display: none;"></div>

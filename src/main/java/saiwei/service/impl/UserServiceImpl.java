@@ -3,6 +3,7 @@
  */
 package saiwei.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import saiwei.bean.PostBean;
 import saiwei.dao.IUserDAO;
+import saiwei.model.Photo;
 import saiwei.model.Post;
 import saiwei.model.Profile;
 import saiwei.model.User;
@@ -66,13 +68,28 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	}
 	
 	
-	public Profile saveOrupdateProfile(String email,String name,String location,String company,String IdNumber){
+	public Profile saveOrupdateProfile(String email,String name,
+			String location,String company,Photo photo,User user){
+		dao.saveOrUpdate(user);
+		Photo oldPhoto = user.getProfile().getHead_photo();
+		if(oldPhoto != null){
+			String OriginalPhotoURL = oldPhoto.getOriginalPhotoURL();
+			String modifyPhotoURL = oldPhoto.getAutomodifyPhotoURL();
+			if(OriginalPhotoURL != null){
+				File originalphoto = new File(OriginalPhotoURL);
+				originalphoto.delete();
+				File modifyPhoto = new File(modifyPhotoURL);
+				modifyPhoto.delete();
+			}
+		}
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("e_mail", email);
 		params.put("name", name);
 		params.put("location", location);
 		params.put("company", company);
-		return dao.updateProfileByUser(params, IdNumber);
+		params.put("head_photo", photo);
+
+		return dao.updateProfileByUser(params, user);
 	}
 	
 	/**

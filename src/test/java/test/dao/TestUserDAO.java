@@ -16,7 +16,7 @@ public class TestUserDAO extends CommonTester{
 		params.put("email", "aaa@1.com");
 		params.put("name", "bb");
 		IUserService userService = (IUserService)context.getBean("userService");
-		userService.saveOrupdateProfile("aa@1.com", "bb", null, null, "a");
+		userService.saveOrupdateProfile("", "", null, null, null, null);
 	}
 	
 }

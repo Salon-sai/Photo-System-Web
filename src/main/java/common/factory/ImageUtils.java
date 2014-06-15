@@ -75,6 +75,9 @@ public class ImageUtils {
 		Graphics graphics = targetImage.getGraphics();
 		graphics.drawImage(image, 0, 0, null);
 		graphics.dispose();
+		if(!targetImageFile.getParentFile().exists()){
+			targetImageFile.getParentFile().mkdirs();
+		}
 		flag = flag && ImageIO.write(targetImage, suffix, targetImageFile);
 		return flag;
 	}

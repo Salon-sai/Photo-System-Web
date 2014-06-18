@@ -48,12 +48,12 @@
     };
 
     function register_form(){
-    	$.post("${pageContext.request.contextPath }/user/userAction!register.action",
+    	$.post("${pageContext.request.contextPath }/user/register.action",
     			{registerNumberId : $('#registerID').val(),
     			registerName : $('#registerName').val(),
     			registerPassword : $('#registerPassword').val()},
     			function(returnData,status){
-    				
+    				window.location.href="${pageContext.request.contextPath }/sso/loginUser.action";
     			});
     };
     
@@ -78,7 +78,7 @@
      <form id="register_form" style="display:none">
          <p><input type="text" id="registerID" placeholder="ID"/></p>
          <p><input type="text" id="registerName" placeholder="Your name"/></p>
-         <p><input type="password" id="registerpassword" placeholder="Password"/></p>
+         <p><input type="password" id="registerPassword" placeholder="Password"/></p>
          <p><input type="password" id="registerrepassword" placeholder="password again"/></p>
          <p class="validate"></p>
          <p class="submit">

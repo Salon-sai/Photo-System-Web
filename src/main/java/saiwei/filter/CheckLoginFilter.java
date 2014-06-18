@@ -33,12 +33,14 @@ public class CheckLoginFilter implements Filter {
 		HttpServletResponse resp = (HttpServletResponse)response;
 		HttpSession session = req.getSession();
 		String url = req.getRequestURI();
-		if(url.endsWith("login.jsp") || url.endsWith("register")){
+		if(url.endsWith("login.jsp") || url.endsWith("register.action")){
 			chain.doFilter(request, response);
 			return ;
 		}else if(url.endsWith("user/")){
 			req.getRequestDispatcher("/user/home.jsp").forward(request, response);
 			return ;
+		}else if(url.endsWith("")){
+			
 		}
 		if(null != session.getAttribute("user")){
 			chain.doFilter(request, response);

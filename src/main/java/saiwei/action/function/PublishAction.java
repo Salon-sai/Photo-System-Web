@@ -61,7 +61,7 @@ public class PublishAction extends ActionSupport implements SessionAware{
 		Post post = new Post();
 		post.setContent(content);
 		postService.save(post, user.getIdNumber(), photos);
-		return SUCCESS;
+		return null;
 	}
 	
 	

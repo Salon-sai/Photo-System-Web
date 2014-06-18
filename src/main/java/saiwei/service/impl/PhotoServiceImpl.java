@@ -211,8 +211,10 @@ public class PhotoServiceImpl extends
 //			}
 //			photo.setOriginalPhotoURL(filepath);
 //			photo.setAutomodifyPhotoURL(modifyFile.getAbsolutePath());
-			Photo photo = this.savePhoto(files[i], fileNames[i], filterType);
-			photos.add(photo);
+			if(files[i] != null){
+				Photo photo = this.savePhoto(files[i], fileNames[i], filterType);
+				photos.add(photo);
+			}
 		}
 		return photos;
 	}

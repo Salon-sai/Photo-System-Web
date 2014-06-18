@@ -54,14 +54,14 @@ public class ImitationPostAction extends CommonTester {
 		}
 	}
 	
-//	@Test
+	@Test
 	public void deletePost(){
 		IPostService postService = (IPostService)context.getBean("postService");
-		Post post = postService.get("ff8081814692d09e014692d14d8a0001", Post.class);
+		Post post = postService.get("ff80818146ae52130146ae53a4da0004", Post.class);
 		postService.delete(post);
 	}
 	
-	@Test
+//	@Test
 	public void testsavePostInLinux(){
 		IPostService postService = (IPostService)context.getBean("postService");
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");

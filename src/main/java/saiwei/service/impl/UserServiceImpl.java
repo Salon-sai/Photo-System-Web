@@ -118,9 +118,9 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	 * @return
 	 */
 	public List<PostBean> getOwnPosts(User user){
-		dao.saveOrUpdate(user);
+		User persistent = dao.merge(user);
 		List<PostBean> postbeans = new ArrayList<PostBean>();
-		Iterator<Post> posts = user.getOwn_posts().iterator();
+		Iterator<Post> posts = persistent.getOwn_posts().iterator();
 		int i = 0;
 		while(i < 10 && posts.hasNext()){
 			PostBean bean = new PostBean(posts.next());

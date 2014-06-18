@@ -614,7 +614,7 @@
 			if(objurl && flag){
 				var id = $(target).parent().attr('id');
 				var html = $(target).parent().prop('outerHTML');
-				createphotoDIV(html,id);
+				/* createphotoDIV(html,id); */
 				img.attr('src',objurl);
 			}else if(objurl){
 				img.attr('src',objurl);
@@ -640,16 +640,18 @@
 /*     			var radio = $("[name='filterType']").val();
     			alert(radio); */
        			$.ajaxFileUpload(
-    					{
+    					{/* ${pageContext.request.contextPath }/publish/publishPost.action */
     						url : '${pageContext.request.contextPath }/publish/publishPost.action',
-    						fileElementId : ['image','filterType'],
+    						fileElementId : ['image'],
     						dataType : 'json',
+    						data: {filterType : $("[name='filterType']").val()},
     						success : function(data, status){
     							requestMessage('success');
+    							$('#public_text').find('.close').trigger('click');
     						}
-    					});
-      				requestMessage('success');
-    		}); 
+    					}); 
+    		});
+    		
     	});
     </script>
   	<script src="../home_ui/js/core.js" type="text/javascript"></script>

@@ -12,8 +12,9 @@ public class TestAction {
 	
 	private static final Logger logger = Logger.getLogger(TestAction.class);
 	
-	public void test(){
+	public String test(){
 		logger.info("invoke testAction");
+		return null;
 	}
 	
 	

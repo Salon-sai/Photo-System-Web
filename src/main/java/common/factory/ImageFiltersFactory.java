@@ -51,9 +51,9 @@ public class ImageFiltersFactory {
 		ImageIO.write(chromeImage, "jpg", out);
 	}
 	
-	public static void grayscaleFilter(String src,String target) throws IOException{
+	public static void grayFilter(String src,String target) throws IOException{
 		String format = StringFactory.getFileNamesuffix(src);
-		ImageFiltersFactory.grayscaleFilter(new File(src), new File(target), format);
+		ImageFiltersFactory.grayFilter(new File(src), new File(target), format);
 	}
 	
 	/**
@@ -63,7 +63,7 @@ public class ImageFiltersFactory {
 	 * @param format
 	 * @throws IOException
 	 */
-	public static void grayscaleFilter(File srcImageFile,File targetImageFile,String format) throws IOException{
+	public static void grayFilter(File srcImageFile,File targetImageFile,String format) throws IOException{
 		BufferedImage originalPic = ImageIO.read(srcImageFile);
 		int width = originalPic.getWidth();
 		int height = originalPic.getHeight();

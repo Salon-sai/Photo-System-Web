@@ -38,7 +38,7 @@ public class TestImageFilterFactory {
 		logger.info("test begin");
 		try {
 			ImageFiltersFactory
-				.grayscaleFilter("/home/sai/6597578840542108209.jpg", "/home/sai/6597578840542108209_gray.jpg");
+				.grayFilter("/home/sai/6597578840542108209.jpg", "/home/sai/6597578840542108209_gray.jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("fail", e);

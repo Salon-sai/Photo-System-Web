@@ -24,7 +24,7 @@ public class TestImageFilterFactory {
 	public void testChrome(){
 		logger.info("test begin");
 		try {
-			ImageFiltersFactory.chromeFilter("/home/sai/1384480949246.jpg", "/home/sai/1384480949246_chrome.jpg");
+			ImageFiltersFactory.chromeFilter("/home/sai/1384480949246.jpg", "/home/sai/1384480949246_chrome.jpg","jpg");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			logger.error("fail", e);

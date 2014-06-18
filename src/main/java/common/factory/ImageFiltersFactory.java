@@ -25,11 +25,11 @@ public class ImageFiltersFactory {
 	 * @param dest
 	 * @throws IOException 
 	 */
-	public static void chromeFilter(String src,String dest) throws IOException{
-		ImageFiltersFactory.chromeFilter(new File(src), new File(dest));
+	public static void chromeFilter(String src,String dest,String format) throws IOException{
+		ImageFiltersFactory.chromeFilter(new File(src), new File(dest),format);
 	}
 	
-	public static void chromeFilter(File srcImageFile,File targetImageFile) throws IOException{
+	public static void chromeFilter(File srcImageFile,File targetImageFile,String format) throws IOException{
 		BufferedImage srcimage = ImageIO.read(srcImageFile);
 		BufferedImage chromeImage = null;
 		
@@ -37,7 +37,7 @@ public class ImageFiltersFactory {
 		
 		chromeImage = chromeFilter.filter(srcimage, chromeImage);
 		
-		ImageIO.write(chromeImage, "jpg", targetImageFile);
+		ImageIO.write(chromeImage, format, targetImageFile);
 	}
 	
 	public static void chromeFilter(File srcImageFile,OutputStream out) throws IOException{

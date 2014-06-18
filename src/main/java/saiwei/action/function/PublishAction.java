@@ -37,7 +37,6 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	
 	private File[] image;
 	private String[] imageFileName;
-	private String[] imageContentType;
 	private String content;
 	private Map<String,Object> session;
 	private String filterType;
@@ -79,9 +78,6 @@ public class PublishAction extends ActionSupport implements SessionAware{
 	}
 	public void setImageFileName(String[] imageFileName) {
 		this.imageFileName = imageFileName;
-	}
-	public void setImageContentType(String[] imageContentType) {
-		this.imageContentType = imageContentType;
 	}
 	public void setPostService(IPostService postService) {
 		this.postService = postService;

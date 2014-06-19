@@ -15,13 +15,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 import saiwei.bean.PostBean;
+import saiwei.bean.UserBean;
 import saiwei.dao.IUserDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
 import saiwei.model.Profile;
 import saiwei.model.User;
 import saiwei.service.IUserService;
-
 import common.AbstractTemplateService;
 import common.factory.MD5Factory;
 
@@ -128,5 +128,10 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 			i++;
 		}
 		return postbeans;
+	}
+	
+	public List<UserBean> searchUser(String userName){
+		
+		return null;
 	}
 }

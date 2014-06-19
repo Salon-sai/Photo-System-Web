@@ -19,7 +19,7 @@ public abstract class BaseModelHasName extends BaseModel {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="name")
-	private String Name;
+	protected String Name;
 
 	public String getName() {
 		return Name;

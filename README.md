@@ -35,6 +35,7 @@ Photo-System-Web
 
 当中调用GraphicsMagick进行图片处理。
 
+2、hough 算法支持 进行图像倾斜纠正
 
 待续.....
 ================

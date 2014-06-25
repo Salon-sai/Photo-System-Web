@@ -21,9 +21,9 @@ import saiwei.dao.IUserDAO;
 import saiwei.model.Photo;
 import saiwei.model.Post;
 import saiwei.model.Profile;
+import saiwei.model.RelationShip;
 import saiwei.model.User;
 import saiwei.service.IUserService;
-
 import common.AbstractTemplateService;
 import common.factory.MD5Factory;
 
@@ -132,13 +132,21 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	 * @param userName
 	 * @return
 	 */
-	public List<UserBean> searchUser(String usernameKey){
+	public List<UserBean> searchUser(String usernameKey,User searcher){
+		searcher = dao.merge(searcher);
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("name", usernameKey);
 		List<User> users = dao.userFindLikeprofile(params);
 		List<UserBean> beans = new ArrayList<UserBean>();
 		for(User user : users){
 			UserBean bean = new UserBean(user);
+			Set<RelationShip> relationships = user.getLinked_relationship();
+			for(RelationShip relationship : relationships){
+				if(relationship.getFounder().equals(searcher)){
+					bean.setFollowingBewteenYour(true);
+					break;
+				}
+			}
 			beans.add(bean);
 		}
 		return beans;

@@ -14,6 +14,8 @@ public interface IDAOTemplate<E> {
 	public E findById(java.io.Serializable id,Class<?> classType) ;
 	
 	public E merge(E detachedInstance) ;
+	
+	public Object mergeAny(Object detachedInstance);
 
 	public void attachClean(E instance) ;
 	

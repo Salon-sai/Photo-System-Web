@@ -25,7 +25,16 @@
 				function(returnData,status){
 					alert(returnData.addflag);			
 				}
-			); 
+			);
+		});
+		
+		$("[name='remove_follow']").click(function(e){
+			$.post("${pageContext.request.contextPath }/relationship/removefollowing.action",
+				{IdNumber: $(this).prev().val()},
+				function(returnData,status){
+					alert(returnData.removeflag);
+				}
+			);
 		});
 	});
 </script>
@@ -111,7 +120,14 @@
 								</h4>
 								</div>
 								<input type="hidden" value="${user.idNumber }">
-								<button name="add_follow">添加关注</button>
+								<c:choose>
+									<c:when test="${user.followingBewteenYour }">
+										<button name="remove_follow">删除关注</button>
+									</c:when>
+									<c:otherwise>
+										<button name="add_follow">添加关注</button>
+									</c:otherwise>
+								</c:choose>
 							</li>
 	            		</c:forEach>
 	            	</ul>

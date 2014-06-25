@@ -16,6 +16,7 @@ import saiwei.model.Post;
 import saiwei.model.RelationShip;
 import saiwei.model.User;
 import saiwei.service.IRelationShipService;
+
 import common.AbstractTemplateService;
 
 /**
@@ -87,6 +88,17 @@ public class RelationShipServiceImpl extends
 			postbeans.add(bean);
 		}
 		return postbeans;
+	}
+	
+	/**
+	 * 
+	 * @param operator
+	 * @param Linker_IDNumber
+	 * @return
+	 */
+	public boolean deleteUserRelationship(User operator,String Linker_IDNumber){
+		operator = (User)dao.mergeAny(operator);
+		return dao.deleteRelationshipByUser(operator, Linker_IDNumber);
 	}
 	
 }

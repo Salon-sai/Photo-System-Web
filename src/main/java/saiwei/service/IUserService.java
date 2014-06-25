@@ -28,5 +28,5 @@ public interface IUserService extends IServiceTemplate<IUserDAO,User> {
 	
 	public List<PostBean> getOwnPosts(User user);
 
-	public List<UserBean> searchUser(String usernameKey);
+	public List<UserBean> searchUser(String usernameKey,User searcher);
 }

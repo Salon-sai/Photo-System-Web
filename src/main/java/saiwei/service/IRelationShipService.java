@@ -26,4 +26,6 @@ public interface IRelationShipService extends
 	public List<Post> findPostByRelationship(String userId,String relationshipType);
 	
 	public List<PostBean> getPostbyRelationship(String userId,String relationshipType);
+	
+	public boolean deleteUserRelationship(User operator,String Linker_IDNumber);
 }

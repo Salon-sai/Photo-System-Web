@@ -88,6 +88,10 @@ public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<
 		// TODO Auto-generated method stub
 		return (E) sessionFactory.getCurrentSession().merge(detachedInstance);
 	}
+	
+	public Object mergeAny(Object detachedInstance){
+		return sessionFactory.getCurrentSession().merge(detachedInstance);
+	}
 
 	/* (non-Javadoc)
 	 * @see commom.IDAOTemplate#attachClean(java.lang.Object)

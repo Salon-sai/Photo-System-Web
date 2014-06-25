@@ -29,6 +29,7 @@ public class RelationshipAction extends
 	private static final long serialVersionUID = 1L;
 	private String IdNumber;
 	private boolean addflag;
+	private boolean removeflag;
 	
 	@Action(value="addfollowing",results={
 			@Result(name=SUCCESS,type="json",params={"excludeNullProperties","ture"}),
@@ -38,6 +39,16 @@ public class RelationshipAction extends
 		User user = (User)session.get("user");
 		addflag = service.addrelationship(user.getIdNumber(), IdNumber, "following");
 		return addflag ? SUCCESS : INPUT;
+	}
+	
+	@Action(value="removefollowing",results={
+			@Result(name=SUCCESS,type="json",params={"excludeNullProperties","ture"}),
+			@Result(name=INPUT,type="json",params={"excludeNullProperties","ture"})
+	})
+	public String removefollow(){
+		User user = (User)session.get("user");
+		removeflag = service.deleteUserRelationship(user, IdNumber);
+		return SUCCESS;
 	}
 	
 	@Override
@@ -51,5 +62,8 @@ public class RelationshipAction extends
 	}
 	public boolean isAddflag() {
 		return addflag;
+	}
+	public boolean isRemoveflag() {
+		return removeflag;
 	}
 }

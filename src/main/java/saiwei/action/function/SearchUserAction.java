@@ -4,13 +4,16 @@
 package saiwei.action.function;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;
 import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
 
 import saiwei.bean.UserBean;
+import saiwei.model.User;
 import saiwei.service.IUserService;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -21,7 +24,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @ParentPackage("basePackage")
 @Namespace("/search")
-public class SearchUserAction extends ActionSupport {
+public class SearchUserAction extends ActionSupport implements SessionAware{
 
 	/**
 	 * 
@@ -31,13 +34,15 @@ public class SearchUserAction extends ActionSupport {
 	private String userKey;
 	private List<UserBean> userbeans;
 	private IUserService userService;
+	private Map<String, Object> session;
 
 	@Action(value="searchUser",results={
 		@Result(name=SUCCESS,location="/user/search.jsp"),
 		@Result(name=INPUT,location="/")
 	})
 	public String searchUser(){
-		userbeans = userService.searchUser(userKey);
+		User user = (User)session.get("user");
+		userbeans = userService.searchUser(userKey,user);
 		return SUCCESS;
 	}
 	
@@ -50,5 +55,8 @@ public class SearchUserAction extends ActionSupport {
 	}
 	public List<UserBean> getUserbeans() {
 		return userbeans;
+	}
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 }

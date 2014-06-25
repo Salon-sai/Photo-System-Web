@@ -118,4 +118,23 @@ public class RelationShipDAOImpl extends BaseDAO<RelationShip> implements
 		return posts;
 	}
 	
+	/**
+	 * 
+	 */
+	public boolean deleteRelationshipByUser(User operator,String linker_IDNumber){
+		try{
+			Session session = sessionFactory.getCurrentSession();
+			User linker = (User)UserDAOImpl.findByIdNum(session, linker_IDNumber);
+			Map<String,Object> params = new HashMap<String, Object>();
+			params.put("founder", operator);
+			params.put("linked_person", linker);
+			RelationShip relationShip = (RelationShip)this.uniqueElement(session, params, RELATIONSHIP);
+			this.delete(relationShip);
+		}catch(Exception e){
+			logger.error("fail delete relationship",e);
+			return false;
+		}
+		return true;
+		
+	}
 }

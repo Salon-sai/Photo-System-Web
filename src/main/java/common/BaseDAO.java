@@ -283,6 +283,26 @@ public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<
 	}
 	
 	/**
+	 * 
+	 * @param params
+	 * @param classType
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public List<E> EntityLikeBy(Map<String, Object> params,Class<?> classType){
+		Session session = sessionFactory.getCurrentSession();
+		Criteria criteria = session.createCriteria(classType);
+		List<E> list = null;
+		if(!params.isEmpty() && params != null){
+			for(String key : params.keySet()){
+				criteria.add(Restrictions.like(key, params.get(key)));
+			}
+			list = (List<E>)criteria.list();
+		}
+		return list;
+	}
+	
+	/**
 	 * getter and setter
 	 * @return
 	 */

@@ -40,4 +40,6 @@ public interface IDAOTemplate<E> {
 	public List<?> findByPropertiesInHql(Map<String,Object> params,String classType);
 	
 	public void lock(E e);
+	
+	public List<E> EntityLikeBy(Map<String, Object> params,Class<?> classType);
 }

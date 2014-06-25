@@ -29,7 +29,7 @@ public class Profile extends BaseModel {
 	@Column(name="name")
 	private String name;
 	
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade=CascadeType.ALL,fetch=FetchType.LAZY)
 	@JoinColumn(name="photo_id")
 	private Photo head_photo;
 	

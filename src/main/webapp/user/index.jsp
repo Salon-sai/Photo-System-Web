@@ -37,7 +37,7 @@
                     <div class="g-hdc">
                         <h1 class="m-title">
                             <a href="#">
-                                ${sessionScope.user.name }
+                                ${sessionScope.user.profile.name }
                             </a>
                         </h1>
                         <ul class="m-nav">

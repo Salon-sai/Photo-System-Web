@@ -59,7 +59,6 @@
 		<filter-name>struts2</filter-name>
 		<url-pattern>*.jsp</url-pattern>
 	</filter-mapping>
-
   
   <welcome-file-list>
     <welcome-file>login.jsp</welcome-file>

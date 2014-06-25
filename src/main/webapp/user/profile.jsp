@@ -38,7 +38,7 @@
 	    <h1 class="m-logo"><a href="LOFTER.html"></a></h1>
 	    <div class="m-nav" id="topbar">
 		        <ul class="nav1 tbtag">
-		            <li class="j-crt"><a rel="nofollow" href="${pageContext.request.contextPath }/user">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
+		            <li class="j-crt"><a rel="nofollow" href="${pageContext.request.contextPath }/user/home.jsp">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
 					<li class=""><a href="#">设置</a></li>
 					<li style="display:none;" id="arturl"><a target="_blank" rel="nofollow" href="http://www.lofter.com/art?act=qbart_20140403_09">ART</a><a target="_blank" href="http://www.lofter.com/art?act=qbart_20140403_09" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc">绘画</span></a></li>
 		            <li>

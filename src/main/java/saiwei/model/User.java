@@ -43,7 +43,7 @@ public class User extends BaseModelHasName {
 	@JoinColumn(name="profile_pk")
 	private Profile profile;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="theme_id")
 	private Theme theme;
 	
@@ -95,7 +95,7 @@ public class User extends BaseModelHasName {
 	@OneToMany(mappedBy="recipients")
 	private Set<Comment> receive_comments;
 	
-	@ManyToOne
+	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="type_id")
 	private UserType userType;
 	

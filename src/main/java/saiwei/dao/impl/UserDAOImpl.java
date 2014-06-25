@@ -46,7 +46,7 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
 		}
 		try{
 			for(String key : params.keySet()){
-				if(params.get(key) != null){
+				if(params.get(key) != null && params.get(key) != ""){
 					String methodName = StringFactory.buildSetterName(key);
 					Method setMethod = profile.getClass().getMethod(methodName, params.get(key).getClass());
 					setMethod.invoke(profile, params.get(key));

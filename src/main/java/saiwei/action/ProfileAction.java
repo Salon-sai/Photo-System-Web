@@ -43,7 +43,7 @@ public class ProfileAction extends BaseAction<Profile,IProfileService> {
 	private IPhotoService photoService;
 	
 	@Action(value="updateProfile",results={
-			@Result(name=SUCCESS,type="redirect",location="/user/")
+			@Result(name=SUCCESS,type="redirect",location="/user/home.jsp")
 	})
 	public String update(){
 		Photo photo = null;

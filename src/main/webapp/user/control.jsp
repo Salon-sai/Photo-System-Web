@@ -232,7 +232,7 @@ document.cookie = cookie;
 <div class="boprt a-control" style="top: 0px; opacity: 1;" id="control">
 	<ul>
 <li><form><a href="${pageContext.request.contextPath }/user/profile.jsp" class="boprt05" target="_top"><em>博客设置</em></a></form></li>
-<li><form><a href="${pageContext.request.contextPath }/user" class="boprt01" target="_top"><em>返回首页</em></a></form></li>
+<li><form><a href="${pageContext.request.contextPath }/user/home.jsp" class="boprt01" target="_top"><em>返回首页</em></a></form></li>
 
     </ul>
 </div>

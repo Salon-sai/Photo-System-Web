@@ -66,7 +66,7 @@ public class TestPhotoService extends CommonTester {
 	@Test
 	public void testDeletePhoto(){
 		IPhotoService photoService = (IPhotoService)context.getBean("photoService");
-		boolean flag = photoService.deletephoto("ff808181469eb48e01469eb53fbe0000");
+		boolean flag = photoService.deletephoto("ff80818146d167510146d16b75770002");
 		TestCase.assertEquals(true, flag);
 	}
 	

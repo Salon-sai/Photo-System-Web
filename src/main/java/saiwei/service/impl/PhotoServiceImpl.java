@@ -370,7 +370,12 @@ public class PhotoServiceImpl extends
 	 */
 	public void photowriteToOutStream(Serializable id,OutputStream out) throws IOException{
 		Photo photo = this.get(id, PHOTOCLASS);
-		File image = new File(photo.getAutomodifyPhotoURL());
+		String photoURL = photo.getAutomodifyPhotoURL();
+		if(photoURL == null)
+			return ;
+		File image = new File(photoURL);
+		if(!image.exists())
+			return ;
 		InputStream is = new FileInputStream(image);
 		byte[] buffer = new byte[1024];
 		int length = 0;

@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<title>LOFTER</title>
@@ -49,11 +50,11 @@
     <h1 class="m-logo"><a href="#">LOFTER</a></h1>
     <div class="m-nav" id="topbar">
 	        <ul class="nav1 tbtag">
-	            <li class="j-crt"><a rel="nofollow" href="${pageContext.request.contextPath }/user">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
+	            <li class="j-crt"><a rel="nofollow" href="${pageContext.request.contextPath }/user/home.jsp">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
 				<li class=""><a href="${pageContext.request.contextPath }/user/profile.jsp">设置</a></li>
 				<li style="display:none;" id="arturl"><a target="_blank" rel="nofollow" href="http://www.lofter.com/art?act=qbart_20140403_09">ART</a><a target="_blank" href="http://www.lofter.com/art?act=qbart_20140403_09" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc">绘画</span></a></li>
 	            <li>
-	            	<a href="#" class="tbtag">更多<span class="more tbtag">&nbsp;&nbsp;&nbsp;</span></a>
+	            	<a href="${pageContext.request.contextPath }/sso/logout.action" class="tbtag">登出<span class="more tbtag">&nbsp;&nbsp;&nbsp;</span></a>
 	            	<a href="http://www.lofter.com/#" class="w-tip f-dn" id="uapptip1"><span class="tipc">新</span></a>
 	            	<div class="a-w-sel a-w-sel-4 tbtag">
 		            	<div class="w-sel w-sel-4" style="margin-top: -258px;">
@@ -107,7 +108,9 @@
 	<div class="g-mn" id="main">
 		<div id="publishBarArea" class="publishBarArea">
 		  <ul id="publishPostBar" class="m-nav2">
-			<li class="user"><a href="${pageContext.request.contextPath }/user/home.action"><img src="../home_ui/143270763245961553.jpg"></a></li>
+			<li class="user"><a href="${pageContext.request.contextPath }/user/home.action">
+			<%-- <s:url action="../photo/photoAction!viewImage.action?photo_id=%{#session.user.profile.head_photo.id}"></s:url> --%>
+			<img src='<s:url action="../photo/photoAction!viewImage?photo_id=%{#session.user.profile.head_photo.id}"></s:url>'></a></li>
 		        <li><a class="publishlink n21" id="publish_text_bn" href="" data-toggle="modal" data-target="#publish_text">文字</a></li>
 		        <li><a class="publishlink n22" href="" data-toggle="modal" data-target="#publish_photo">图片</a></li>
 		        <li><a class="publishlink n23" href="" >音乐</a></li>
@@ -116,7 +119,7 @@
 		</div>
 		<div style="display:none" id="tempSaveTipArea" class="tempSaveTipArea"><div class="tempsavetipwrap">你还有一篇未发布的文章。<a class="gotemppost" href="http://www.lofter.com/#">查看</a><a class="closetip icon2-8" href="http://www.lofter.com/#" hidefocus="true">&nbsp;</a></div></div>
 		<div style="display:none" id="bulletinTipArea" class="tempSaveTipArea"><div class="tempsavetipwrap"><div class="bulletincontain"><span class="ztag bulletintxt"></span><a class="gotemppost ztag" href="http://www.lofter.com/#" target="_blank">查看</a></div><a class="closetip icon2-8 ztag" href="http://www.lofter.com/#" hidefocus="true">&nbsp;</a></div></div>
-          <div id="noticetip" class="a-slide a-slide-do"><div class="m-mlist slide" style="display:none;">
+        <div id="noticetip" class="a-slide a-slide-do"><div class="m-mlist slide" style="display:none;">
 	    <div class="mlistcnt">
 	        <div class="isay">
 	            <div class="isayt3"></div>
@@ -128,6 +131,10 @@
 	    </div>
 		</div></div>
 		<div class="w-load2" id="loadfirst" style="display: none;"><div class="load">加载中</div></div>
+
+	<c:forEach var="a" items="${post }">
+		
+	</c:forEach>
 
 	<div class="m-mlist">
 	    <div class="mlistimg js-447673">
@@ -293,7 +300,7 @@
 	    </div>
 	</div>
 
-	<div class="m-mlist">
+	<div class="m-mlist m-mlist-self">
 	    <div class="mlistimg js-447673">
 	        <div class="w-img" style="z-index:1;">
 	            <a href="http://alohamei.lofter.com/" target="_blank">
@@ -479,6 +486,7 @@
 	        </div>
 	    </div>
 	</div>
+
 	</div>
 
 	<div class="modal fade" id="public_text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

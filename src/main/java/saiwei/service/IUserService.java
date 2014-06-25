@@ -6,6 +6,7 @@ package saiwei.service;
 import java.util.List;
 
 import saiwei.bean.PostBean;
+import saiwei.bean.UserBean;
 import saiwei.dao.IUserDAO;
 import saiwei.model.Photo;
 import saiwei.model.Profile;
@@ -26,4 +27,6 @@ public interface IUserService extends IServiceTemplate<IUserDAO,User> {
 	public List<PostBean> getOwnPosts(String userId);
 	
 	public List<PostBean> getOwnPosts(User user);
+
+	public List<UserBean> searchUser(String usernameKey);
 }

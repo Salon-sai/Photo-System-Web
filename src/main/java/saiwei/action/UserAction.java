@@ -9,6 +9,7 @@ import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 
+import saiwei.model.Profile;
 import saiwei.model.User;
 import saiwei.service.IUserService;
 import common.BaseAction;
@@ -38,7 +39,7 @@ public class UserAction extends BaseAction<User,IUserService> {
 	private User user;
 
 	@Action(value="register",results={
-			@Result(name=SUCCESS,type="redirect",location="/user/"),
+			@Result(name=SUCCESS,type="redirect",location="/user/home.jsp"),
 			@Result(name=INPUT,type="json",params={"excludeProperties","session,user"})
 	})
 	public String register(){
@@ -46,6 +47,7 @@ public class UserAction extends BaseAction<User,IUserService> {
 		user.setIdNumber(registerNumberId);
 		user.setIdNumber(registerName);
 		user.setPassword(registerPassword);
+		user.setProfile(new Profile());
 		try{
 			service.save(user);
 		}catch(Exception e){

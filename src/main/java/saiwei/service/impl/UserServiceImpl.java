@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -22,6 +23,7 @@ import saiwei.model.Post;
 import saiwei.model.Profile;
 import saiwei.model.User;
 import saiwei.service.IUserService;
+
 import common.AbstractTemplateService;
 import common.factory.MD5Factory;
 
@@ -54,15 +56,7 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 			return null;
 		}else{
 			user = list.get(0);
-//			user.setCollect_posts(null);
-//			user.setFavorite_posts(null);
-//			user.setFound_relationship(null);
-//			user.setLinked_relationship(null);
-//			user.setOwn_posts(null);
-//			user.setTags(null);
-//			user.setReceive_comments(null);
-//			user.setSend_comments(null);
-//			user.setProfile(null);
+			user.getProfile().getHead_photo().getId();
 		}
 		return user;
 	}
@@ -72,7 +66,7 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 			String location,String company,Photo photo,User user){
 		dao.saveOrUpdate(user);
 		Photo oldPhoto = user.getProfile().getHead_photo();
-		if(oldPhoto != null){
+		if(oldPhoto != null && photo != null){
 			String OriginalPhotoURL = oldPhoto.getOriginalPhotoURL();
 			String modifyPhotoURL = oldPhoto.getAutomodifyPhotoURL();
 			if(OriginalPhotoURL != null){
@@ -120,7 +114,10 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	public List<PostBean> getOwnPosts(User user){
 		User persistent = dao.merge(user);
 		List<PostBean> postbeans = new ArrayList<PostBean>();
-		Iterator<Post> posts = persistent.getOwn_posts().iterator();
+		Set<Post> postlist = persistent.getOwn_posts();
+		if(postlist == null)
+			return null;
+		Iterator<Post> posts = postlist.iterator();
 		int i = 0;
 		while(i < 10 && posts.hasNext()){
 			PostBean bean = new PostBean(posts.next());
@@ -130,8 +127,20 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 		return postbeans;
 	}
 	
-	public List<UserBean> searchUser(String userName){
-		
-		return null;
+	/**
+	 * 
+	 * @param userName
+	 * @return
+	 */
+	public List<UserBean> searchUser(String usernameKey){
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("name", usernameKey);
+		List<User> users = dao.EntityLikeBy(null, User.class);
+		List<UserBean> beans = new ArrayList<UserBean>();
+		for(User user : users){
+			UserBean bean = new UserBean(user);
+			beans.add(bean);
+		}
+		return beans;
 	}
 }

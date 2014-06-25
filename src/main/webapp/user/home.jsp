@@ -77,9 +77,9 @@
 	        <div class="nav2 m-ssch-act" id="schtagbox">
 	        	<div class="ssch tbtag">
 	                <form class="xtag">
-	                	<a href="${pageContext.request.contextPath }/user" class="btn xtag"></a>
+	                	<a id="search_user_url" href="${pageContext.request.contextPath }/user/home.jsp" class="btn xtag"></a>
 	                	<label class="xtag" style="display:none;">搜索标签、博客</label>
-	                    <input type="text" placeholder="搜索标签、博客" class="xtag" onfocus="this.isfocus = true;">
+	                    <input id="search_user_text" type="text" placeholder="搜索标签、博客" class="xtag" onfocus="this.isfocus = true;">
 	                    <div class="xtag a-show-mask f-op0">
 		                    <div class="new" style="display:none;" id="nav2flnew"></div>
 	                    </div>
@@ -111,10 +111,10 @@
 			<li class="user"><a href="${pageContext.request.contextPath }/user/home.action">
 			<%-- <s:url action="../photo/photoAction!viewImage.action?photo_id=%{#session.user.profile.head_photo.id}"></s:url> --%>
 			<img src='<s:url action="../photo/photoAction!viewImage?photo_id=%{#session.user.profile.head_photo.id}"></s:url>'></a></li>
-		        <li><a class="publishlink n21" id="publish_text_bn" href="" data-toggle="modal" data-target="#publish_text">文字</a></li>
-		        <li><a class="publishlink n22" href="" data-toggle="modal" data-target="#publish_photo">图片</a></li>
-		        <li><a class="publishlink n23" href="" >音乐</a></li>
-		        <li><a class="publishlink publishlink-video n24" href="">视频</a></li>
+	        <li><a class="publishlink n21" id="publish_text_bn" href="" data-toggle="modal" data-target="#publish_text">文字</a></li>
+	        <li><a class="publishlink n22" href="" data-toggle="modal" data-target="#publish_photo">图片</a></li>
+	        <li><a class="publishlink n23" href="" >音乐</a></li>
+	        <li><a class="publishlink publishlink-video n24" href="">视频</a></li>
 		  </ul>
 		</div>
 		<div style="display:none" id="tempSaveTipArea" class="tempSaveTipArea"><div class="tempsavetipwrap">你还有一篇未发布的文章。<a class="gotemppost" href="http://www.lofter.com/#">查看</a><a class="closetip icon2-8" href="http://www.lofter.com/#" hidefocus="true">&nbsp;</a></div></div>
@@ -132,8 +132,23 @@
 		</div></div>
 		<div class="w-load2" id="loadfirst" style="display: none;"><div class="load">加载中</div></div>
 
-	<c:forEach var="a" items="${post }">
-		
+	<c:forEach var="post" items="${postBeans }">
+		<div class="m-mlist">
+			<div class="mlistimg js-447673">
+		        <div class="w-img" style="z-index:1;">
+		            <a href="" target="_blank">
+		                <img class="js-447673" src='<s:url action="../photo/photoAction!viewImage.action?photo_id=%{attr.post.poster_headphotoId}"></s:url>'>
+		            </a>
+		        </div>
+		    </div>
+			<div class="mlistcnt">
+				<div class="isay">
+					<div class="isayt">
+						<!-- 还没有完成 -->
+					</div>
+				</div>
+			</div>
+		</div>
 	</c:forEach>
 
 	<div class="m-mlist">
@@ -658,6 +673,12 @@
     							$('#public_text').find('.close').trigger('click');
     						}
     					}); 
+    		});
+    		
+    		$('#search_user_text').blur(function(e){
+    			var value = $(this).val();
+    			var url = "${pageContext.request.contextPath }" + "/search/searchUser.action?userKey=" + value;
+    			$("#search_user_url").attr("href",url);
     		});
     		
     	});

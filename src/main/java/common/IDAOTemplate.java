@@ -41,5 +41,5 @@ public interface IDAOTemplate<E> {
 	
 	public void lock(E e);
 	
-	public List<E> EntityLikeBy(Map<String, Object> params,Class<?> classType);
+	public List<?> EntityLikeBy(Map<String, Object> params,Class<?> classType);
 }

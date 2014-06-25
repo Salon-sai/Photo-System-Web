@@ -19,6 +19,8 @@ import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import common.factory.StringFactory;
+
 import saiwei.model.ModelClassType;
 
 /**
@@ -288,16 +290,16 @@ public abstract class BaseDAO<E> extends ModelClassType implements IDAOTemplate<
 	 * @param classType
 	 * @return
 	 */
-	@SuppressWarnings("unchecked")
-	public List<E> EntityLikeBy(Map<String, Object> params,Class<?> classType){
+	public List<?> EntityLikeBy(Map<String, Object> params,Class<?> classType){
 		Session session = sessionFactory.getCurrentSession();
 		Criteria criteria = session.createCriteria(classType);
-		List<E> list = null;
+		List<?> list = null;
 		if(!params.isEmpty() && params != null){
 			for(String key : params.keySet()){
-				criteria.add(Restrictions.like(key, params.get(key)));
+				criteria.add(Restrictions.like(key, 
+						StringFactory.MergerString("%",(String)params.get(key),"%")));
 			}
-			list = (List<E>)criteria.list();
+			list = criteria.list();
 		}
 		return list;
 	}

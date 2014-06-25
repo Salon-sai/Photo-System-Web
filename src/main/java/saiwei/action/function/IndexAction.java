@@ -4,10 +4,17 @@
 package saiwei.action.function;
 
 import java.util.List;
+import java.util.Map;
+
+import org.apache.struts2.convention.annotation.Action;
+import org.apache.struts2.convention.annotation.Namespace;
+import org.apache.struts2.convention.annotation.ParentPackage;
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.interceptor.SessionAware;
 
 import saiwei.bean.PostBean;
+import saiwei.model.User;
 import saiwei.service.IRelationShipService;
-import saiwei.service.IUserService;
 
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -15,7 +22,9 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author sai
  *
  */
-public class IndexAction extends ActionSupport {
+@ParentPackage("basePackage")
+@Namespace("/user")
+public class IndexAction extends ActionSupport implements SessionAware{
 
 	/**
 	 * 
@@ -23,20 +32,25 @@ public class IndexAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	private List<PostBean> postBeans;
-	private IUserService userService;
 	private IRelationShipService relationshipService;
+	private Map<String, Object> session;
 	
+	@Action(value="index",results={
+			@Result(name=SUCCESS,location="/")
+	})
 	public String index(){
-		return null;
+		User user = (User)session.get("user");
+		postBeans = relationshipService.getPostbyRelationship(user.getId(), "");
+		return SUCCESS;
 	}
 	
 	public List<PostBean> getPostBeans() {
 		return postBeans;
 	}
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
-	}
 	public void setRelationshipService(IRelationShipService relationshipService) {
 		this.relationshipService = relationshipService;
+	}
+	public void setSession(Map<String, Object> session) {
+		this.session = session;
 	}
 }

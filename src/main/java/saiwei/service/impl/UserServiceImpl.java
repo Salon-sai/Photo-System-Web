@@ -135,7 +135,7 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	public List<UserBean> searchUser(String usernameKey){
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("name", usernameKey);
-		List<User> users = dao.EntityLikeBy(null, User.class);
+		List<User> users = dao.userFindLikeprofile(params);
 		List<UserBean> beans = new ArrayList<UserBean>();
 		for(User user : users){
 			UserBean bean = new UserBean(user);

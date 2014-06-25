@@ -26,6 +26,7 @@ public class PostBean extends Post {
 
 	private String posterName;
 	private String posterNumber;
+	private String poster_headphotoId;
 	// key is userId , value is user name
 	private Map<String,Object> favoriter;
 	private List<String> photo_id;
@@ -58,6 +59,8 @@ public class PostBean extends Post {
 		for(Photo photo : post.getPhotos()){
 			photo_id.add(photo.getId());
 		}
+		
+		this.poster_headphotoId = post.getPoster().getProfile().getHead_photo().getId();
 	}
 	
 	/**
@@ -82,12 +85,16 @@ public class PostBean extends Post {
 	public void setFavoriter(Map<String, Object> favoriter) {
 		this.favoriter = favoriter;
 	}
-
 	public List<String> getPhoto_id() {
 		return photo_id;
 	}
-
 	public void setPhoto_id(List<String> photo_id) {
 		this.photo_id = photo_id;
+	}
+	public String getPoster_headphotoId() {
+		return poster_headphotoId;
+	}
+	public void setPoster_headphotoId(String poster_headphotoId) {
+		this.poster_headphotoId = poster_headphotoId;
 	}
 }

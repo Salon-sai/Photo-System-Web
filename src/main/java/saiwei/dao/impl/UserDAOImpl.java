@@ -18,7 +18,6 @@ import saiwei.model.Profile;
 import saiwei.model.RelationShip;
 import saiwei.model.RelationShipType;
 import saiwei.model.User;
-
 import common.BaseDAO;
 import common.factory.StringFactory;
 
@@ -98,6 +97,16 @@ public class UserDAOImpl extends BaseDAO<User> implements IUserDAO {
 	public static User findByIdNum(Session session,String IdNum){
 		return (User)session.createQuery("from User as model where model.IdNumber=:IdNumber")
 			.setParameter("IdNumber", IdNum).uniqueResult();
+	}
+	
+	@SuppressWarnings("unchecked")
+	public List<User> userFindLikeprofile(Map<String, Object> params){
+		List<Profile> profiles = (List<Profile>)this.EntityLikeBy(params, Profile.class);
+		List<User> users = new ArrayList<User>();
+		for(Profile profile : profiles){
+			users.add(profile.getUser());
+		}
+		return users;
 	}
 	
 }

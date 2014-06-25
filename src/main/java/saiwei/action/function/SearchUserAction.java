@@ -29,15 +29,15 @@ public class SearchUserAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 
 	private String userKey;
-	private List<UserBean> beans;
+	private List<UserBean> userbeans;
 	private IUserService userService;
 
 	@Action(value="searchUser",results={
-		@Result(name=SUCCESS,type="json"),
-		@Result(name=INPUT,type="json")
+		@Result(name=SUCCESS,location="/user/search.jsp"),
+		@Result(name=INPUT,location="/")
 	})
 	public String searchUser(){
-		beans = userService.searchUser(userKey);
+		userbeans = userService.searchUser(userKey);
 		return SUCCESS;
 	}
 	
@@ -48,7 +48,7 @@ public class SearchUserAction extends ActionSupport {
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
-	public List<UserBean> getBeans() {
-		return beans;
+	public List<UserBean> getUserbeans() {
+		return userbeans;
 	}
 }

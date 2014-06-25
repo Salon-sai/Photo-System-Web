@@ -16,6 +16,12 @@
 	<script type="text/javascript">
 		$(function(){
 			$(":file").filestyle();
+    		
+			$('#search_user_text').blur(function(e){
+    			var value = $(this).val();
+    			var url = "${pageContext.request.contextPath }" + "/search/searchUser.action?userKey=" + value;
+    			$("#search_user_url").attr("href",url);
+    		});
 		});
 	</script>
 	
@@ -65,13 +71,13 @@
 		        <div class="nav2 m-ssch-act" id="schtagbox">
 		        	<div class="ssch tbtag">
 		                <form class="xtag">
-		                	<a href="${pageContext.request.contextPath }/user" class="btn xtag"></a>
+		                	<a id="search_user_url" href="${pageContext.request.contextPath }/user/home.jsp" class="btn xtag"></a>
 		                	<label class="xtag" style="display:none;">搜索标签、博客</label>
-		                    <input type="text" placeholder="搜索标签、博客" class="xtag" onfocus="this.isfocus = true;">
+		                    <input id="search_user_text" type="text" placeholder="搜索标签、博客" class="xtag" onfocus="this.isfocus = true;">
 		                    <div class="xtag a-show-mask f-op0">
 			                    <div class="new" style="display:none;" id="nav2flnew"></div>
 		                    </div>
-		                </form>
+	                	</form>
 		            </div>
 		            <div class="m-ssch2  m-ssch-act" style="position:absolute;top:100%;">
 		            	<div class="suggest">

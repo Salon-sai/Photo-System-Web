@@ -18,6 +18,15 @@
 			var url = "${pageContext.request.contextPath }" + "/search/searchUser.action?userKey=" + value;
 			$("#search_user_url").attr("href",url);
 		});
+		
+		$("[name='add_follow']").click(function(e){
+			$.post("${pageContext.request.contextPath }/relationship/addfollowing.action",
+				{IdNumber: $(this).prev().val()},
+				function(returnData,status){
+					alert(returnData.addflag);			
+				}
+			); 
+		});
 	});
 </script>
 </head>
@@ -101,7 +110,8 @@
 								</em>
 								</h4>
 								</div>
-								<button>添加关注</button>
+								<input type="hidden" value="${user.idNumber }">
+								<button name="add_follow">添加关注</button>
 							</li>
 	            		</c:forEach>
 	            	</ul>

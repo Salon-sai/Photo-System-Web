@@ -34,7 +34,7 @@ public class User extends BaseModelHasName {
 	private static final long serialVersionUID = 1L;
 	
 	@Column(name="IdNumber",nullable=false,unique=true)
-	private String IdNumber;
+	protected String IdNumber;
 	
 	@Column(name="password",nullable=false)
 	private String password;

@@ -17,7 +17,7 @@ import common.IServiceTemplate;
  */
 public interface ICommentService extends IServiceTemplate<ICommentDAO, Comment> {
 
-	public Comment save(String content,String posterId,String recipientId,String postId);
-	
+	public Comment save(String content,String posterId,String recipientId,String postId,String recipentComment_id);
+
 	public Set<CommentBean> getOwnSendComments(User user);
 }

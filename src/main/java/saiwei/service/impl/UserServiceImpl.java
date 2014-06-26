@@ -64,7 +64,7 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	
 	public Profile saveOrupdateProfile(String email,String name,
 			String location,String company,Photo photo,User user){
-		dao.saveOrUpdate(user);
+		user = dao.merge(user);
 		Photo oldPhoto = user.getProfile().getHead_photo();
 		if(oldPhoto != null && photo != null){
 			String OriginalPhotoURL = oldPhoto.getOriginalPhotoURL();
@@ -112,9 +112,9 @@ public class UserServiceImpl extends AbstractTemplateService<IUserDAO, User>
 	 * @return
 	 */
 	public List<PostBean> getOwnPosts(User user){
-		User persistent = dao.merge(user);
+		user = dao.merge(user);
 		List<PostBean> postbeans = new ArrayList<PostBean>();
-		Set<Post> postlist = persistent.getOwn_posts();
+		Set<Post> postlist = user.getOwn_posts();
 		if(postlist == null)
 			return null;
 		Iterator<Post> posts = postlist.iterator();

@@ -36,11 +36,11 @@ public class IndexAction extends ActionSupport implements SessionAware{
 	private Map<String, Object> session;
 	
 	@Action(value="index",results={
-			@Result(name=SUCCESS,location="/")
+			@Result(name=SUCCESS,location="/user/home.jsp")
 	})
 	public String index(){
 		User user = (User)session.get("user");
-		postBeans = relationshipService.getPostbyRelationship(user.getId(), "");
+		postBeans = relationshipService.getPostbyRelationship(user.getIdNumber(), "following");
 		return SUCCESS;
 	}
 	

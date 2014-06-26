@@ -3,12 +3,19 @@
  */
 package saiwei.action;
 
+import java.util.Set;
+
+import javax.annotation.Resource;
+
 import org.apache.struts2.convention.annotation.Action;
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.Result;
 
+import saiwei.bean.CommentBean;
 import saiwei.model.Comment;
+import saiwei.model.User;
 import saiwei.service.ICommentService;
+import saiwei.service.IPostService;
 
 import common.BaseAction;
 
@@ -31,6 +38,9 @@ public class CommentAction extends
 	private String recipientId;
 	private String postId;
 	private Comment comment;
+	private Set<CommentBean> comments;
+	
+	private IPostService postService;
 	
 	@Override
 	@Action(value="saveComment",
@@ -41,7 +51,8 @@ public class CommentAction extends
 	})
 	public String add() {
 		// TODO Auto-generated method stub
-		comment = service.save(content, posterId, recipientId, postId);
+		User poster = (User)session.get("user");
+		comment = service.save(content, poster.getIdNumber(), recipientId, postId,commentId);
 		if(entity == null){
 			return INPUT;
 		}
@@ -63,7 +74,14 @@ public class CommentAction extends
 		return SUCCESS;
 	}
 	
-	
+	@Action(value="getComments",results={
+			@Result(name=SUCCESS,location="/user/comment.jsp"),
+			@Result(name=INPUT,location="/user/comment.jsp")
+	})
+	public String getCommentsByPost(){
+		comments = postService.getCommentsByPost(postId);
+		return SUCCESS;
+	}
 	
 	/**
 	 * 
@@ -75,15 +93,12 @@ public class CommentAction extends
 	public void setPosterId(String posterId) {
 		this.posterId = posterId;
 	}
-	
 	public String getContent() {
 		return content;
 	}
-
 	public void setContent(String content) {
 		this.content = content;
 	}
-
 	public String getRecipientId() {
 		return recipientId;
 	}
@@ -101,5 +116,12 @@ public class CommentAction extends
 	}
 	public void setComment(Comment comment) {
 		this.comment = comment;
+	}
+	public Set<CommentBean> getComments() {
+		return comments;
+	}
+	@Resource(name="postService")
+	public void setPostService(IPostService postService) {
+		this.postService = postService;
 	}
 }

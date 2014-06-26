@@ -32,7 +32,7 @@ public class CommentDAOImpl extends BaseDAO<Comment> implements ICommentDAO {
 	 * @param recipientId
 	 * 		recipient recipientting comment
 	 */
-	public void save(Comment transientInstance,String posterId,String recipientId,String postId) {
+	public void save(Comment transientInstance,String posterId,String recipientId,String postId,String recipentComment_id) {
 		// TODO Auto-generated method stub
 		Session session = sessionFactory.getCurrentSession();
 		Map<String, Object> params = new HashMap<String, Object>();
@@ -42,17 +42,24 @@ public class CommentDAOImpl extends BaseDAO<Comment> implements ICommentDAO {
 		
 		params.clear();
 		
-		params.put("IdNumber", recipientId);
-		User recipients = (User)this.uniqueElement(params, USER);
+		if(recipientId != null){
+			params.put("IdNumber", recipientId);
+			User recipients = (User)this.uniqueElement(params, USER);
+			transientInstance.setRecipients(recipients);
+		}
 		
 		params.clear();
 		
 		params.put("id", postId);
 		Post post = (Post)this.uniqueElement(params, POST);
+		Comment recipentComment = null;
+		if(recipentComment_id != null){
+			recipentComment = this.load(Comment.class, recipentComment_id);
+		}
 		
 		transientInstance.setPost(post);
 		transientInstance.setPoster(poster);
-		transientInstance.setRecipients(recipients);
+		transientInstance.setRecipientComment(recipentComment);
 		
 		session.save(transientInstance);
 	}

@@ -34,11 +34,11 @@ public class CommentServiceImpl extends
 		this.dao = dao;
 	}
 	
-	public Comment save(String content,String posterId,String recipientId,String postId){
+	public Comment save(String content,String posterId,String recipientId,String postId,String recipentComment_id){
 		Comment comment = new Comment();
 		comment.setPostdate(new Date());
 		comment.setContent(content);
-		dao.save(comment, posterId, recipientId, postId);
+		dao.save(comment, posterId, recipientId, postId,recipentComment_id);
 		return comment;
 	}
 

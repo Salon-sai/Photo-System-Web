@@ -127,8 +127,10 @@ public class PostServiceImpl extends
 		Set<Comment> comments = post.getComments();
 		Set<CommentBean> commentbeans = new HashSet<CommentBean>();
 		for(Comment comment : comments){
-			CommentBean bean = new CommentBean(comment);
-			commentbeans.add(bean);
+			if(comment.getRecipientComment() == null){
+				CommentBean bean = new CommentBean(comment);
+				commentbeans.add(bean);
+			}
 		}
 		return commentbeans;
 	}

@@ -22,7 +22,7 @@
 	    	{idNum: id,password: password},
 	        function(returnData, status){
 	        if(returnData.returnMsg == null){
-	            window.location.href="${pageContext.request.contextPath }/sso/loginUser.action" ;
+	            window.location.href="${pageContext.request.contextPath }/user/index.action" ;
 	        }else{
 	            updateValidate(returnData.returnMsg) ;
 	        }

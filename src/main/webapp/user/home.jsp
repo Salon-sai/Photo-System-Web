@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html>
 <html lang="zh"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -50,7 +51,7 @@
     <h1 class="m-logo"><a href="#">LOFTER</a></h1>
     <div class="m-nav" id="topbar">
 	        <ul class="nav1 tbtag">
-	            <li class="j-crt"><a rel="nofollow" href="${pageContext.request.contextPath }/user/home.jsp">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
+	            <li class="j-crt"><a rel="nofollow" href="${pageContext.request.contextPath }/user/index.action">首页</a><a href="../home_ui/LOFTER.html" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc tbtag">5</span></a></li>
 				<li class=""><a href="${pageContext.request.contextPath }/user/profile.jsp">设置</a></li>
 				<li style="display:none;" id="arturl"><a target="_blank" rel="nofollow" href="http://www.lofter.com/art?act=qbart_20140403_09">ART</a><a target="_blank" href="http://www.lofter.com/art?act=qbart_20140403_09" class="w-tip w-tip-1" style="font-size: 12px; color: white; text-shadow: none; display: none;"><span class="tipc">绘画</span></a></li>
 	            <li>
@@ -137,17 +138,94 @@
 			<div class="mlistimg js-447673">
 		        <div class="w-img" style="z-index:1;">
 		            <a href="" target="_blank">
-		                <img class="js-447673" src='<s:url action="../photo/photoAction!viewImage.action?photo_id=%{attr.post.poster_headphotoId}"></s:url>'>
+		                <img class="js-447673" src='<s:url action="../photo/photoAction!viewImage.action?photo_id=%{#attr.post.poster_headphotoId}"></s:url>'>
 		            </a>
 		        </div>
 		    </div>
 			<div class="mlistcnt">
 				<div class="isay">
 					<div class="isayt">
-						<!-- 还没有完成 -->
+						<a class="isayc js-447673" href="#"
+		                title="查看全文" target="_blank">
+		                    打开新页
+		                </a>
 					</div>
+					<div class="isaym">
+	                	<div class="w-who">
+		                    <a href="#" class="js-447673" target="_blank">
+		                        ${post.posterName }
+		                    </a>
+	                    </div>
+	                    <div class="js-447673">
+		                    <div class="m-icnt">
+		                        <div class="cnt">
+		                            <div class="img js-732629">
+		                            	<div class="imgc" style="height: auto;">
+		                                    <a href="#" hidefocus="true">
+		                                        <img width="164" src='<s:url 
+		                                        action="../photo/photoAction!viewImage.action?photo_id=%{#attr.post.photo_id[0]}"></s:url>'>
+		                                        <span class="total">
+		                                            <span class="totalbg">
+		                                            </span>
+		                                            <span class="totalnum">
+		                                                ${fn:length(post.photo_id) }
+		                                            </span>
+		                                        </span>
+		                                    </a>
+	                                	</div>
+		                            </div>
+		                            <div class="txt js-732629">
+		                            	<p>
+		                            		${post.content }
+		                            	</p>
+		                            </div>
+		                        </div>
+		                    </div>
+		                </div>
+	                	<div class="w-opt">
+							<div class="optb">
+                       			<span class="opti">
+                       				<input type="hidden" value="${post.id }">
+		                           <a class="js-447673" hidefocus="true" name="click_comment">
+		                               评论()
+		                           </a>
+	                           		<span class="opticrt">
+	                           		</span>
+                      			 </span>
+		                       <span class="opti opti-reblog">
+		                           <a href="http://www.lofter.com/reblog/7701e_11eff9a" class="js-447673"
+		                           target="_blank">
+		                               转载
+		                           </a>
+		                       </span>
+		                       <span class="opti opti-shareTo">
+		                           <a href="http://www.lofter.com/#" class="js-447673" hidefocus="true">
+		                               分享
+		                           </a>
+		                           <span class="opticrt">
+		                           </span>
+		                       </span>
+		                       <span class="opti">
+		                           <a class="js-447673" hidefocus="true" href="http://www.lofter.com/#">
+		                               推荐
+		                           </a>
+		                       </span>
+		                       <span class="opti">
+		                           <a class="w-icn w-icn-0b js-447673" hidefocus="true" href="http://www.lofter.com/#"
+		                           title="喜欢">
+		                               喜欢
+		                               <span>
+		                               </span>
+		                               <span>
+		                               </span>
+		                           </a>
+		                       </span>
+                   			</div>
+						</div>
+	                </div>
 				</div>
 			</div>
+			
 		</div>
 	</c:forEach>
 
@@ -503,7 +581,69 @@
 	</div>
 
 	</div>
-
+<!--  
+	<div id="rside" class="g-sd">
+	        <div class="g-box">
+	        	<div class="m-menu">
+	            	<div class="menut"></div>
+	                <div class="menum">
+					<ul>
+					    <li style="border-color:#b2b2b2;" class="">
+					    	<div class="crtp"></div>
+					    	<a href="http://www.lofter.com/blog/kaxiuptd?act=dashboardclick_20130514_04" class="mi">
+						    	<span class="icn icn-9"></span>
+						    	<span class="txt">文章</span>
+						    	<span class="inf inf-1" id="rside-postcount">14</span>
+					    	</a>
+					    </li>
+					    <li class="">
+					    	<a href="http://www.lofter.com/followed/kaxiuptd?act=dashboardclick_20130514_05" class="mi">
+					    		<span class="icn icn-10"></span>
+					    		<span class="txt">粉丝</span>
+					    		<span class="inf inf-1">3</span>
+					    	</a>
+					    </li>
+					    <li class="">
+					    	<a href="http://www.lofter.com/notice/kaxiuptd" class="mi">
+						    	<span class="icn icn-11"></span>
+						    	<span class="txt">通知</span>
+						    </a>
+						</li>
+					    <li style="display:none;" class="">
+					    	<a href="http://www.lofter.com/time/kaxiuptd" class="mi">
+					    		<span class="icn icn-17"></span>
+					    		<span class="txt">自动发布</span>
+					    		<span class="inf inf-1" id="rside-postqueuecount">0</span>
+					    	</a>
+					    </li>
+					    <li style="display:none;" class="">
+					    	<a href="http://www.lofter.com/draft/kaxiuptd" class="mi">
+					    		<span class="icn icn-14"></span>
+					    		<span class="txt">草稿</span>
+					    		<span class="inf inf-1" id="rside-draftcount">0</span>
+					    	</a>
+					    </li>
+					    <li class="">
+					    	<a href="http://www.lofter.com/message/kaxiuptd" class="mi">
+					    		<span class="icn icn-13"></span>
+					    		<span class="txt">私信</span>
+					    		<span class="inf inf-1 tip" id="bgmanmsg" style="display:none;">0</span>
+					    	</a>
+					    </li>
+					    <li class="noipt ">
+					    	<a class="mi mi-noipt" href="http://www.lofter.com/theme/kaxiuptd/?type=setting">
+						    	<span class="icn icn-8"></span>
+						    	<span class="txt">博客设置</span>
+					    	</a>
+					    </li>
+					</ul>
+	                </div>
+	                <div class="menub"></div>
+	            </div>
+	        </div>
+		<div class="g-box" id="grelativetag" style="display:none;"></div>
+	</div>
+-->	
 	<div class="modal fade" id="public_text" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 		  <div class="modal-dialog">
 		    <div class="modal-content">
@@ -552,6 +692,24 @@
 	      </div>
 	      <div class="modal-body">
 	        <p>AAAA</p>
+	      </div>
+	      <div class="modal-footer">
+	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+	        <button type="button" class="btn btn-primary">Save changes</button>
+	      </div>
+	    </div><!-- /.modal-content -->
+	  </div><!-- /.modal-dialog -->
+	</div><!-- /.modal -->
+	
+	<div class="modal fade" id="comment_list">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	        <h4 class="modal-title">Modal title</h4>
+	      </div>
+	      <div class="modal-body">
+
 	      </div>
 	      <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -679,6 +837,17 @@
     			var value = $(this).val();
     			var url = "${pageContext.request.contextPath }" + "/search/searchUser.action?userKey=" + value;
     			$("#search_user_url").attr("href",url);
+    		});
+    		
+    		$("[name='click_comment']").click(function(e){
+    			$.post("${pageContext.request.contextPath }/comment/getComments.action",
+    					{postId : $(this).prev().val()},
+    					function(returnData,status){
+    						$('#comment_list').find('.modal-body').html(returnData);
+    						$('#comment_list').modal({keyboard : false});
+    					}
+    			); 
+    			
     		});
     		
     	});
